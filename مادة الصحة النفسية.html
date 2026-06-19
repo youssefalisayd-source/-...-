@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة Y_EDUX التفاعلية الذكية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #E31E24;
+            --primary-hover: #B7151A;
+            --secondary-color: #111111;
+            --accent-dark: #1A1A1A;
+            --bg-light: #FAFAFA;
+            --text-dark: #2B2B2B;
+            --text-light: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --border-color: #EAEAEA;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.08);
+            --radius-lg: 12px;
+            --radius-md: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* الملاحة العلوية الفخمة */
+        header {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 15px 40px;
+            border-bottom: 4px solid var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .logo-area h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logo-area h1 span {
+            color: var(--primary-color);
+        }
+
+        .designer-badge {
+            background: linear-gradient(45deg, var(--accent-dark), #2c2c2c);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .designer-badge .label {
+            font-size: 11px;
+            color: #888;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .designer-badge .name {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* التوزيع الرئيسي للموقع كـ Web App */
+        .main-container {
+            display: flex;
+            flex: 1;
+            position: relative;
+        }
+
+        /* الشريط الجانبي الذكي */
+        aside {
+            width: 320px;
+            background-color: var(--accent-dark);
+            color: var(--text-light);
+            position: fixed;
+            right: 0;
+            top: 84px;
+            bottom: 0;
+            padding: 30px 20px;
+            overflow-y: auto;
+            border-left: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 99;
+        }
+
+        .menu-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #888;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tabs-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tabs-nav button {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #BBBBBB;
+            text-align: right;
+            padding: 14px 16px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tabs-nav button:hover {
+            background-color: rgba(255,255,255,0.03);
+            color: var(--text-light);
+        }
+
+        .tabs-nav button.active-tab {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+            font-weight: 700;
+        }
+
+        .contact-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            margin-top: 30px;
+        }
+
+        .contact-box h4 {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #FFF;
+            text-align: center;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: transform 0.2s, filter 0.2s;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .link-whatsapp { background-color: #25D366; }
+        .link-facebook { background-color: #1877F2; }
+
+        /* مساحة المحتوى الديناميكية */
+        main {
+            flex: 1;
+            margin-right: 320px;
+            padding: 40px;
+            background-color: var(--bg-light);
+            min-height: calc(100vh - 84px);
+        }
+
+        .tab-content {
+            display: none;
+            max-width: 950px;
+            margin: 0 auto;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .tab-content.active-content {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* كروت العرض الفاخرة للمواد العلمية */
+        .article-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 45px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .welcome-hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-dark));
+            color: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 40px;
+            border-bottom: 6px solid var(--primary-color);
+        }
+
+        .welcome-hero h2 {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .welcome-hero p {
+            font-size: 18px;
+            color: #CCC;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        .start-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(227, 30, 36, 0.4);
+            transition: all 0.2s;
+        }
+
+        .start-btn:hover {
+            background-color: var(--primary-hover);
+            transform: scale(1.03);
+        }
+
+        h2.section-heading {
+            font-size: 28px;
+            color: var(--secondary-color);
+            font-weight: 900;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        h2.section-heading::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            right: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        h3.subsection-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3.subsection-title::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 22px;
+            background-color: var(--secondary-color);
+            border-radius: 3px;
+        }
+
+        h4.nested-title {
+            font-size: 17px;
+            color: var(--secondary-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            padding-right: 15px;
+            border-right: 3px solid var(--primary-color);
+        }
+
+        p.text-paragraph {
+            font-size: 16px;
+            color: #3A3A3A;
+            text-align: justify;
+            margin-bottom: 20px;
+            text-justify: inter-word;
+        }
+
+        /* تنسيقات متطورة للمستندات والقوائم */
+        ul.bullet-list, ol.numbered-list {
+            margin-right: 25px;
+            margin-bottom: 25px;
+            list-style-position: outside;
+        }
+
+        ul.bullet-list li, ol.numbered-list li {
+            font-size: 16px;
+            color: #444444;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        ul.bullet-list li strong, ol.numbered-list li strong {
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        .nested-bullet {
+            margin-right: 25px;
+            margin-top: 8px;
+            list-style-type: circle;
+        }
+
+        /* الصناديق التوضيحية الممتازة */
+        .callout-box {
+            background-color: #FFF6F6;
+            border-right: 5px solid var(--primary-color);
+            padding: 25px;
+            border-radius: var(--radius-md);
+            margin: 25px 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .callout-box h5 {
+            color: var(--primary-color);
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        /* جدول المقارنة الفخم */
+        .luxury-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .luxury-table th, .luxury-table td {
+            padding: 16px 20px;
+            text-align: right;
+            font-size: 15px;
+        }
+
+        .luxury-table th {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            font-weight: 700;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .luxury-table tr:nth-child(even) {
+            background-color: #FDFDFD;
+        }
+
+        .luxury-table tr:nth-child(odd) {
+            background-color: #F5F5F5;
+        }
+
+        .luxury-table td strong {
+            color: var(--primary-color);
+        }
+
+        /* ========================================================
+           نظام الاختبار التفاعلي الذكي والكامل بقوة JavaScript
+        ======================================================== */
+        .quiz-container {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .quiz-header-dashboard {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            margin-bottom: 30px;
+            border-bottom: 4px solid var(--primary-color);
+        }
+
+        .quiz-header-dashboard h3 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .quiz-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: #EAEAEA;
+            color: var(--text-dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active-filter {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(227, 30, 36, 0.2);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background-color: #EAEAEA;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .question-wrapper {
+            display: none;
+            background-color: #FFF;
+            padding: 10px 5px;
+        }
+
+        .question-wrapper.active-q {
+            display: block;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .options-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .option-item {
+            border: 2px solid var(--border-color);
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .option-item:hover {
+            border-color: #999;
+            background-color: rgba(0,0,0,0.01);
+        }
+
+        .option-item input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .option-item.selected-option {
+            border-color: var(--primary-color);
+            background-color: #FFF5F5;
+        }
+
+        /* ألوان التقييم الفوري بعد التحقق */
+        .option-item.correct-ans {
+            border-color: #25D366 !important;
+            background-color: #E8FAF0 !important;
+            color: #1E7E34;
+        }
+
+        .option-item.wrong-ans {
+            border-color: var(--primary-color) !important;
+            background-color: #FFF5F5 !important;
+            color: #C82333;
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .quiz-btn {
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-prev {
+            background-color: #EAEAEA;
+            color: var(--text-dark);
+        }
+
+        .btn-prev:hover { background-color: #DDD; }
+
+        .btn-next, .btn-submit-test {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-next:hover { background-color: var(--accent-dark); }
+
+        .btn-verify {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(227, 30, 36, 0.2);
+        }
+
+        .btn-verify:hover { background-color: var(--primary-hover); }
+
+        /* لوحة النتائج النهائية المذهلة */
+        .results-dashboard {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .score-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 25px auto;
+            border: 6px solid var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .score-circle .number {
+            font-size: 38px;
+            font-weight: 900;
+            color: var(--text-light);
+        }
+
+        .score-circle .label {
+            font-size: 14px;
+            color: #AAA;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 500px;
+            margin: 30px auto;
+        }
+
+        .stat-card {
+            background-color: #F8F9FA;
+            padding: 15px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-card .val {
+            font-size: 22px;
+            font-weight: 800;
+            display: block;
+        }
+
+        .stat-card.c-card .val { color: #25D366; }
+        .stat-card.w-card .val { color: var(--primary-color); }
+        .stat-card.p-card .val { color: #007BFF; }
+
+        .stat-card .lbl {
+            font-size: 13px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* شاشات الحجم الصغير للتجاوب الكامل مع الهواتف والتابلت */
+        @media (max-width: 1024px) {
+            aside {
+                position: static;
+                width: 100%;
+                height: auto;
+                margin-top: 0;
+            }
+            .main-container {
+                flex-direction: column;
+            }
+            main {
+                margin-right: 0;
+                padding: 20px;
+            }
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>EDUX <span>_Y</span></h1>
+        </div>
+        <div class="designer-badge">
+            <span class="label">Development & Design  </span>
+            <span class="name">MR. YOUSSEF ALI</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <!-- القائمة الجانبية للتنقل الذكي والتواصل الفوري -->
+        <aside>
+            <div>
+                <div class="menu-title">لوحة التحكم والتنقل</div>
+                <ul class="tabs-nav">
+                    <li><button class="active-tab" onclick="switchTab(event, 'dashboard-tab')">📊 الواجهة والترحيب</button></li>
+                    <li><button onclick="switchTab(event, 'ch1-tab')">📕 الفصل الأول: الصحة النفسية</button></li>
+                    <li><button onclick="switchTab(event, 'ch2-tab')">📘 الفصل الثاني: التوافق النفسي</button></li>
+                    <li><button onclick="switchTab(event, 'ch3-tab')">📗 الفصل الثالث: الشخصية</button></li>
+                    <li><button onclick="switchTab(event, 'ch4-tab')">📙 الفصل الرابع: الاضطرابات</button></li>
+                    <li><button onclick="switchTab(event, 'quiz-tab')" style="border: 2px dashed var(--primary-color); color: #FFF; background: rgba(227,30,36,0.05);">📝 الاختبار التفاعلي الشامل</button></li>
+                </ul>
+            </div>
+
+            <div class="contact-box">
+                <h4>الدعم العلمي والتواصل السريع</h4>
+                <a href="https://wa.me/201034288343" target="_blank" class="social-link link-whatsapp">💬 واتساب: 01034288343</a>
+                <a href="https://www.facebook.com/Youssef.Ali.s.Mohamed" target="_blank" class="social-link link-facebook">🌐 فيسبوك المطور والناشر</a>
+            </div>
+        </aside>
+
+        <!-- ساحة المحتوى الأساسية -->
+        <main>
+            
+            <!-- 0. تبويب الواجهة والترحيب -->
+            <div id="dashboard-tab" class="tab-content active-content">
+                <div class="welcome-hero">
+                    <h2>مرحباً بكم في منصة Y_EDUX </h2>
+                    <p>Work and Development of   </p> Mr. Youssef Ali Sayed Mohammed </p>
+                    <button class="start-btn" onclick="document.querySelectorAll('.tabs-nav button')[1].click()">🚀 ابدأ تصفح المادة العلمية الآن</button>
+                </div>
+
+                <div class="article-card" style="text-align: center;">
+                    <h3 class="subsection-title" style="justify-content: center;">💡 نظام دراسي تفاعلي </h3>
+                    <p class="text-paragraph" style="text-align: center;">تمت  هيكلة المنصة بالكامل للقضاء على الجمود. يمكنك الآن تصفح الفصول الأربعة للمادة العلمية الضخمة من القائمة العلوية بكل سلاسة، ثم الانتقال إلى <strong>"الاختبار التفاعلي الشامل"</strong> الذي يحتوي على <strong>80 سؤالاً </strong> (صواب وخطأ، واختيار من متعدد) مع نظام تصحيح فوري ذكي، واحتساب دقيق للدرجات والنسب المئوية الإحصائية فورياً عند الانتهاء.</p>
+                </div>
+            </div>
+
+            <!-- 1. تبويب الفصل الأول -->
+            <div id="ch1-tab" class="tab-content">
+                <div class="article-card">
+                    <h2 class="section-heading">الفصل الأول بعنوان "الصحة النفسية"</h2>
+                    
+                    <h3 class="subsection-title">أولاً: مفهوم الصحة النفسية</h3>
+                    <ul class="bullet-list">
+                        <li>
+                            <strong>الاهتمام بالصحة النفسية:</strong> يُعد ميدان الصحة النفسية من أكثر الميادين إثارة لاهتمام الناس والمختصين، وذلك لرغبتهم في معرفة المظاهر التي يجب أن يتمتع بها الإنسان ليكون ذا صحة نفسية سليمة، وما يقابلها من مظاهر السلوك المرتبطة بالصحة النفسية غير السليمة.
+                        </li>
+                        <li>
+                            <strong>طبيعة المفهوم:</strong> كان يُظن قديماً أن هذا المفهوم محدد ومتفق عليه، لكن تبين للعلماء أنه <strong>مفهوم ثقافي نسبي</strong> غير ثابت، يتأثر بالبيئة الاجتماعية والثقافية للفرد. كما تختلف وجهات نظر العلماء في تحديده بناءً على مناهجهم الفكرية ونظرتهم لطبيعة الإنسان.
+                        </li>
+                        <li>
+                            <strong>مقارنة مع الصحة الجسمية:</strong> يتفق الأطباء على تحديد الصحة الجسمية بخلو الجسم من الأمراض وقيام الأجهزة بوظائفها بشكل يمكن قياسه بدقة. أما الصحة النفسية، فلا يمكن قياسها بمجرد الخلو من الأعراض المرضية العصبية، لأن "العرض المرضي" يختلف تقييمه.
+                            <ul class="nested-bullet">
+                                <li><strong>أعراض متفق عليها:</strong> مثل الهلوسة (كإحساس الفرد بأشياء لا وجود لها موضوعياً، كسماع أصوات أو الإحساس بحشرات تزحف أو شم روائح لا مصدر لها) والخوف الشديد المعوق لفاعلية الفرد، فهذه تُعد أعراضاً واضحة لصحة نفسية سيئة.</li>
+                                <li><strong>أعراض غير متفق عليها:</strong> هناك تصرفات لا يمكن الاتفاق على اعتبارها شاذة أو مرضية بسبب اختلاف قيم وتقاليد وثقافات المجتمعات، مما يؤكد أن المفهوم ثقافي نسبي.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>تعدد وجهات نظر المختصين حول المظاهر السليمة:</strong>
+                            <ul class="nested-bullet">
+                                <li>يرى البعض أنها الخلو من الأعراض المعوقة كالتوتر، القلق، الاكتئاب، والخوف المرضي.</li>
+                                <li>يرى آخرون أنها عدم المعاناة من الصراع النفسي، والتوافق مع الذات والبيئة.</li>
+                                <li>تُعرف أيضاً بأنها حالة من التكيف، السيطرة على الإحباط، تحويل الأخطاء لخطوات ناجحة، السيطرة على الانفعالات، استثمار القدرات لصالح الذات والآخرين، التصرف بمرونة، والاتسام بالتفاؤل وانعدام التشاؤم.</li>
+                                <li>هي القدرة على التعامل مع مطالب الحياة دون إرهاق أو إهدار للطاقة، والشعور بالكفاية والسعادة، والوفاء بالالتزامات، وتقبل الذات وإدراك تقبل الآخرين.</li>
+                                <li>تتطلب توكيد الذات، النظرة الموضوعية للقدرات، والعيش بعلاقات طيبة مع الأسرة، الزملاء في العمل، أو الجامعة.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>مقومات ومتطلبات الصحة النفسية:</strong> للصحة النفسية درجات؛ إذا تدنت أصيب الفرد باضطرابات، وإذا توفرت استطاع تحمل الضغوط والمحن دون ظهور أعراض مرضية.
+                            <ul class="nested-bullet">
+                                <li><strong>على مستوى الأسرة:</strong> تتطلب خلق مناخ نفسي مشبع بالتعاون والتفاؤل، ومعاملة الآباء للأبناء بتقبل واستقلالية، والابتعاد عن التسلط والقهر. كما يجب تجنب الحماية الزائدة (التدليل) التي تسبب الاتكالية، اللامبالاة، الانسحاب، الانطواء، وانعدام الثقة بالنفس.</li>
+                                <li><strong>على المستوى الاجتماعي:</strong> يجب أن تتولى المؤسسات التربوية والعلاجية بث الوعي بالاضطرابات النفسية، طرق علاجها، وكيفية التعامل مع المرضى، والتخفيف من الأزمات المسببة للأذى النفسي.</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3 class="subsection-title">ثانياً: تعريفات الصحة النفسية</h3>
+                    <p class="text-paragraph">تعددت التعريفات لتشمل جوانب التوافق الاجتماعي، التكيف المتكامل، والتكامل الإنساني:</p>
+                    <ul class="bullet-list">
+                        <li><strong>تعريف بوهيم (Bohim):</strong> هي حالة ومستوى فاعلية الفرد الاجتماعية، وما تؤدي إليه من إشباع لحاجاته.</li>
+                        <li><strong>تعريف كيلاندر (Kilander):</strong> تُقاس بمدى قدرة الفرد على التأثير في بيئته والتكيف مع الحياة، مما يحقق له الإشباع الشخصي، الكفاءة، والسعادة.</li>
+                        <li><strong>تعريف شوبن (Shobin):</strong> ترتبط بالتكيف المتكامل، وتتحدد بصفات مثل ضبط النفس، الشعور بالمسؤولية الشخصية والاجتماعية، والاهتمام بالقيم. الشخص السليم هو من يرجئ الإشباع الفوري لنتائج أبعد، ويتحمل مسؤولية أعماله دون حيل دفاعية.</li>
+                        <li>
+                            <strong>تعريف منظمة الصحة العالمية (1964):</strong> هي حالة عقلية انفعالية مركبة دائمة نسبياً من الشعور بأن كل شيء على ما يرام، السعادة مع الذات والآخرين، الرضا، الطمأنينة، الأمن، سلامة العقل، الإقبال على الحياة بقوة، وتحقيق توافق نفسي واجتماعي مرتفع.
+                            <ul class="nested-bullet">
+                                <li>أكدت المنظمة أن الشخص السليم يتسم بالخلق القويم، الكفاءة، الاتزان الانفعالي، تكامل الشخصية، والقدرة على مواجهة مطالب الحياة.</li>
+                                <li>حذرت المنظمة من أن مجرد التحرر من الأعراض المرضية والانحرافات لا يثبت بالضرورة قوة الصحة النفسية.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>الفرق بين المصطلحات:</strong>
+                            <ul class="nested-bullet">
+                                <li><strong>الصحة النفسية للفرد:</strong> هي حالته النفسية العامة التي تتأثر بالمواقف وقدرته على الاحتمال.</li>
+                                <li><strong>الصحة النفسية السليمة (المرتفعة):</strong> الحالة التي يتصف فيها الفرد بإمكانات لتحقيق ذاته، فيشعر بالارتياح والنجاح.</li>
+                            </ul>
+                        </li>
+                        <li><strong>تعريف عبد السلام عبد الغفار (1990):</strong> حالة تكامل طاقات الفرد المختلفة مما يؤدي لحسن استثمارها وتحقيق إنسانيته (وجوده).</li>
+                        <li><strong>تعريف أديب الخالدي (2002):</strong> تنظيم متسق بين عوامل التكوين العقلي والتكوين الانفعالي للفرد، مما يحدد استجابات دالة على اتزانه الانفعالي، توافقه الشخصي والاجتماعي، وتحقيق ذاته.</li>
+                    </ul>
+
+                    <div class="callout-box">
+                        <h5>📌 الجوانب المشتركة المجمع عليها في تعريفات الصحة النفسية:</h5>
+                        <ol class="numbered-list" style="margin-bottom:0;">
+                            <li>التوافق المناسب ومواجهة الأزمات.</li>
+                            <li>الشعور بالسعادة، الرضا، الكفاية، والإيجابية.</li>
+                            <li>تكامل شخصية الفرد وسوائها.</li>
+                            <li>تقبل الذات وتقبل الآخرين.</li>
+                            <li>سيطرة انفعالات معقولة ومتناسبة مع المواقف دون صدور سلوك غير سوي.</li>
+                            <li>الربط بين الجانب العقلي (الذكاء، الابتكار) والجانب الانفعالي (الدافعية، القيم، الميول) لتحقيق التوافق.</li>
+                        </ol>
+                    </div>
+
+                    <h3 class="subsection-title">ثالثاً: الصحة النفسية مفهوم ثقافي نسبي</h3>
+                    <ul class="bullet-list">
+                        <li><strong>سبب التغير:</strong> المعنى يتطور بتطور الحياة، وبتغير معلوماتنا وخبراتنا واكتشافاتنا عن أنفسنا وأهدافنا.</li>
+                        <li><strong>الاتساق النفسي:</strong> الاتساق بين الطاقة العقلية (الذكاء) والطاقة النفسية (الثقة بالنفس، الخلو من الصراع) يساعد الفرد على إقامة علاقات مرضية وتحقيق ذاته. فالشخصية تنظيم متكامل يجب أن تتسق وظائفه.</li>
+                        <li>
+                            <strong>مظاهر النسبية بالتفصيل:</strong>
+                            <ol class="numbered-list">
+                                <li><strong>الزمان والمكان:</strong> تختلف باختلاف الظروف الاجتماعية، التباين الثقافي، وتغير مطالب الحياة.</li>
+                                <li><strong>حالة ديناميكية:</strong> ليست حالة ثابتة، بل تتغير بتغير المدركات العقلية وآليات التوافق بين الأفراد (كيفية التعامل مع الفشل والإحباط).</li>
+                                <li><strong>تغير الشعور الفردي:</strong> الفرد الواحد يتقلب بين السعادة والتشاؤم بناءً على مواقف الحياة اليومية.</li>
+                                <li><strong>مراحل النمو:</strong> السلوك يُحكم عليه بالنسبة للعمر. (مثال: مص الأصابع أو التبول اللاإرادي طبيعي للرضيع، لكنه مشكلة وسلوك شاذ لمن هو في العاشرة).</li>
+                                <li><strong>المعايير الثقافية:</strong> العزلة وانعدام الاتصال مرفوضة بشدة في المجتمع الريفي، بينما قد تكون مقبولة إلى حد ما في مجتمع المدينة المعقد.</li>
+                            </ol>
+                        </li>
+                        <li><strong>ملخص نقاش نسبية الصحة النفسية:</strong> المفهوم يتطور بتطور الحياة. ويوجد فرق بين الحالة النفسية العامة للمرء والصحة النفسية السليمة (تحقيق الذات والاتزان). هي حالة ذات ثبات نسبي، تتغير بتغير مواقف الحياة، الفروق الفردية، مراحل النمو، وثقافة المجتمع.</li>
+                        <li>
+                            <strong>صفات الفرد السوي (عبد السلام عبد الغفار 1990):</strong>
+                            <ol class="numbered-list">
+                                <li>تقبل الذات (إدراك نواحي القوة والضعف).</li>
+                                <li>مسافة مناسبة بين مستوى الطموح والإمكانات الواقعية.</li>
+                                <li>المرونة في العلاقات مع الآخرين.</li>
+                                <li>الاتزان الانفعالي.</li>
+                                <li>المبادأة.</li>
+                                <li>نجاح إقامة علاقات اجتماعية فعالة.</li>
+                            </ol>
+                        </li>
+                        <li>
+                            <strong>المحكات الثلاثة الأساسية للمؤلف للصحة النفسية:</strong>
+                            <ol class="numbered-list">
+                                <li><strong>الاتزان الانفعالي:</strong> مستوى مناسب من الثبات والاستقرار النفسي وضبط النفس.</li>
+                                <li><strong>التوافق الشخصي والاجتماعي:</strong> المرونة في التعامل وإقامة علاقات فعالة.</li>
+                                <li><strong>تحقيق الذات:</strong> الاتجاه الواقعي نحو النفس، وتقبل الذات، والتمركز حول حل المشاكل بدلاً من التمركز حول الذات.</li>
+                            </ol>
+                        </li>
+                    </ul>
+
+                    <h3 class="subsection-title">رابعاً: محكات (معايير) السلوك السوي واللاسوي</h3>
+                    <p class="text-paragraph">حددها العالم "علاء الدين كفافي" (1984) في نوعين أساسيين:</p>
+                    
+                    <h4 class="nested-title">أ - المحكات النظرية للتمييز بين السلوك السوي واللاسوي</h4>
+                    <ol class="numbered-list">
+                        <li><strong>المحك الذاتي:</strong> يعتمد على آراء الفلاسفة مثل "بروتاجوارس" أن الإنسان مقياس كل شيء. شائع بين الأشخاص غير المتخصصين. الفرد يحكم بناءً على إطاره المرجعي الذي غالباً ما يتشابه مع إطار الجماعة. <br><em>النقد:</em> الأحكام تتعرض للتشويه والتحريف بحكم دوافع الفرد واتجاهاته خاصة في المواقف غير الحيادية.</li>
+                        <li><strong>المحك الإحصائي:</strong> يعتمد على شيوع السلوك. السلوك الشائع هو السوي، والسلوك النادر هو غير السوي. <br><em>النقد:</em> مضلل وغير دقيق. يعتبر العباقرة وقصار/طوال القامة شواذاً لانحرافهم عن المتوسط، ويحدد الانحراف مجرداً من الدلالة الاجتماعية والخلقية.</li>
+                        <li><strong>محك التوافق الشخصي:</strong> الفرد السوي هو من يتوافق مع مطالبه البيولوجية الداخلية ومطالب البيئة الاجتماعية الخارجية. <br><em>النقد:</em> قاصر لأنه لا يضع مرجعاً لتحقيق الإمكانيات (مثال: عبقري يقوم بعمل روتيني لا يعد سلوكه صحياً). كما يغفل الدلالة الأخلاقية والاجتماعية (مثال: التاجر غير الأمين قد يكون سعيداً وحسن التوافق ولكنه ليس سوياً مجتمعياً).</li>
+                        <li><strong>محك تكامل الشخصية:</strong> الانسجام بين مكونات الشخصية وبينها وبين البيئة. يظهر في التوافق بين الفكر والمشاعر والعمل، التحرر من الصراعات، عدم استخدام آليات دفاعية جامدة، والانفتاح على الخبرات. <br><em>النقد:</em> غير كافٍ دائماً. الشاب المدلل المستكين لحماية والديه قد يكون حسن التكيف لكن سلوكه لا يدل على نضج أو تكامل.</li>
+                        <li><strong>المحك الاجتماعي:</strong> السلوك السوي هو الذي يدعم حاجات المجتمع، أهدافه، ويتفق مع معاييره. <br><em>النقد:</em> المجتمع نفسه قد يمرض أو يخرج عن حدود السوية. التوافق مع مجتمع مريض ليس سلوكاً سوياً (مثال: محاولة الأنبياء تطهير المجتمعات من الانحرافات كالجنسية المثلية).</li>
+                        <li><strong>محك نمو الفرد وصالح الجماعة (كولمان):</strong> السلوك السوي يحقق نمو الفرد (لأقصى درجة) واستقرار وتقدم الجماعة معاً. في العلاج، يجب تعديل الظروف الاجتماعية (الأسرة/المجتمع) التي تعيق التوافق، وليس فقط الفرد. <br><em>النقد:</em> دقيق، لكن تقابله مشكلة تحديد حقوق وواجبات الفرد والمجتمع التي تختلف باختلاف الفلسفة المجتمعية.</li>
+                    </ol>
+
+                    <h4 class="nested-title">ب - المحكات العملية للسلوك السوي</h4>
+                    <ul class="bullet-list">
+                        <li>تبحث في تحقيق الانسجام لدى الفرد بين حاجاته وقيمه (تقبل الذات، الثقة، التحرر من الصراعات).</li>
+                        <li>تحقيق الانسجام مع البيئة (بناء علاقات سوية، مبادلة المشاعر، الخضوع المعتدل لمطالب الجماعة مع الانطلاق في الفكر والعمل).</li>
+                        <li>مدى إسهام الفرد في نمو الجماعة وتحمل المسؤولية بطريقة بناءة.</li>
+                    </ul>
+
+                    <h4 class="nested-title">ج - محك التوازن (علاء الدين كفافي)</h4>
+                    <p class="text-paragraph">يقوم على فكرة أن السلوك السوي هو توازن مرن وواقعي يجمع بين أطراف متعددة متناقضة ظاهرياً:</p>
+                    <ol class="numbered-list" style="margin-right:30px;">
+                        <li>وسط بين الجماعية والفردية.</li>
+                        <li>يجمع بين التطوع والالتزام.</li>
+                        <li>يتحدد بالوازع الداخلي والوازع الخارجي.</li>
+                        <li>يجمع بين التواضع والعزة.</li>
+                        <li>توازن بين الحرية والمسؤولية.</li>
+                        <li>توازن بين الثبات والتغير.</li>
+                        <li>توازن بين الإيجابية والسلبية.</li>
+                        <li>يجمع بين المثالية والواقعية.</li>
+                    </ol>
+                    <p class="text-paragraph"><em>ويتميز هذا المحك بأنه عالمي، إنساني، ويتسم بالأمن، الطمأنينة، الإدراك الصحيح للواقع، والتنافس البناء البشري.</em></p>
+                </div>
+            </div>
+
+            <!-- 2. تبويب الفصل الثاني -->
+            <div id="ch2-tab" class="tab-content">
+                <div class="article-card">
+                    <h2 class="section-heading">الفصل الثاني بعنوان "الصحة النفسية والتوافق"</h2>
+                    
+                    <h3 class="subsection-title">مقدمة: التكيف والتوافق</h3>
+                    <ul class="bullet-list">
+                        <li><strong>التكيف والتوافق:</strong> هناك علاقة مستمرة بين الكائن الحي وبيئته، وبما أنهما متغيران، فإن أي تغيير يتطلب تعديلاً للحفاظ على الاستقرار. هذا التعديل هو <strong>التكيف (Adaptation)</strong>، بينما العلاقة المستمرة هي <strong>التوافق</strong>. التكيف يمثل الخطوات، والتوافق هو الحالة التي يبلغها الكائن الفرد.</li>
+                        <li><strong>أشكال التعديل:</strong> إما بتعديل الكائن لنفسه ليتلائم مع الظروف (مغايرة Dissimilation)، أو إحداث تعديل في البيئة (مماثلة Assimilation)، أو تعديل كلاهما معاً.</li>
+                        <li><strong>نواحي التوافق:</strong> يشمل نواحي فيزيائية (كالحرارة)، بيولوجية/فسيولوجية، نفسية (كتعديل الإدراك والانفعال)، واجتماعية (كتطوير الدوافع لتتفق مع المجتمع).</li>
+                        <li><strong>عدم التوافق وسوء التوافق:</strong> عجز الكائن عن التوافق تماماً (عدم التوافق) قد يؤدي إلى هلاكه. أما إذا حقق توافقاً فاشلاً أو غير سوي، فيُسمى <strong>سوء التوافق (Maladjustment)</strong>، مثل الطفل الذي يمرض وهماً ليستدر عطف والديه بعد ولادة أخ جديد له.</li>
+                    </ul>
+
+                    <h3 class="subsection-title">معنى التوافق</h3>
+                    <ul class="bullet-list">
+                        <li><strong>جوهر علم النفس:</strong> دراسة علم النفس لا تنصب على السلوك ذاته، بل تدور حول كيفية الوصول للتوافق وطبيعة العمليات التي يتم بواسطتها التوافق أو عدمه.</li>
+                        <li><strong>التوافق كحالة ديناميكية:</strong> هو حالة وقتية تتزن فيها قوى المجال. عندما ينتقل الفرد لمجال جديد (كالدراسة الجامعية مقارنة بالثانوية)، تختل القوى القديمة وتظهر ضغوط جديدة (حرية أكبر، نظام تدريس مختلف) مما يتطلب خلق نظام اتزان داخلي جديد تماماً.</li>
+                        <li>
+                            <strong>العوامل المؤثرة في التوافق:</strong> يتوقف تأثير الفرد وتأثره بمجاله على محددان أساسيان:
+                            <ol class="numbered-list" style="margin-top:5px; margin-right:15px;">
+                                <li>قابليته للتأثر وقدرته على التأثير (الطفل أكثر قابلية للتأثر من البالغ).</li>
+                                <li>الإمكانيات المتاحة في المجال للتأثر والتأثير (المواقف الحاسمة والدائمة أكثر تأثيراً من التافهة والمؤقتة).</li>
+                            </ol>
+                        </li>
+                        <li>التوافق هو نتاج قوى متصارعة بين الفرد وبيئته، ويمثل "لحظة اتزان" بين إمكانيات الفرد والفرص المتاحة في مجاله.</li>
+                    </ul>
+
+                    <h3 class="subsection-title">التوافق عملية مستمرة</h3>
+                    <p class="text-paragraph">الحياة تتطلب توافقاً مستمراً؛ فالجوع يدفع للبحث عن الطعام، والبرد يدفع للبحث عن الدفء، وبقاء الكائن الحي مرهون تماماً بقدرته المستدامة على هذا التوافق البيئي البنائي والفسيولوجي.</p>
+                    <p class="text-paragraph"><strong>طرق التوافق البديلة مع البيئة:</strong> إما تعديل الاستجابات (كتغيير المهنة إذا كانت لا تدر رزقاً كافياً)، أو تغيير البيئة كلياً (كالهجرة لبلد آخر بحثاً عن الرزق)، أو تغيير البيئة جزئياً (كبناء المساكن أو إقامة السدود لحمايته).</p>
+                    <p class="text-paragraph"><strong>الدوافع الاجتماعية والتوافق:</strong> الإنسان لا يحتاج فقط لإشباع الدوافع البيولوجية الفطرية، بل الاجتماعية أيضاً (كالحب، الأمن، التفوق، الاستقلال، والزعامة)، وعجز الفرد المطلق عن إشباعها يسبب مشكلات معقدة وحادة في التوافق العام والشخصي.</p>
+
+                    <h3 class="subsection-title">أبعاد (مستويات) التوافق</h3>
+                    <h4 class="nested-title">1. التوافق على المستوى البيولوجي</h4>
+                    <p class="text-paragraph">يعتمد على تغيير الكائنات الحية لأنشطتها الفسيولوجية استجابة للظروف البيئية المتغيرة، ويجب أن يجد الكائن طرقاً جديدة وإلا هلك، مما يعني أن التوافق هنا يتسم بـ <strong>المرونة (Flexibility)</strong> والاستمرارية البقائية.</p>
+                    
+                    <h4 class="nested-title">2. التوافق على المستوى الاجتماعي</h4>
+                    <ul class="bullet-list">
+                        <li><strong>لورنس شافر:</strong> سلسلة من العمليات يعدل فيها الفرد سلوكه للاستجابة للموقف الاجتماعي، ويجب أن يكون توافقه مرناً ومسايراً.</li>
+                        <li><strong>راش (Rush):</strong> التوافق هو السلوك وفقاً للأساليب الثقافية السائدة بالمجتمع. (مثال: المنتقل حديثاً من الريف للمدينة يجب أن يدرك أن محور العلاقات في المدينة هو "أنا" وليس "نحن" القروية).</li>
+                        <li><strong>التطبيع الاجتماعي (Socialization):</strong> تقوم الأسرة والمجتمع بتهذيب استعدادات الفرد وتعديل دوافعه وتكوين ضميره واكتسابه للقيم والمعايير، وهذا الأسلوب العام يسمى "التوافق العام الجماهيري".</li>
+                    </ul>
+
+                    <h4 class="nested-title">3. التوافق على المستوى السيكولوجي</h4>
+                    <ul class="bullet-list">
+                        <li><strong>مورار وكلاكهون:</strong> الصراع صفة ملازمة للسلوك البشري؛ فخفض التوتر في جانب يؤدي لزيادته في جانب آخر، لكن الكائن الذكي يختار أشكال التوافق الأقل صراعاً وعمقاً.</li>
+                        <li><strong>سميث (Smith):</strong> التوافق السوي هو اعتدال في الإشباع العام دون طغيان دافع على آخر. الشخص المتوافق يواجه العقبات بطريقة بناءة تحقق الرضا وتقلل القلق الخفي.</li>
+                        <li><strong>شوبين (Shobin):</strong> التوافق هو "السلوك المتكامل" الذي يتميز بالضبط الذاتي الصارم، المسؤولية الشخصية والاجتماعية، وتأجيل الإشباع العاجل الفوري لنتائج أبعد وآجل (وهو جوهر النضج الانفعالي).</li>
+                    </ul>
+
+                    <h3 class="subsection-title">خطوات عملية التوافق النفسي</h3>
+                    <ol class="numbered-list">
+                        <li>وجود دافع ملح يدفع الإنسان لهدف خاص ومحدد.</li>
+                        <li>ظهور عائق حاد يمنع الوصول للهدف ويحبط الدافع النفسي.</li>
+                        <li>قيام الإنسان بحركات وأعمال بديلة عشوائية أو موجهة للتغلب على العائق.</li>
+                        <li>الوصول لحل سليم يتغلب على العائق ويشبع الدافع الأصلي. <br><em>(ملاحظة علمية: إذا عجز الفرد كلياً، فقد يتجنب العائق ويبتعد عن الهدف، مما يسبب الإحباط المزمن).</em></li>
+                    </ol>
+
+                    <h3 class="subsection-title">مفاهيم أساسية في الصحة النفسية والتوافق</h3>
+                    <h4 class="nested-title">أولاً: الإحباط (Frustration)</h4>
+                    <p class="text-paragraph"><strong>المفهوم:</strong> حالة من التأزم النفسي والانفعالي تنشأ عن مواجهة الفرد لعائق يحول دون إشباع دافع أو حاجة ملحة. وكمية الإحباط تعتمد طردياً على: أهمية الحاجة، مدى الإعاقة، وعدد مرات الفشل السابقة.</p>
+                    <p class="text-paragraph"><strong>أسباب وعوائق الإحباط السبعة:</strong>
+                        <br>1. <em>عوائق مادية:</em> ظروف مادية كالزلازل، الفيضانات، أو تعطل سيارة بالمرور.
+                        <br>2. <em>عوائق اجتماعية:</em> القيود والنواهي المجتمعية والتقاليد (كغلاء المهور، قيود الزواج، تدخل الوالدين الزائد).
+                        <br>3. <em>عوائق اقتصادية:</em> الفقر وضعف الدخل الذي يحرم الفرد من تحقيق آماله وطموحاته أو الغذاء والمسكن الملائم.
+                        <br>4. <em>عيوب شخصية ذاتية:</em> بدنية (كالعاهات أو قبح المنظر)، عقلية (ضعف الذكاء)، أو نفسية (كالخجل والخوف المرضي).
+                        <br>5. <em>دوافع متعارضة (الصراع):</em> كرغبة الشاب في الاستقلال ورغبته في الاعتماد على والديه بآن واحد.
+                        <br>6. <em>المنافسة الشرسة:</em> التنافس على الثروة أو المركز مع تفاوت القدرات الوراثية والبيئية بين المتنافسين.
+                        <br>7. <em>الأهداف بعيدة المنال:</em> الطموحات التي تزيد عن قدرات الفرد تعرضه للانهيار التام. الآباء والمعلمون مسؤولون عن رفع طموحات الأطفال فوق طاقاتهم.
+                    </p>
+                    <p class="text-paragraph"><strong>أساليب مواجهة الإحباط:</strong> تنمية الرضا، تعويد الأفراد على الصبر والأخذ بالأسباب، مساعدة الأسر الفقيرة مجتمعياً، توجيه الآباء لمعاملة الأبناء حسناً وبث الاستقلال، توجيه المتأخرين دراسياً نحو المسار المهني المناسب، تجنب إهانة الفاشلين، وتشجيع الأبناء على حل مشكلاتهم بأنفسهم وبمرونة.</p>
+
+                    <h4 class="nested-title">ثانياً: الصراع (Conflict)</h4>
+                    <p class="text-paragraph"><strong>المفهوم:</strong> الصراع النفسي الدائم المستمر الذي ينشأ نتيجة تعارض دافعين أو رغبتين لا يمكن إرضاؤهما في وقت واحد لتساويهما في القوة والجاذبية.</p>
+                    <p class="text-paragraph"><strong>مصادر وأنواع الصراع:</strong> مصادر خارجية (عقبات مادية/اجتماعية) أو داخلية ذاتية (دوافع جنسية أو عدوانية يخشى الفرد إشباعها). وأنواعه: وقتي عابر أو مزمن مدمر، خفيف أو عنيف (حسب نضج الفرد)، بسيط أو مركب. <br><strong>الصراعات المتعددة الكبرى:</strong> متعدد الإقدام (اختيار بين بدائل كلها جيدة ومحببة)، متعدد الإحجام (بدائل كلها سيئة ومكروهة قسراً)، متعدد الإقدام والإحجام (بدائل لها جوانب حسنة ومحببة وجوانب سيئة ومكروهة بآن واحد).</p>
+
+                    <h4 class="nested-title">ثالثاً: الضغوط النفسية والاجتماعية</h4>
+                    <p class="text-paragraph"><strong>ضغوط نفسية:</strong> المطالب المادية المتزايدة، تعقد الحياة والتنافس، ظروف العمل المملة، عدم الاستقرار الدولي، وسرعة التغيرات التكنولوجية والاقتصادية التي تشعر الفرد بالقلق المستمر والتوجس. <br><strong>ضغوط اجتماعية:</strong> ضوابط ومعايير صارمة تضعها جماعات الأسرة والعمل، وتجبر الفرد على سلوك لا يرضيه داخلياً لإرضاء الجماعة فقط.</p>
+
+                    <div class="callout-box">
+                        <h5>⚠️ النتائج المباشرة للإحباط والصراع الخفي:</h5>
+                        <ul class="bullet-list" style="margin-bottom:0;">
+                            <li><strong>التوتر وعدم الاستقرار:</strong> صعوبة الاستقرار على رأي أو مكان، وحركات عصبية تكرارية (كإشعال سيجارة وتركها، فرقعة الأصابع، التململ).</li>
+                            <li><strong>الاعتداء (العدوان):</strong> قد يوجه للشخص/الشيء المسبب للإحباط، أو يوجه نحو الذات (الانتحار/جلد الذات)، أو يأخذ مظهر سب ونميمة. إذا عجز الفرد عن مواجهة المصدر الأصلي للخوف، يحول اعتداءه نحو <strong>"كبش الفداء"</strong> (مثل المعلم الذي يقسو على طلابه هرباً من تعسف رئيسه، أو ظاهرة الشعب الألماني ومعاداته لليهود بعد الحرب).</li>
+                            <li><strong>عدم المبالاة (البلادة العاطفية):</strong> نتيجة الإحباط المستمر وفقدان الأمل، يُكبت الشعور بالإحباط فيبدو الفرد بارداً وغير مبالٍ.</li>
+                            <li><strong>أحلام اليقظة والخيال:</strong> اللجوء للخيال لتحقيق ما عجز عنه في الواقع (كالمرؤوس الذي يتخيل الانتقام من رئيسه، أو الطفل الذي يعوض ضعفه بالخيال). خطورتها تكمن إذا أبعدت الفرد كلياً عن الواقع الحقيقي.</li>
+                            <li><strong>الجمود السلوكي:</strong> القيام بسلوك عشوائي جامد وتكراره آلياً رغم أنه لا يحقق الهدف إطلاقاً.</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">أساليب التوافق (المباشرة وغير المباشرة اللاشعورية)</h3>
+                    <h4 class="nested-title">1. أساليب التوافق المباشرة الثمانية</h4>
+                    <ol class="numbered-list">
+                        <li><strong>العمل الجدي ومضاعفة الجهد:</strong> كالطالب الراسب الذي يزيد من استذكاره، أو الرياضي الذي يتمرن بشدة، ويجب غرس هذا الاستعداد في الأطفال مبكراً.</li>
+                        <li><strong>تغيير الطريقة:</strong> تغيير طريقة المذاكرة أو طريقة شرح المدرس للدرس إذا فشلت الطريقة الأولى بالامتحان.</li>
+                        <li><strong>تحوير السلوك:</strong> كالفتاة غير الجميلة التي تعوض ذلك بتقوية شخصيتها وتعليمها، أو اتخاذ طريق بديل إذا كان الطريق الرئيسي مغلقاً.</li>
+                        <li><strong>تنمية مهارات جديدة:</strong> كالأم التي تدرس التربية الحديثة أو التاجر الذي يدرس الأسواق المتغيرة برمجياً.</li>
+                        <li><strong>إعادة تفسير الموقف:</strong> تعديل التفسير الخاطئ (كالأب الذي يتفهم أن تمرد ابنه المراهق هو محاولة طبيعية للاستقلال وليس عقوقاً).</li>
+                        <li><strong>التعاون والمشاركة الاجتماعية:</strong> أفضل نوع من العلاقات، ويجب أن يتم في جو من المساواة التامة لا السيطرة والخضوع.</li>
+                        <li><strong>تغيير الهدف:</strong> تغيير الهدف لآخر أسهل وأقرب للواقع (تغيير الكلية الجامعية، أو شراء كاميرا بدلاً من دراجة غير متوفرة).</li>
+                        <li><strong>تأجيل إشباع الدافع إلى حين:</strong> إذا تعذرت الحلول المباشرة والبديلة مؤقتاً.</li>
+                    </ol>
+
+                    <h4 class="nested-title">2. أساليب التوافق غير المباشرة: آليات الدفاع اللاشعورية (Defense Mechanisms)</h4>
+                    <p class="text-paragraph">عندما يفشل الفرد في التوافق المباشر ويشعر بالقلق والتوتر، تلجأ (الأنا) لاشعورياً لحيل لتجنب مواجهة الحقائق التي تسبب الشعور بالإثم أو الامتهان. عيوبها: تموه الذات وتشوه الواقع ولا تقدم حلولاً حقيقية. الإسراف في استخدامها يستنزف الطاقة النفسية ويؤدي للاضطراب النفسي والعصبي الحاد.</p>
+                    <p class="text-paragraph"><strong>تصنيفها العلمي:</strong> حيل خداعية كاذبة (الكبت، التبرير، الإسقاط، التكوين العكسي)، حيل هروبية (النكوص، الانعزالية، السلبية، أحلام اليقظة)، وحيل استبدالية (التعويض، التحويل، التقمص).</p>
+                    
+                    <h4 class="nested-title">أهم آليات الدفاع اللاشعورية بالتفصيل الشامل</h4>
+                    <ol class="numbered-list">
+                        <li><strong>الكبت (Repression):</strong> آلية أولية أساسية والأكثر فعالية وخطورة، ودورها رئيسي في تكوين اللاشعور. هي استبعاد الحفزات والأفكار التي تتعارض مع الذات عن الشعور لتجنب القلق. لها وظيفتان: وقائية (دفع مسببات الألم وجرح الكبرياء) وصد الدوافع الغريزية (الجنسية والعدوانية). الكبت يبقى ناقصاً دائماً، فالمحتويات المكبوتة تحتفظ بقوتها وتستنزف طاقة (الأنا) باستمرار.</li>
+                        <li><strong>التقمص / التوحد (Identification):</strong> وسيلة لنمو (الأنا) و(الأنا الأعلى) في سن مبكرة (كالطفل الذي يتقمص أباه ليتعلم الصواب والخطأ). الفرد يدمج نفسه لاشعورياً في شخصية أخرى محببة وناجحة ليشعر بالفخر والتميز (عكس الإسقاط). يختلف عن (التقليد) بأن التقليد شعوري، بينما التقمص لاشعوري واندماج تام. وهو نوعان: توحد أولي وتوحد ثانوي لخفض التوتر وتجنب الألم البنائي.</li>
+                        <li><strong>التعويض (Compensation):</strong> محاولة لاشعورية لتغطية الشعور بالنقص (حقيقي أو متوهم، جسمي أو نفسي) باللجوء للتميز في مجال آخر تماماً. قد يتخذ صورة المبالغة في سلوك معين (القصير الذي يفرض سيطرته الصارمة). أمثلة إيجابية خالدة: طه حسين (العمى/الأدب)، هيلين كيلر (الصمم والعمى/التأليف)، بيتهوفن (الصمم/الموسيقى).</li>
+                        <li><strong>الإسقاط (Projection):</strong> إلصاق الفرد ما يتصف به من صفات ونواقص مرفوضة بالآخرين ليزيل عن كاهله الشعور بالفشل والقلق. يرتبط بحيلة "الإنكار" (مثال: شخص يكره آخر، فيحولها لاشعورياً إلى "هو يكرهني" ليخفف الألم الذاتي). خطورته إذا أصبح صفة ملازمة، فإنه يولد التعصب والشكوك والعزلة. الحالات القصوى تتمثل في الهذيان، الهلوسة، والبارانويا. وعكسها تماماً هو <strong>الاستدماج/الاستدخال (Introjection)</strong> حيث يدخل الشخص صفات البيئة الخارجية لتصبح من مكوناته الأساسية.</li>
+                        <li><strong>Tسامي / الإعلاء (Sublimation):</strong> تحويل طاقة الدوافع الممنوعة والمرفوضة (الجنسية أو العدوانية) إلى توجهات وأهداف اجتماعية وثقافية وأخلاقية مفيدة وراقية جداً (كالفن والبحث العلمي والرياضة). من أكبر العمليات الدفاعية نجاحاً؛ يقي من المرض النفسي ويحقق السعادة والتقدير الاجتماعي، ويستخدم بقوة في العلاج النفسي.</li>
+                        <li><strong>التبرير (Rationalization):</strong> إيجاد أسباب تبدو "منطقية ومقبولة" ولكنها كاذبة ومختلقة لاشعورياً لتبرير سلوك خاطئ أو فشل (مثال: تبرير الخسارة بتحيز الحكم، أو اعتبار التبذير كرماً). <em>الفرق بين التبرير والكذب:</em> الكذب عملية شعورية متعمدة لخداع الغير مع الإدراك بالسبب الحقيقي، التبرير عملية لاشعورية تتضمن خداع الذات أولاً.</li>
+                        <li><strong>النكوص (Regression):</strong> العودة إلى أشكال سابقة أو طفلية من السلوك والنمو عند مواجهة مواقف صعبة لتقوية دفاعات الأنا (كالطفل الذي يعود للتبول أو مص إصبعه بعد قدوم أخ جديد، أو الزوجة التي تهرب لأهلها بدل مواجهة مشاكلها). يرتبط بنقاط "التثبيت" (Fixation) في مراحل النمو السابقة. تظهر الحالات القصوى للنكوص في الفصام والهستيريا والأحلام (فالحلم نكوص للطفولة).</li>
+                        <li><strong>التكوين العكسي (Reaction Formation):</strong> تبني الفرد لسلوكيات هي النقيض التام لمشاعره اللاشعورية المكبوتة، كتمويه على الرغبات الخطيرة. يتميز بالمبالغة والاندفاع في إظهار الصفة الإيجابية لإخفاء السلبية (كالذي يخفي كراهيته وغيرته بادعاء الحب والدفء المبالغ فيه، أو من ينجذب بشدة لامرأة فيعاملها بعدوانية شديدة لتغطية الانجذاب).</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- 3. تبويب الفصل الثالث -->
+            <div id="ch3-tab" class="tab-content">
+                <div class="article-card">
+                    <h2 class="section-heading">الفصل الثالث بعنوان "الشخصية"</h2>
+                    
+                    <h3 class="subsection-title">أولاً: تعريف الشخصية</h3>
+                    <ul class="bullet-list">
+                        <li><strong>صعوبة التعريف العلمية:</strong> رغم أن لدينا تصوراً بديهياً لمعنى الشخصية، إلا أن تعريف هذا المصطلح علمياً في علم النفس يُعد أمراً في غاية الصعوبة لأنه مصطلح متعدد الوجوه والزوايا الإكلينيكية.</li>
+                        <li><strong>التصور البديهي السطحي:</strong> قد يلقي الضوء على الجوانب الجسمية الخارجية أو الجانب الاجتماعي (كيف يبدو الفرد في مواجهة الآخرين: خجول، عدواني، ودود، مؤثر). إلا أن هذا التصور يهمل اعتباراً هاماً وهو أن للشخصية جوانب غير مرئية توجد حتى في غياب الآخرين كلياً.</li>
+                        <li><strong>اشتقاق الكلمة والمدرسة التحليلية:</strong> مصطلح الشخصية (Personality) مشتق من الكلمة اللاتينية (Persona) والتي تعني القناع (mask). هذا التعريف الذي يشبه قناع الممثل يعكس أننا نختار ما نظهره للآخرين، وأن هناك صفات تبقى طي الكتمان، وهو الاتجاه الذي تؤيده مدرسة التحليل النفسي بقوة.</li>
+                        <li><strong>الشخصية كجهاز من الاستجابات (المدرسة السلوكية):</strong> يرى هذا الاتجاه أن سلوكنا يدل على شخصيتنا (أصلك فعلك)، وأن الكائن لا يولد شخصاً بل فرداً يكتسب طابعه من خلال اللغة والأفكار والقيم. ويُعرفون الشخصية بأنها "أسلوب عام منظم نسبياً لنماذج السلوك العام ومحصلة خبرات الشخص في بيئة ثقافية محددة".</li>
+                        <li><strong>الشخصية كميكانيزمات داخلية (نظرية الذات والسمات):</strong> ترى هذه الوجهة أن الشخصية هي ميكانيزمات داخلية (Internal Mechanisms) تتحكم في السلوك. فكل شخص لديه سمات تحدد سلوكه، ولتغيير السلوك يجب تغيير السمات أو الذات أولاً. وهذا يضع أصحاب هذا الاتجاه في تحدٍ مع مشكلة علاقة الجسم والعقل (Mind-Body Problem).</li>
+                        <li><strong>الثبات النسبي:</strong> تتفق معظم النظريات على أن الشخصية تتضح من خلال نمط السلوك الثابت نسبياً، والذي يعطينا هويتنا الفردية ويتيح التنبؤ بسلوكنا المستقبلي في المواقف المختلفة. ولا يقتصر الثبات على السلوك بل يشمل أنماط الإدراك، التفكير، والإحساس العام.</li>
+                        <li><strong>التعريف الشامل المقترح للمؤلف:</strong> الشخصية هي <span style="color:var(--primary-color); font-weight:700;">"التفاعل المتكامل للخصائص الجسمية والعقلية والانفعالية والاجتماعية التي تميز الشخص وتجعل منه نمط فريد في سلوكه ومكوناته النفسية"</span>. وهذا التفاعل المتكامل يعني التأثير المتبادل بين مكونات الشخصية وتوجيه السلوك وفقاً لخاصية الدينامية المستمرة.</li>
+                    </ul>
+
+                    <h3 class="subsection-title">ثانياً: العوامل المؤثرة في الشخصية</h3>
+                    <p class="text-paragraph">على الرغم من اتفاق النظريات على ثبات واتساق السلوك، إلا أنها تختلف في تفسير محددات هذا الثبات، وهي خمسة محددات:</p>
+                    
+                    <h4 class="nested-title">1. المحددات الوراثية (Genetic)</h4>
+                    <p class="text-paragraph">يرى البعض أن الوراثة لها الدور الأساسي الفعال في الفروق الفردية. الوراثة تمثل العوامل الداخلية الموجودة عند الإخصاب، وتنتقل عبر الجينات، وتلعب دوراً حاسماً في الخصائص الجسمية وتكوين الجهاز العصبي والغدّي الذي يحدد السلوك البشري. أنصار الوراثة يرون أننا نرث الخصائص العقلية والاجتماعية والانفعالية وليس فقط الجسمية (كما كشفت دراسات دارون وفرانسيس جالتون ودراسات التوائم المتماثلة).</p>
+                    <p class="text-paragraph"><em>أمثلة في النظريات:</em> الحاجات الفسيولوجية (فرويد، سكنر، دولارد وميللر، ماسلو)، الميل لتأكيد الذات الفطري (يونج، روجرز، ماسلو)، والاهتمامات الاجتماعية (أدلر) جميعها بُنيت على أساس وجود شيء موروث جينياً.</p>
+
+                    <h4 class="nested-title">2. المحددات الثقافية والاجتماعية</h4>
+                    <p class="text-paragraph">تتكون الشخصية من عدة "أدوار" يلعبها الفرد اجتماعية (مثل: ذكر/أنثى، طالب، ديانة معينة، أعزب، مهني، إلخ). ويحدد المجتمع لكل دور مدى مقبولاً من السلوك، والانحراف عنه يعرض الفرد لضغوط هائلة. تشمل هذه المحددات: المستوى الاقتصادي/الاجتماعي للأسرة، حجم الأسرة، الترتيب الميلادي، والنوع الاجتماعي. نظريات أدلر، هورني، وإيريكسون تؤكد على أهمية علاقة الطفل الأولى مع والديه في تشكيل خصائصه البنائية.</p>
+
+                    <h4 class="nested-title">3. التعلـيــم (الجانب البيئي التجريبي الموجه)</h4>
+                    <p class="text-paragraph">يمثل قبول أثر البيئة والمثيرات في تشكيل الشخصية بالكامل. ومن أبرز شواهده مقولة واطسون الشهيرة: <span style="font-style:italic; font-weight:700; color:var(--primary-color);">"أعطوني مجموعة من الأطفال الأصحاء سليمي البنية، وأنا كفيل أن أخرج منهم الطبيب والمحامي والمهندس... بل والشحاذ واللص، بصرف النظر عن استعداداتهم وميولهم وجنسهم"</span>. يرى أصحاب نظريات التعلم (مثل سكنر ودولارد وميللر) أن الفروق بين الأشخاص ترجع لوجود "عنصر المكافأة" (التعزيز البيئي). مثال لتعلم اللغة: مكافأة الوالدين للطفل عندما يصدر صوتاً صحيحاً تعزز نموه اللغوي وتستمر أنماطه السلوكية بالتشكل.</p>
+
+                    <h4 class="nested-title">4. الاعتبارات الإنسانية الوجودية</h4>
+                    <p class="text-paragraph">تقلل من أهمية معرفة أصل الشخصية التاريخي البيولوجي (لماذا أنت هكذا؟) وتهتم بـ "كينونة الفرد المعاصرة" (ماذا يعني أن تكون أنت الآن؟). تركز على الفاعلية العامة لوجود الإنسان، وحاجاته للحرية والمغامرة والأمان وتحقيق الذات الفردي والجمعي. من روادها الحقيقيين: كيلي، ماي، روجرز، وماسلو.</p>
+
+                    <h4 class="nested-title">5. الميكانيزمات اللاشعورية (نظريات الأعماق)</h4>
+                    <p class="text-paragraph">تهتم باكتشاف الأسباب الدفينة واللاشعورية للسلوك المترسبة من الطفولة المبكرة عبر الكبت. تتطلب أدوات معقدة ومميزة كـ (تفسير الأحلام، المقابلة الإكلينيكية الحرة، التنويم المغناطيسي، وتحليل تداعي الذاكرة) لإخراج محتوى اللاشعور الحبيس إلى الوعي الشعوري المباشر. وروادها الأوائل فرويد وكارل يونج.</p>
+
+                    <h3 class="subsection-title">ثالثاً: نظريات الشخصية الأربع الكبرى</h3>
+                    
+                    <h4 class="nested-title">1. نظرية التحليل النفسي (سيجموند فرويد)</h4>
+                    <ul class="bullet-list">
+                        <li><strong>طبيعة الشخصية والغرائز:</strong> أطلق فرويد مصطلح (التحليل النفسي) والذي يُستخدم كطريقة للعلاج ونظرية للشخصية بآن واحد. وقد ترجمت كلمة (Triebe) الألمانية إلى غرائز (Instincts) أو دوافع (drives).</li>
+                        <li><strong>دورة الغريزة وتوجيه السلوك:</strong> تشمل المثير الداخلي الفسيولوجي ثم الاستجابة الحركية. الغريزة تولد توتراً نفسياً ورغبة غير سارة، وهدف السلوك الإنساني بأكمله هو تخفيف هذا التوتر تحقيقاً لمبدأ اللذة (Pleasure Principle) وتجنب الألم البنائي. الغريزة تدفع السلوك وتحدد اتجاهه بزيادة حساسية الفرد للمنبهات الخارجية (كحساسية الجائع لمنبهات الطعام وروائحه).</li>
+                        <li><strong>أنواع الغرائز:</strong> ميز فرويد بين (غريزة الحياة - الجنس) التي تخدم بقاء الفرد وتكاثره وقوتها الدافعة تُسمى "الليبيدو Libido"، و(غريزة الموت - العدوان والتدمير). فسر فرويد "الهفوات" وزلات اللسان غير المتعمدة بأنها دوافع لاشعورية مكبوتة لا يمكن استدعاؤها بسهولة، وهي تمثل أغلبية النشاط العقلي البشري.</li>
+                    </ul>
+                    
+                    <p class="text-paragraph" style="font-weight:700; margin-right:15px;">تركيب الشخصية الثلاثي عند فرويد:</p>
+                    <p class="text-paragraph" style="margin-right:15px;">طور فرويد نموذجه الطبوغرافي البدائي إلى نموذج تركيبي دينامي يشمل ثلاثة نظم ممتزجة تتفاعل بداخل الفرد:</p>
+                    <ol class="numbered-list" style="margin-right:35px;">
+                        <li><strong>الهي (ID):</strong> تولد معنا منذ اللحظة الأولى، وتحتوي الغرائز الفطرية والطاقة النفسية الحيوية. لاشعورية تماماً. هي الجانب المظلم الفوضوي من الشخصية، وتشبه الإناء المملوء بسائل يغلي بعنف. هدفها الأوحد تحقيق اللذة المباشرة الفورية بدون منطق، زمن، أو قيم أخلاقية. تستخدم <strong>العمليات الأولية (Primary Process)</strong> كالحلم وتكوين الصور العقلية لتفريغ التوتر دون التمييز بين الخيال والواقع الحقيقي.</li>
+                        <li><strong>الأنا (Ego):</strong> تتطور من الـ "هي" في عمر 6-8 شهور نتيجة الاحتكاك بالواقع. مسؤولة عن التفرقة بين الذات واللاذات والتفاعل مع البيئة، وتتسع للشعور واللاشعور معاً. تعمل وفق <strong>مبدأ الواقع (Reality Principle)</strong> و<strong>العمليات الثانوية</strong> (التفكير المنطقي، التقييم، تأجيل اللذة لتجنب الأخطاء والعقاب). شبه فرويد الأنا في علاقتها بـ"الهي" كـ "رجل على ظهر حصان هائج" يحاول توجيه قوة الحصان الهائلة بقوة مستعارة (التبصر والذكاء). الأنا تدافع عن الشخصية وتلجأ للحيل الدفاعية عند استثارة القلق مهدداً كيانها.</li>
+                        <li><strong>الأنا الأعلى (Superego):</strong> تتكون بين عمر 3 إلى 5 سنوات من خلال تشرب وتمثّل معايير وقيم الوالدين والمجتمع (الصواب والخطأ) خوفاً من فقدان حبهم وعطفهم. هي أداة نقل الأفكار للضمير ليعاقب الأنا على الأفعال المحرمة والمرفوضة (مسبباً القلق الخلقي الحاد والشعور بالذنب وجلد الذات) ويزود الأنا بالمثالية للمكافأة. قد تكون الأنا الأعلى ناقصة النمو (ينعدم الضمير إذا افتقد الطفل الحب تماماً)، أو مفرطة الصرامة والقسوة (تسبب الانتحار أو الجرائم النكراء غسلاً للذنب)، وتتأثر بتذبذب أساليب التربية الوالدية.</li>
+                    </ol>
+
+                    <div class="callout-box">
+                        <h5>📊 تقييم مدرسة التحليل النفسي لفرويد:</h5>
+                        <p class="text-paragraph" style="margin-bottom:0;"><strong>نقد النظرية عيوبها:</strong> التأكيد الزائد والمبالغ فيه على الدافع الجنسي لأنه استمده من مرضاه النفسيين البالغين، التشاؤم الشديد والظلامية تجاه الطبيعة البشرية، عدم إمكانية قياس الطاقة النفسية (الليبيدو) مخبرياً، والذاتية المفرطة في تفسيرات المحلل النفسي الخاضعة لهواه. <br><strong>إسهامات النظرية ميزاتها:</strong> إبراز أهمية اللاشعور كقوة محركة، اكتشاف ميكانيزمات الدفاع وتحليل الأحلام علمياً، توضيح أثر الطفولة المبكرة الصارم في الشخصية البالغة، والتأكيد على أهمية القلق والألم النفسي في مسار المرض وسياق العلاج السلوكي.</p>
+                    </div>
+
+                    <h4 class="nested-title">2. نظريات السمات (Trait Theories)</h4>
+                    <p class="text-paragraph">تهتم بوصف وتصنيف الشخصية بناءً على مكوناتها الثابتة نسبياً والمستمرة المسمى بالسمات الشخصية.</p>
+                    <p class="text-paragraph" style="font-weight:700; margin-right:15px;">أ - جوردن ألبورت (Gordon Allport):</p>
+                    <p class="text-paragraph" style="margin-right:15px;">اتبع أسلوب الانتقائية الفاخر في علم النفس (أخذ الأفكار الجيدة من مصادر متعددة). عرف الشخصية بأنها "تنظيم ديناميكي ينمو ويتغير بتفرد مستمر"، ويرى أن السلوك يتركب من سمات (كالصداقة، الغيرة، الخجل، الكرم) وهي تركيبات نفس عصبية حقيقية بالدماغ. <br><strong>أنواع السمات عند ألبورت:</strong> سمات عامة مشتركة تتواجد بين الأفراد في الثقافة الواحدة (كالسيطرة، قد يكون المسيطر عدوانياً أو قيادياً). وسمات فردية شخصية تتفرد بها الشخصية وتميزها تماماً، وقسمها إلى ثلاثة مستويات: السمة الرئيسية الغالبة (Cardinal) المسيطرة على كل أفعاله، السمات المحورية المركزية (Central) وتتراوح بين 5 إلى 10 سمات واضحة كالميول والطباع، والسمات الثانوية (Secondary) وهي محدودة التأثير وأقل ظهوراً وعدداً.</p>
+                    
+                    <p class="text-paragraph" style="font-weight:700; margin-right:15px;">ب - ريموند كاتل (Raymond Cattell):</p>
+                    <p class="text-paragraph" style="margin-right:15px;">عرّف الشخصية إحصائياً وتنبؤياً بأنها ما يتيح التنبؤ الدقيق بما سيفعله الشخص في موقف معين. <br><strong>أنواع السمات عند كاتل:</strong> استخدم أسلوب <em>التحليل العاملي الرياضي المعقد</em> لاستنتاج "سمات المصدر" (العناصر الأساسية العميقة للشخصية). وقسّمها إلى: السمات الدينامية التي تنشط السلوك وتوجهه (الدوافع فطرية ومكتسبة)، والسمات المزاجية وسمات القدرة التي تحدد أسلوب السلوك ومدى نجاحه الفعلي وكفاءته. استخرج كاتل <strong>16 عاملاً أساسياً للشخصية (16 PF)</strong>، من بينها: (التعاطف/الجفاء، الذكاء، قوة الأنا، السيطرة/الخضوع، الاندفاع/التروي، الجرأة/الحياء، الطراوة/الصلابة، الارتياب/التقبل... إلخ). كما حدد كاتل <strong>12 سمة مرضية</strong> مقتبسة من مقياس مينيسوتا الشهير (MMPI) مثل (توهم المرض، الاكتئاب، البارانويا، الفصام، السيكاثينيا).</p>
+
+                    <div class="callout-box">
+                        <h5>📊 تقييم ونقد مدرسة السمات الوصفية:</h5>
+                        <p class="text-paragraph" style="margin-bottom:0;"><strong>الإيجابيات والمميزات:</strong> تعتمد على الملاحظة العلمية والقياس الإحصائي الدقيق، تهتم بالحاضر والمستقبل التنبؤي، تساير سيكولوجية الأنا الواعية عبر مفهوم "الجوهر" (Proprium) والاستقلال الوظيفي للدوافع، والاهتمام بالدراسة الكلينيكية للحالة الفردية المستقلة. <br><strong>السلبيات والعيوب والنقد:</strong> تبحث داخل الفرد بشكل مغلق وتهمل التفاعل مع البيئة والتاريخ والمواقف المتغيرة، السمات مجرد تسمية لغوية ووصفية للسلوك وليست بالضرورة سبباً منشئاً له، غياب معايير اجتماعية دقيقة لتحديد السمة، وعدم كفايتها لوصف السلوك البشري المعقد بمفردها دون دمج المواقف الحياتية المتغيرة. <br><strong>الإسهامات الحقيقية لألبورت وكاتل:</strong> اهتمام ألبورت البالغ بالإصلاح الاجتماعي وعلم نفس المتعصبين ونشر السلام العالمي، وضع مقياس "القيم" الشهير (النظرية، الاقتصادية، الأخلاقية، الدينية، الجمالية، السياسية)، وتقديم معايير جيدة ومحكمة للصحة النفسية المستقرة.</p>
+                    </div>
+
+                    <h4 class="nested-title">3. النظرية السلوكية (ب. ف. سكنر - B.F. Skinner)</h4>
+                    <p class="text-paragraph">يتحدد السلوك الإنساني بالكامل بناءً على "تاريخه الإشراطي البيئي" ووفقاً للتسلسل الصارم: (مثير - استجابة - تدعيم وتعزيز). الإنسان يفعل ما يُعزز عليه فقط؛ فالوالدان ثم المدرسة وجماعة الرفاق يشكلون سلوكه بالتعزيز المستمر. البيئة والمثيرات الخارجية هي التي تحدد سمات الشخصية وليس الدوافع الداخلية أو الغرائز الموهومة.</p>
+                    <p class="text-paragraph" style="font-weight:700; margin-right:15px;">مفاهيم أساسية حاسمة في نظرية سكنر الإجرائية:</p>
+                    <ul class="bullet-list" style="margin-right:35px;">
+                        <li><strong>أولاً: التعزيز (Reinforcement):</strong> كل حدث بيئي يزيد من احتمالية حدوث استجابة معينة وتكرارها مستقبلاً.
+                            <ul class="nested-bullet">
+                                <li><em>المعززات الموجبة:</em> تبعث السرور والرضا، وتنقسم لـ أولية فطرية (كالطعام والشراب دون تدريب مسبق) وثانوية مكتسبة (تكتسب قيمتها بالاقتران الشرطي، كالمدح، الابتسام، المال، التقدير).</li>
+                                <li><em>المعززات السالبة:</em> استبعاد وإزالة شيء مؤلم أو لا يرغبه الكائن، وتنقسم لـ أولية (استبعاد ألم كالصدمة الكهربية - الهروب العارض) وثانوية (الهروب من مثير مقترن بمعزز أولي سالب، مثل السماح باللعب كمكافأة للالتزام وحل الواجب). كِلا التعزيزين الموجب والسالب يقوي السلوك ويثبته بالكامل.</li>
+                            </ul>
+                        </li>
+                        <li><strong>ثانياً: العقاب (Punishment):</strong> استبعاد شيء مرغوب ومحبب أو إضافة شيء مكروه ومؤلم لإضعاف السلوك والقضاء عليه.
+                            <ul class="nested-bullet">
+                                <li><em>العقاب الإيجابي (بإضافة مكروه):</em> أولي (الضرب، الصدمة المؤلمة) وثانوي (السب، التوبيخ، النظرة الغاضبة).</li>
+                                <li><em>العقاب السلبي (باستبعاد مرغوب):</em> أولي (الحرمان من الطعام/النوم) وثانوي (الحرمان من مشاهدة التلفزيون، اللعب، أو المصروف). <br>• <span style="font-style:italic; font-weight:700;">ملاحظة سكنر التجريبية:</span> التعزيز الإيجابي يقوي السلوك دائماً ويضمن استمراره، لكن العقاب لا يضعفه بالضرورة على المدى الطويل بل يكبته مؤقتاً فقط وينعكس بآثار جانبية سيئة.</li>
+                            </ul>
+                        </li>
+                        <li><strong>ثالثاً: التشكيل (Shaping):</strong> الانتقال خطوة بخطوة نحو الأداء النهائي المطلوب بتعزيز المقاربات التدريجية المتتالية (مثل تعليم المشي للطفل، تعلم لغة جديدة، أو تعليم الحيوانات الحركات السيركية المعقدة بقفز الحواجز).</li>
+                    </ul>
+
+                    <div class="callout-box">
+                        <h5>📊 تقييم مدرسة السلوكية الإجرائية لسكنر:</h5>
+                        <p class="text-paragraph" style="margin-bottom:0;"><strong>نقد النظرية عيوبها:</strong> إنكارها التام والمطلق لوجود المعارف والعواطف والعمليات اللاشعورية الداخلية والوعي (اعتبار الإنسان صندوقاً أسود)، اعتمادها المفرط والتام على تجارب الفئران والحمام مما يصعب ويستحيل أحياناً تطبيقه حرفياً على الإنسان العاقل المفكر، وعدم تفسير "لماذا وكيف" يقوم التعزيز بتقوية السلوك فسيولوجياً داخلياً. <br><strong>إسهامات النظرية ميزاتها الفعالة:</strong> نجاح باهر ومحقق علمياً في تكنولوجيا (تعديل السلوك البشري) وطرق التدريس الحديثة والتعليم المبرمج الآلي، ابتكار جداول التعزيز المتنوعة، تطبيقات التغذية البيولوجية المرتدة (Biofeedback) لعلاج الأمراض، والالتزام بالدقة العلمية والملاحظة الموضوعية الصارمة للتجارب.</p>
+                    </div>
+
+                    <h4 class="nested-title">4. نظرية الذات (كارل روجرز - Carl Rogers)</h4>
+                    <p class="text-paragraph">يُعد روجرز رائداً فذاً للاتجاه الإنساني (القوة الثالثة) مع ماسلو، والتي عارضت بشدة تشاؤم مدرسة التحليل النفسي وظلاميتها وآلية المدرسة السلوكية المفرطة. تعتمد بقوة على الجوانب الظاهراتية (Phenomenological) وتركز على خبرات الفرد وقيمه ومدركاته الحالية الواعية. طور علاجه الشهير من "المتمركز حول العميل" إلى <strong>"المتمركز حول الشخص"</strong> ليشمل مجالات غير إكلينيكية كالتربية الديمقراطية والعلاقات والقيادة الإنسانية البناءة.</p>
+                    <p class="text-paragraph" style="font-weight:700; margin-right:15px;">طبيعة الشخصية والغائية وتركيب الخبرة عند روجرز:</p>
+                    <ul class="bullet-list" style="margin-right:35px;">
+                        <li><strong>النزعة للتحقيق الفطرية:</strong> الإنسان يتحرك بقوة إيجابية نامية وميل فطري أصيل (Actualizing tendency) لتنمية قدراته وتحقيق ذاته بطريقة عقلانية ومركبة ومرنة، ويتضمن تحقيق الذات: إشباع حاجات الجوع والجنس الأساسية، الرغبة في التميز والسيطرة على البيئة، الفضول المعرفي، والقدرة على تحمل الألم لتعلم الفعالية (كالطفل الذي يتحمل ألم السقوط مراراً ليتعلم المشي بنجاح).</li>
+                        <li><strong>التقدير الإيجابي:</strong> الحاجة المُلحة لـ التقدير الإيجابي (Positive regard) من الآخرين (كالحب غير المشروط والاحترام والدفء من الوالدين والمحيط)، وتتطور مع النمو إلى حاجة ثانوية داخلية هي التقدير الإيجابي للذات والثقة بالنفس. النظرية "غائية" (تؤكد على الهدف والمستقبل الراهن): السلوك لا يُقاد أبداً بالماضي السحيق كفرويد، بل التوترات والحاجات الراهنة المستقبلية هي التي تدفع الفرد للإنجاز والإبداع.</li>
+                        <li><strong>المجال التجريبي / الظاهري البنائي:</strong> رفض روجرز وضع تركيبات جامدة ومقواة للشخصية. يرى أن كل شخص له عالمه الخاص المتغير الذي لا يفهمه أحد غيره تماماً (المجال الظاهري). الخبرات تشمل الأفكار، المشاعر، والحاجات الواعية واللاواعية. بعضها يُعبر عنه بوضوح شعوري، وأغلبيتها تبقى غير ممثلة برموز (تحت الوعي الشعوري مباشرة) وتأخذ شكل إحساس بديهي عضوي للتقييم الإيجابي أو السلبي لما يحقق الذات ويدعم بقاءها وكفاءتها.</li>
+                        <li><strong>مفهوم الذات وشروط القيمة والدفاع:</strong> خلال التطور والنمو، يبني الطفل مفهوم الذات (Self-Concept) الذي يجب أن يكون متطابقاً ومتسقاً (Congruent) مع خبراته العضوية الأصلية. إذا فرض الوالدان والمجتمع <strong>"شروط القيمة الصارمة" (Conditions of worth)</strong> ليمنحوه الحب (مثل: لن نحبك إلا إذا أصبحت طبيباً أو مطيعاً تماماً قمعاً لرغبتك)، سيضطر الطفل لتجاهل وإنكار مشاعره وخبراته الحقيقية العميقة ليرضيهم فقط، فيصبح مفهوم الذات مزيفاً وغير متطابق (Incongruent) مع خبرته العميقة، مما يولد القلق النفسي والعصبي الحاد والاضطراب البنائي للشخصية. لحماية نفسه وتوازنه الهش، يلجأ الفرد إلى حيلة <strong>الدفاع (Defense)</strong> المتمثلة في تشويه الخبرة المهددة للذات أو إنكارها وإلغائها تماماً من الوعي الشعوري المباشر.</li>
+                        <li><strong>التنشئة الديمقراطية السليمة:</strong> نصح روجرز بالمعاملة الديمقراطية للأطفال ومنحهم التقدير غير المشروط ومشاركتهم المشاعر (بدلاً من الأوامر الصارمة والتهديد بقمع الحب) لضمان تحقيق الذات في مناخ صحي سليم يفرز شخصية قوية سوية متكاملة الوظائف.</li>
+                    </ul>
+
+                    <div class="callout-box">
+                        <h5>📊 تقييم ونقد نظرية الذات الروجرية:</h5>
+                        <p class="text-paragraph" style="margin-bottom:0;"><strong>نقد النظرية عيوبها:</strong> التفاؤل المفرط والتبسيط الزائد للطبيعة البشرية بشكل ساذج (الاعتقاد بأن الإنسان خيّر ومسالم تماماً بالفطرة وكل الشرور والعدوان سببها المجتمع فقط غفلة عن الغرائز)، غموض مصطلح "الميل للتحقيق" وصعوبة قياسه إجرائياً، والنتائج الإحصائية للتجارب (باستخدام أسلوب Q-sort المعقد للمقارنة بين الذات المدركة الواقعية والذات المثالية المرجوة) كانت متفاوتة ولم تثبت دائماً ارتباطاً كبيراً ومحسوباً بين التقدير غير المشروط والتغيرات البنائية العميقة في الشخصية. <br><strong>إسهامات النظرية ميزاتها:</strong> روجرز معالج فذ وابتكر أسلوب تسجيل جلسات العلاج النفسي بالكامل وصوتياً لتحليلها علمياً لأول مرة بالتاريخ، إرساء مفاهيم "الأصالة"، "التعاطف الوجداني الدقيق"، و"الاعتبار الإيجابي غير المشروط" كركائز صلبة وأسس لا غنى عنها لأي علاج نفسي ناجح، والريادة المطلقة في الاتجاه الإنساني بالتركيز الكامل على السواء والعمليات الإيجابية والنمو البشري وتطبيق المبادئ الديمقراطية الشاملة في العلاج والتعليم وعلاقات الأفراد الجماعية والتربوية.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. تبويب الفصل الرابع -->
+            <div id="ch4-tab" class="tab-content">
+                <div class="article-card">
+                    <h2 class="section-heading">الفصل الرابع بعنوان "الاضطرابات العصابية والذهانية والأمراض السيكوسوماتية"</h2>
+                    
+                    <h3 class="subsection-title">أولاً: الاضطرابات العصابية (Neurosis)</h3>
+                    <p class="text-paragraph">إن الخلو النسبي من الأعراض العصابية هو أبرز وأقوى مؤشرات الصحة النفسية الإيجابية المرتفعة. العصاب هو اضطراب "وظيفي - دينامي" يتصف بالانفعالية الحادة والمستمرة، ويُطلق عليه أحياناً "العصاب الموصول البنائي"، وهذا الاضطراب الوظيفي يعني في جوهره عجز الأنا وتفكك الشخصية الجزئي المخل بالاستقرار والسعادة.</p>
+                    <p class="text-paragraph"><strong>معاناة المريض العصابي:</strong> العصاب هو رأس الأمراض النفسية وأكثرها إيلاماً للفرد. المريض العصابي يُدرك تماماً اضطرابه ويعي عدم منطقيته ولكنه يعجز عجزاً مطلقاً عن السيطرة عليه أو التخلص منه بمفرده. يتسم سلوكه بالتناقض الوجداني الحاد، ويشعر بانعدام التفاؤل، التشاؤم المستمر، الضيق، الكرب، القلق الشديد المستعر، مع المبالغة والإسراف في استخدام الحيل الدفاعية اللاشعورية كمحاولة يائسة للتخلص من معاناته الداخلية دون جدوى.</p>
+                    <p class="text-paragraph"><strong>تفسير النظريات للعصاب النفسي:</strong> يرى <em>التحليل النفسي</em> أنه صراع حاد بين (الهي) بمحتوياتها الغريزية المكبوتة (الجنسية والعدوانية) و(الأنا) بضغوطها الواقعية ومعايير الأنا الأعلى، يكبتها الشعور فتعود لتظهر كعَرَض عصابي مشوه. بينما تراه <em>النظرية السلوكية</em> صراعاً ناتجاً عن تعلم خاطئ وعادات سلوكية ناقصة حدثت في سن مبكرة بالاقتران الشرطي، وتراه <em>النظرية الإنسانية الوجودية</em> اضطراباً ينشأ أساساً من افتقاد الإنسان لمعنى وجوده واغترابه عن ذاته الحقيقية. وتتفق جميع النظريات على أن العصاب هو اضطراب "نفسي المنشأ" خالص وليس عضوياً أو تشريحياً (على عكس الذهان العضوي)، لذلك مصطلح "العصاب النفسي" (Psycho-Neurosis) هو الأكثر دلالة علمية. وقد حدد التصنيف الدولي العاشر للأمراض (ICD-10) لعام 1992 هذه الاضطرابات بدقة كلينيكية محكمة.</p>
+
+                    <div class="callout-box">
+                        <h5>📌 الأعراض العامة العشرة المحددة للعصاب النفسي:</h5>
+                        <ol class="numbered-list" style="margin-bottom:0;">
+                            <li>اختلال جزئي في جانب معين من الشخصية (يستطيع الفرد مساعدة نفسه ويطلب العون طواعية وعارف بمرضه).</li>
+                            <li>استمرار الاتصال بالواقع الخارجي؛ الفرد يسعى للتكيف لكنه يعاني بشدة عندما يعجز عن تحقيق السعادة والرضا.</li>
+                            <li>محاولات مستمرة لممارسة الدور الاجتماعي والمهني، لكنها مصحوبة دائماً بالقلق والضيق والتوتر المنهك للطاقة النفسية.</li>
+                            <li>انعدام الأمن النفسي، حساسية زائدة ومفرطة، مبالغة حادة في ردود الأفعال، اختلال الاتزان الانفعالي، اتكالية، استجداء عواطف الناس، إحباط، اكتئاب، وضعف الثقة بالنفس.</li>
+                            <li>اضطراب واضح في العمليات العقلية العليا: تفكير غير منطقي، بطء في الفهم، ضعف التذكر والنسيان السريع، رتابة في الأداء، نقص الإنجاز، والشعور الدائم بالقصور والنقص.</li>
+                            <li>إحساس دائم باضطرابات عضوية وظيفية: هضمية، تنفسية، دورة دموية، فقدان شهية، صعوبات نوم وأرق، ومشاكل في النطق واللغلوغة العصبية.</li>
+                            <li>التناقض الوجداني الحاد (الحب والكره بآن واحد) والتذبذب السلوكي السريع غير المبرر.</li>
+                            <li>الميل المفرط والجامد لاستخدام الحيل الدفاعية اللاشعورية للهروب من المواقف الحياتية الضاغطة.</li>
+                            <li>اضطرابات تعكس الصراع النفسي الداخلي مصحوبة بمخاوف شديدة ومرضية غير مبررة موضوعياً.</li>
+                            <li>اضطرابات انفعالية واضحة وجلية للعيان تظهر في سرعة الغضب الشديد والاهتياج السريع لأتفه الأسباب.</li>
+                        </ol>
+                    </div>
+
+                    <h4 class="nested-title">أكثر الأمراض العصابية انتشاراً ودراسة إكلينيكية</h4>
+                    
+                    <h5 class="nested-title" style="color:var(--primary-color); border-right-color:var(--secondary-color);">1. مرض القلق (Anxiety Neurosis)</h5>
+                    <p class="text-paragraph"><strong>المفهوم:</strong> خبرة انفعالية مؤلمة ومزعجة يعاني منها الفرد عندما يتهدد أمنه النفسي والوجودي، ويبدأ في صورة نوبات مفاجئة وتلقائية بدون سبب واضح في المجال (وهذا ما يميزه تماماً عن الخبرات الانفعالية المؤلمة العادية المبررة سبباً). يُعد من أكثر موضوعات الصحة النفسية انتشاراً ودراسة إحصائية.</p>
+                    <p class="text-paragraph"><strong>نوعا الأعراض والتغيرات لاضطراب القلق:</strong>
+                        <br>• <em>فسيولوجية جسمية:</em> زيادة نشاط وفراز الغدة الدرقية، اضطرابات حادة بالمعدة والأمعاء، سرعة خفقان وضربات القلب، ارتعاش الأصابع واليدين، برودة الأطراف الشديدة، جفاف الحلق واللسان، الدوار والدوخة، كثرة التبول العصبي، تغير نبرة الصوت، صعوبة الكلام والتعبير، التثاؤب المستمر، ارتفاع ضغط الدم الشرياني، والتوتر العضلي الدائم والمؤلم بجميع أنحاء الجسد.
+                        <br>• <em>نفسية سيكولوجية:</em> إنهاك نفسي وتأزم داخلي، انعدام الثقة بالنفس والآخرين، هواجس وأفكار سوداوية تآمرية، تشتت الانتباه وضعف التركيز، خوف شديد مبهم، توقع كوارث وأذى دائم، الهروب من المواقف، التردد القاتل في القرارات، كوابيس مفزعة بالنوم، فقدان الطمأنينة والأمن، اضطراب التفكير المنطقي، والاكتئاب المزمن.
+                        <br><strong>تصنيف القلق:</strong> قلق عادي (موضوعي) مصدره معروف ومحدد وهو أقرب للخوف البقائي الطبيعي كقلق الامتحان الموجه. وقلق مرضي (عصابي) مصدره غير معروف كلياً، عام، وغامض ومستمر، وتتعدد مسمياته الإكلينيكية (قلق تحذيري، قلق الأنا، قلق الأنا الأعلى، قلق تلقائي، قلق الاكتئاب، قلق الموت، قلق الامتحان المرضي المعوق).
+                    </p>
+                    
+                    <p class="text-paragraph" style="font-weight:700; margin-right:15px; margin-top:20px;">مراحل وأعراض اضطراب القلق بالتفصيل الشامل (تصنيف د. شيهان):</p>
+                    <p class="text-paragraph" style="margin-right:20px; font-weight:700; color:var(--secondary-color);">أ- الأعراض الجسمية الفسيولوجية (المرحلة الأولى: النوبات Spells):</p>
+                    <ol class="numbered-list" style="margin-right:40px;">
+                        <li><strong>نوبات الدوار:</strong> شكوى شائعة جداً، شعور عارم ومفاجئ بأنه على وشك السقوط والإغماء، يصاحبه تثاؤب متكرر، ضعف وارتخاء حاد في الأطراف، فقدان السيطرة العضلية، وخوف شديد من الإغماء والفضيحة أمام الناس بالمجال العام.</li>
+                        <li><strong>فقدان التوازن الحركي:</strong> مشي مترنح وغير مستقر يحتاج فيه المريض للاستناد على الحوائط والأثاث، يرافقه شعور كاذب بأن الأرض مائلة وغير مستوية، لدرجة خفض الرأس ومراقبة الأرض ومواضع القدم عن كثب وبدقة لضمان السلامة أثناء المشي.</li>
+                        <li><strong>صعوبة التنفس الحادة:</strong> خوف مفاجئ وقاتل من نسيان كيفية التنفس التلقائي أو انسداد الرئتين، المريض يبالغ في التهوية وعملية التنفس (يأخذ شهيقاً عميقاً جداً ويطرد زفيراً كبيراً بعنف)، مما يسبب خللاً سريعاً وحاداً في التوازن الحامضي-القاعدي وكيمياء الجسد والدم مسبباً الدوار وزيادة نوبة القلق.</li>
+                        <li><strong>خفقان القلب السريع:</strong> يصيب أكثر من 80% من مرضى القلق، سرعة ضربات القلب الجنونية وانقباضات مبكرة ومفاجئة للبطينين، المريض يشعر بوضوح بأن القلب يضرب ضربتين متتاليتين تعقبهما فترة توقف أطول من المعتاد فيعتقد أن قلبه يتوقف سيموت فوراً.</li>
+                        <li><strong>آلام وضغوط الصدر:</strong> ألم وضغط عميق وساحق في الجهة اليسرى (أسفل الثدي الأيسر مباشرة) يمتد للظهر والكتف، أو ألم في أعلى الجهة اليمنى يمتد لأسفل الثدي الأيمن، المريض يصفه بـ"ثقل صخرة ووتد حديدي دائم"، يشبه تماماً نوبة مرض القلب الحقيقي والذبحة لكنه عرض فسيولوجي ناجم خالص عن الضغط النفسي وتشنج العضلات الوربية.</li>
+                        <li><strong>توهج الحرارة والهبات:</strong> يصيب 70% من المرضى، هبات ساخنة وحارقة تبدأ فجأة من أسفل البطن وتصعد للصدر والرقبة والوجه (وقد تظهر بقع حمراء جلية أعلى الصدر)، البعض الآخر تنتابه "رعشة باردة صاعقة" ومفاجئة خاصة أسفل الظهر والعمود الفقري.</li>
+                        <li><strong>غصة الحلق والبلع:</strong> إحساس خانق بوجود كتلة أو انسداد كامل في الحلق، وسيطرة خوف شديد لا يقاوم من الاختناق والموت عند الأكل أو بلع الريق رغم الشعور بالجوع الشديد.</li>
+                        <li><strong>الغثيان والقيء النفسي:</strong> يصيب 80%، يشبه تماماً دوار البحر وفقدان السيطرة الذاتية، المريض يشعر بشيء يتمدد في معدته وثقل وانحباس في الحلق وانخفاض اللسان للخلف وزيادة إفراز اللعاب، ويعتقد المريض واهماً أن النوبة ستنتهي بمجرد أن يتقيأ.</li>
+                        <li><strong>التنميل والخدر العصبي:</strong> ينتشر الخدر والتنميل وثقل في الأعضاء (الذراعين، الوجه والشفاه، الأرجل)، المريض يصف ذراعيه يائساً بأنها "ميتة تماماً وفقد الاتصال العصبي بها، ولو قُطعت من جسدي الآن لكان أريح لي".</li>
+                        <li><strong>الإسهال والمغص العصبي:</strong> فقدان الثقة التامة بالأمعاء، البقاء دائماً قرب دورات المياه وعدم الخروج للمجتمع لتجنب الفضيحة والإحراج، يصاحبه مغص حاد، دوار، خفقان قلب، واضطرابات نفسية وتوجس.</li>
+                        <li><strong>الصداع العصبي الساحق:</strong> الأعراض الأكثر انتشاراً برمتها (90%)، مما يدفع للإسراف المدمر في تناول المسكنات، ألم أعنف وأثقل من الصداع العادي، مصحوب بضيق وتوتر وانعدام الطمأنينة ويشبه الطوق الحديدي حول الجمجمة. *(ملاحظة علمية: ليس بالضرورة أن يصاب المريض بكل هذه النوبات الـ11 معاً بل تختلف باختلاف الفروق الفردية).*</li>
+                    </ol>
+
+                    <p class="text-paragraph" style="margin-right:20px; font-weight:700; color:var(--secondary-color);">ب- الأعراض والمراحل النفسية السيكولوجية لاضطراب القلق (تصنيف شيهان المتتالي):</p>
+                    <ul class="bullet-list" style="margin-right:40px;">
+                        <li><strong>المرحلة الثانية: الهلع (Phobia والمخاوف):</strong> ينتقل لها المريض حتماً خلال 4 أشهر من بدء النوبات الجسمية إذا لم تعالج، رعب عميق، مفاجئ، وجارف يصعب السيطرة عليه، يصاحبه فقدان مؤقت جزئي للبصر، دوار، خدر، اختلال حركي، هلوسة سمعية عابرة، تعرق غزير، قصر تنفس، وضيق صدر ساحق، وتحدث من 4 إلى 6 مرات أسبوعياً مسببة شللاً كاملاً لحياة الفرد.</li>
+                        <li><strong>المرحلة الثالثة: التوهم المرضي (Hypochondriasis):</strong> فقدان السيطرة على الأعضاء بسبب الخوف المستمر، يتوهم المريض الإصابة بأمراض خطيرة وفتاكة (مرض القلب، سرطان الدم، الفشل الكلوي)، يتنقل باستمرار بين الأطباء والتخصصات، وعندما يؤكدون له بالإجماع سلامته العضوية، يتهمهم بالفشل ويتجه مجبراً للعيادات النفسية ليتم تشخيصه بـ "عصاب القلق/التوهم المرضي الحاد" أو اضطراب تفكك الشخصية والاغتراب.</li>
+                        <li><strong>المرحلة الرابعة: المخاوف المرضية (Path Phobia المتوقعة):</strong> تيارات عارمة من الأفكار التش التشاؤمية وتوقع الأذى والكوارث، وتظهر في نوعين من النوبات: نوبة غير متوقعة (تلقائية) تسري فجأة يشعر فيها أنه دخل أبعاداً جديدة خارج خبرته الإنسانية وبعدها يشعر باستنفاد كامل للطاقة النفسية، ونوبة متوقعة تتسم بالتوجس الدائم حيث يعيش في دوامة قلق متسائلاً برعب "ماذا سيحدث لي لو أُصبت بنوبة الرعب والإغماء وأنا في الموقف الفلاني أو أمام الناس؟".</li>
+                        <li><strong>المرحلة الخامسة: المرضية الاجتماعية (الانعزالية):</strong> العزلة الاجتماعية التامة، تجنب الناس والاجتماعات خوفاً من مراقبتهم وتقييمهم له، إحساس اجتماعي مشوه وغير عادي وانعدام كامل للثقة بالذات، قد يقوم بتصرفات محرجة (كالإغماء المفاجئ أو الهروب من المجالس) ويصل للشعور بالوحدة النفسية والاغتراب الاجتماعي والأسري.</li>
+                        <li><strong>المرحلة السادسة والأخيرة: الاكتئاب (Depression):</strong> اضطراب مزاجي عنيف وسوداوي، وفقدان كامل للأمل في الشفاء والعيش، يعيش بين رغبة يائسة في الحياة ورغبة ملحة في الموت والخلاص، تزداد الحالة سوءاً وتدهوراً مع التقدم في العمر، يشعر بانعدام الجدوى والقيمة وصعوبة تحمل أعباء الأسرة والعمل، يميل لسماع أحاديث الموت والمقابر، ويستجدي العاطفة والمساعدة لضعف وتحطم طاقته الدفاعية النفسية تماماً.</li>
+                    </ul>
+                    <p class="text-paragraph" style="margin-right:20px;"><strong>علاج القلق النفسي:</strong> يُعد من أكثر الأمراض النفسية استجابة وتجاوباً مع العلاج، ويشمل أربعة محاور: 1. <em>العلاج النفسي الفردي البصير:</em> زيادة بصيرة المريض بذاته، إخراج الذكريات والمخاوف المكبوتة، العلاج السلوكي المعرفي لفك الارتباط الشرطي والقضاء على اللزمات، والمناقشة الشرح والتدريب التفسيري الفسيولوجي للأعراض لطمأنة الأنا. 2. <em>الإرشاد العلاجي والزواجي:</em> حل المشكلات الأسرية والواقعية ومواجهتها بشجاعة وعدم التهرب منها. 3. <em>العلاج البيئي والاجتماعي:</em> تعديل بيئة العمل أو السكن الضاغطة، تقليل الأعباء المادية، العلاج الاجتماعي بالدمج والرياضة والموسيقى والرحلات الجماعية لتصريف الطاقة. 4. <em>العلاج الطبي الدوائي:</em> استخدام المسكنات، المهدئات الصغرى، ومضادات القلق الحديثة بجرعات دقيقة، وقد يُستخدم دواء وهمي (Placebo) مع علاج نفسي مختصر ويكون فعالاً ومدهشاً جداً، أحياناً يُستخدم التنبيه الكهربائي المنظم والعلاج المائي للاسترخاء.</p>
+
+                    <h5 class="nested-title" style="color:var(--primary-color); border-right-color:var(--secondary-color);">2. مرض الهستيريا (Hysteria)</h5>
+                    <p class="text-paragraph"><strong>تاريخ وتطور المرض:</strong> سماه الإغريق واليونان قديماً بـ "مرض الرحم" (Hystera) معتقدين واهمين أنه يصيب النساء فقط دون الرجال بسبب حرمان جنسي وعاطفي حاد يؤدي لجفاف الرحم وانفصاله وميله وهجرته نحو الدماغ أو القلب مسبباً التثاؤب والقيء والخرس والصرع الهستيري. وكان يُنظر إليه عبر العصور كنوع من الخداع والتمويه الفردي (ادعاء وتصنّع المرض لجلب الانتباه والمنفعة). لاحقاً، أثبت علماء النفس الكبار (شاركو، جانيت، وسيجموند فرويد بالتنويم المغناطيسي) أن الهستيريا مرض نفسي حقيقي لاشعوري بالكامل لا وعي للمريض به، يصيب الرجال والنساء، والأطفال والشيوخ على حد سواء وبآليات محددة.</p>
+                    <p class="text-paragraph"><strong>المفهوم والنظريات المنشئة:</strong> اضطراب "نفسي المنشأ" له أعراض جسمية ونفسية تفككية واضحة تخدم غرضاً ومكسباً لاشعورياً حيوياً للمريض للهروب من موقف ضاغط لا تطيقه الأنا. يرى <em>التحليل النفسي</em> أنه صراع عنيف بين (الأنا) و(الهي) الغريزية المكبوتة، حيث تلجأ الأنا للحيل اللاشعورية التحولية لتخفيف الخطر وجرح الكبرياء وتحويل الصراع النفسي لعَرَض جسدي، بينما يرى <em>المذهب الإنساني</em> الهستيريا حالة مؤلمة يفقد فيها الفرد صلته بالواقع والمسؤولية بسبب الفشل الإحباط المتكرر. الخلاصة: مرض نفسي لاشعوري يتميز بأعراض جسمية للهروب من المواقف الصراعية المؤلمة.</p>
+                    <p class="text-paragraph" style="font-weight:700; margin-right:15px;">أعراض مرض الهستيريا بالتفصيل الإكلينيكي:</p>
+                    <p class="text-paragraph" style="margin-right:20px; font-weight:700; color:var(--secondary-color);">أ- الهستيريا التحولية (Conversion Hysteria): تحول الأفكار المكبوتة والانفعالات المعتصرة إلى أعراض وعاهات جسدية محققة تفصل العضو وظيفياً:</p>
+                    <ol class="numbered-list" style="margin-right:40px;">
+                        <li><strong>أعراض حسية هستيرية:</strong>
+                            <br>• <em>الخدار الهستيري (Anesthesia):</em> فقدان الإحساس التام والكامل بالجلد في مناطق محددة (كالقفاز أو الجورب) للهروب من ألم صراع نفسي، ويمكن وخز المريض بإبرة حادة وطعنه فلا يشعر بأي ألم ولا ينزف أحياناً لإنكار العضو لاشعورياً.
+                            <br>• <em>اضطرابات بصرية هستيرية:</em> ألم شديد ومفاجئ بالعين للهروب من الواجبات والمذاكرة، الرؤية المزدوجة، والضبابية أو العمى الهستيري المتعمد لأشياء ومشاهد صادمة لا يرغب الأنا بالتعامل معها أو رؤيتها (كرؤية حادث مروع أو خيانة).
+                            <br>• <em>الصمم الهستيري:</em> فقدان السمع الوظيفي الكامل لكي لا يسمع كلمات، توبيخ، أو حقائق لا يرغب إطلاقاً في سماعها ومواجهتها.
+                            <br>• <em>فقدان الشم الهستيري:</em> لعدم الرغبة في شم روائح معينة تستثيره وتذكر بالصراع المكبوت الحاد.
+                        </li>
+                        <li><strong>أعراض حركية هستيرية:</strong> الرجفة، اللزمات، تقلص العضلات، فقدان الصوت الكامل (Ophonia)، الخرس الهستيري (Mutism)، والتأتأة الحادة.
+                            <br>• <em>الرجفة المهنية:</em> ارتعاش اليدين الشديد والمعوق عند مسك أداة العمل وفقط في أوقات العمل، يكشف عن صراع نفسي عنيف وكراهية دفينة تجاه المهنة أو الرئيس.
+                            <br>• <em>اللزمات الحركية:</em> حركات متكررة ورتيبة لاإرادية (رعشة بالوجه، طرف العين، نفض العنق، حركت الكتفين) تحدث لاشعورياً كصمام أمان لتفريغ شحنة صراع مكبوت.
+                            <br>• <em>التقلصات العضلية الجامدة:</em> تقلص وتصلب أطراف معينة تحمي الفرد من الاستمرار في عمل أو زواج أو موقف لا يناسبه كلياً.
+                            <br>• <em>الشلل النفسي الهستيري / النوبة التشنجية:</em> شلل كامل لأطراف (كشلل الساقين أو الذراع الضاربة) دون تلف عصبي عضوي إطلاقاً، (مثال كلينيكي: جندي يصاب بالشلل التام في ساقيه فور صدور الأمر بالهجوم نحو المعركة، هرباً لاشعورياً من الموقف الضاغط والموت، دون وعي منه بالخداع). والنوبة التشنجية تشبه الصرع العضوي لكنها تحدث فقط أمام الناس ولا يعض المريض لسانه ولا يتبول ولا يصاب بأذى عند السقوط.
+                        </li>
+                        <li><strong>أعراض جسمية وغذائية هستيرية:</strong> الصداع النصفي الشديد، القيء المستمر، الآلام المتنقلة، الحمل الكاذب الهستيري (انتفاخ البطن وانقطاع الطمث تماماً)، شرقة الزور الخانقة، والبرود الجنسي التام.
+                            <br>• <em>فقدان الشهية العصبي الهستيري (جزئي أو كلي):</em> رد فعل منعكس لعدم الرضا عن الذات أو الاحتجاج على الآخرين وقمعهم.
+                            <br>• <em>الشهية المفرطة (الشره العصبي):</em> الأكل المستمر والجنوني دون شبع هرباً لاشعورياً من مشاعر الذنب والامتهان ولتجنب التفكير في الوضع الانفعالي المقلق المربك.
+                        </li>
+                    </ol>
+                    <p class="text-paragraph" style="margin-right:20px; font-weight:700; color:var(--secondary-color);">ب- الهستيريا التفككية الانفصالية (Dissociative Hysteria): استجابات انفصالية حادة بسبب تفكك وتفتت الشعور والوعي:</p>
+                    <ol class="numbered-list" style="margin-right:40px;">
+                        <li><strong>فقدان الذاكرة الهستيري (Amnesia):</strong> المريض ينسى فجأة وبشكل كامل كل ما يتعلق بهويته الشخصية (اسمه، عنوانه، أهله، تاريخه)، لكنه يحتفظ ويمارس بدقة تامة المهارات المعرفية والمكتسبة كالقرءاة، الكتابة، والقيادة. وهو هروب لاشعوري صارم من صراعات قاسية ومخزية (مشكلة اجتماعية فاضحة، أزمة اقتصادية ساحقة، أو إحباط جنسي مرير).</li>
+                        <li><strong>الشرود والهروب (Fugue) والسلوك التلقائي (Automatic Behavior):</strong> يسافر الفرد لمسافات بعيدة وينشئ حياة جديدة باسم جديد دون وعي منه بتأثير تفكك الشعور، ويتصرف بآلية فائقة دون وعي، قد يجد نفسه يتحدث أو يرسم أو يكتب بدقة متناهية تفوق قدرته العادية (مثل مرضى رسموا برج إيفل بدقة هندسية فائقة من الذاكرة وهم في هذه الحالة التفككية)، والكُتاب العالميون ساردو وجيرترود شتاين كتبا أعمالاً أدبية كاملة وروايات معقدة تحت هذا التأثير اللاشعوري الانفصالي الفريد.</li>
+                    </ol>
+                    <p class="text-paragraph" style="margin-right:20px;"><strong>سمات الشخصية الهستيرية بالتفصيل:</strong> مزاج عصبي متقلب وخلق أناني استعراضي طفولي، تجنب كامل ومستمر للمسؤولية، ثرثرة فارغة، مبالغة وتمثيل بارع ومسرحة للانفعالات، عدم الثبات العاطفي، حساسية مفرطة، وبكاء وعويل لأسباب تافهة وغير منطقية. متمركز حول ذاته، سهل الاستهواء والإيحاء السريع يمتص انفعالات الآخرين بسطحية (يضحك ويبكي معهم بقوة بآن واحد)، علاقته بالجنس الآخر تتسم بالإغراء والتصرفات المثيرة الفاضحة ويفسر المواقف البريئة جنسياً، ورغم جاذبيته الطاغية، فإن نسبة كبيرة منهم يعانون من البرود الجنسي والعجز. لديه قدرة هائلة على "التلون والتمثيل" حسب المواقف للهروب وجلب المنفعة، لدرجة قال عنها العالم بابينسكي بصرامة: "بين الهستيريا والخداع الكاذب اختلاف في الرتبة الأخلاقية فقط وليس في الآلية".</p>
+                    <p class="text-paragraph" style="margin-right:20px;"><strong>علاج الهستيريا:</strong> قد تشفى تلقائياً وبسرعة إن لم تحقق هدفها اللاشعوري المرجو وتجابه بحزم. ويشمل: <em>العلاج النفسي:</em> التنويم الإيحائي لإزالة الأعراض فورياً، التحليل النفسي والتخديري بالصوديوم كشف الدوافع، استعادة الثقة بالأنا، والعلاج الجماعي. <em>الإرشاد الأسري:</em> نصيحة صارمة ومحورية بتجاهل المريض تماماً وعدم إعطائه أي اهتمام، رعاية، أو عطف "أثناء" النوبة الهستيرية أو الشلل، لأن الاهتمام يثبت النوبة لديه كسبيل ناجح لجلب العطف والهروب. <em>العلاج الطبي والبيئي:</em> تعديل البيئة وتغيير المواقف، واستخدام التنبيه الكهربائي لـ "حفظ ماء وجه المريض" أمام نفسه والآخرين (ليبرر الشفاء بأن الكهرباء هي من شفته)، واستخدام الدواء الوهمي (Placebo) مفيد وفعال جداً هنا.</p>
+
+                    <h5 class="nested-title" style="color:var(--primary-color); border-right-color:var(--secondary-color);">3. مرض الوسواس القهري (Obsessive-Compulsive / Psychasthenia)</h5>
+                    <p class="text-paragraph"><strong>أ- الوسواس الفكري (Obsession):</strong> فكرة، صورة، أو اندفاع نفسي متسلط يتكرر دورياً وينساب في وعي الفرد رغماً عنه، يرفضها المريض ويقاومها مقاومة داخلية عنيفة (Internal Resistance) لعلمه التام بسخافتها، تاهتها، وعدم عقلانيتها، لكنه يفشل تماماً في التخلص منها أو طردها. أمثلتها: وساوس التلوث والميكروبات، أفكار سب الذات الإلهية والعقيدة، أفكار ارتكاب عنف وقتل الأبناء، العد القهري للأرقام، والحركات النمطية الرتيبة. هذه الأفكار تعكر المزاج، وتسبب تردداً دائماً (يقضي ساعات لاتخاذ قرار تافه كشراء قميص)، وشكاً مستمراً يخل بعلاقاته ويشعره بانعدام الثقة بالنفس. <br><em>أمثلة دقيقة:</em> مغادرة الفراش ليلاً لعشرات المرات للتأكد من قفل الباب، ثم العودة مجدداً لغلقه بسبب سماع صوت يشبه خرير الماء، أو القلق الشديد المستعر لنسيان قلم محدد للامتحان، أو ربط الحذاء الأيسر قبل الأيمن وإعادة الكَرّة لمرات عديدة إذا اختل الترتيب. أشكال الوساوس: عقلية (اجترار الأفكار البيزنطية)، مخاوف (من التلوث والموت)، اندفاعات (إلحاق أذى بالذات والغير)، وخيالية (كالزوج الذي يتوهم ويجتر فكرة خيانة زوجته مع صديقه المقرب ويراقبها طوال اليوم لعجزه عن طرد الفكرة).</p>
+                    <p class="text-paragraph"><strong>ب- الفعل القهري السلوكي (Compulsion):</strong> فعل حركي وطقس يأتيه الفرد مجبراً ضد إرادته وخارج وعيه العقلاني، بدافع داخلي قسري جارف لا يُقاوم، يكرره لمرات عديدة ولساعات طويلة يومياً مُعطلاً أعماله ووظيفته، ورغم استنكار السامعين والآخرين له وسخريتهم، يصر عليه إصراراً غريباً. يعرف المريض بوضوح أن هذا الفعل يمنعه من الاستمتاع بالحياة، لكنه يُقهر عليه كحيلة لا بديل لها لخفض شدة القلق والتوتر الدفين بداخل الأنا. أشكاله: "القهر المتنكر" (حيلة حركية لتغطية فكرة مرعبة)، "القهر الذهني الباطن" (ترديد عبارات أو آيات لا معنى لها بالاتساق)، و"إجبار التكرار الحركي" (دافع خفي يعيده لمواقف انفعالية مؤلمة سابقة منسية ليوقظ قلقها غسلاً وتكفيراً).</p>
+                    <p class="text-paragraph"><strong>الأعراض العامة للوسواس القهري وسمات الشخصية القهرية:</strong> الوساوس الفكرية، الصور المؤلمة لأحداث سابقة، المخاوف من التلوث، العد القهري، التنظيف والمبالغة المفرطة والجنونية في غسل الأيدي والنظافة، المراجعة المتكررة للغاز والأبواب، الاتباع الحرفي الدقيق والجامد للقواعد والتقاليد البسيطة، البطء الشديد في السلوك، كره الغموض والتوجس من أي تغيير، العجز التام عن اتخاذ القرار، الطقوس التشاؤمية، الحساسية والخجل الزائد، الارتياب والتزمت، المبالغة في الأخلاقيات، الانضباط والتصلب، اجترار الأفكار العقيمة، هواية التجميع والادخار لكل تافه وقذر، الكف الانفعالي، التسويف والمماطلة، الاعتماد الانفعالي الخفي على الغير، التناقض الوجداني، والتصنع المبالغ فيه. وتتميز الشخصية القهرية بالميل الحرفي للأخلاق والولاء الصارم للمؤسسات كحماية ودروع من الصراعات، والمشاركة في طقوس تافهة للهروب من قلق دفين، ونشاط ذهني بطيء، وتأخر في رد الفعل وعناد أناني شديد ومستمر. <br><strong>العلاج:</strong> <em>العلاج النفسي:</em> كشف الأسباب اللاشعورية العميقة والصراعات الطفولية والتثبيت، والعلاج بالعمل (للاكتئاب المصاحب) واللعب (للأطفال). <em>العلاج الاجتماعي/البيئي:</em> تغيير السكن أو العمل المسبب للتوتر الحاد. <em>العلاج الطبي:</em> أدوية مهدئة ومضادات الاكتئاب والوسواس الحديثة (SSRIs) لتقليل القلق والتوتر وضبط كيمياء الدماغ السيروتونية. <em>الجراحة النفسية (شق الفص الجبهي):</em> وهو نادر جداً وحالياً كآخر حل طبي ممكن عند تدهور الحالة تماماً وفشل كل السبل لسنوات.</p>
+
+                    <h3 class="subsection-title">ثانياً: الأمراض العقلية (الذهان - Psychosis)</h3>
+                    <p class="text-paragraph"><strong>المفهوم:</strong> اضطراب خطير، نسقي، وبنائي في الشخصية بأسرها، واختلال شديد وعميق في القوى العقلية العليا، الإدراك، التفكير، والحياة الانفعالية برمتها، يمنع الفرد منعاً كاملاً من تدبير شؤونه ونفسه والتكيف مع الواقع. وجدير بالذكر العلمي الصارم أن كلمة (الجنون) هي مصطلح "طب شرعي/قانوني رسمي" يشير فقط لانعدام المسؤولية الجنائية والأخلاقية للفرد أمام المحاكم، وليس مصطلحاً علمياً أو طبياً دقيقاً في علم النفس والطب النفسي المعاصر، حيث يُستبدل دائماً بمصطلح الذهان.</p>
+                    <p class="text-paragraph"><strong>تصنيف الذهان الأساسي المعتمد:</strong>
+                        <br>1. <em>الذهان العضوي:</em> ناتج مباشر عن تلف، إصابة، أو خلل فسيولوجي/كيميائي وعضوي محقق في أنسجة المخ والدماغ (مثل: ذهان الشيخوخة والخرف، أورام الدماغ الساحقة، اضطراب الغدد الحاد، سوء التغذية الحاد، وتصلب الشرايين واضطرابات الدورة الدموية الدماغية والسكتات).
+                        <br>2. <em>الذهان الوظيفي:</em> نفسي المنشأ بالكامل، لا توجد أي أسباب عضوية أو تشريحية واضحة له بالدماغ، وينقسم لـ: اضطرابات التفكير الكبرى (الفصام الشيزوفرينيا، والبارانويا الهذاء الصارم)، واضطرابات الوجدان والانفعال (ذهان الهوس والاكتئاب الدوري وثنائي القطب).
+                    </p>
+
+                    <div class="callout-box">
+                        <h5>⚠️ الخصائص العامة السبعة للأمراض العقلية (الذهان):</h5>
+                        <ol class="numbered-list" style="margin-bottom:0;">
+                            <li><strong>التفكك العقلي الحاد:</strong> لا يستطيع المريض الربط بين أفكاره إطلاقاً، يعجز تماماً عن التمييز المنطقي ويتقبل أفكاراً شاذة وغير ملائمة دون أي نقد أو تمحيص، ويشعر بالارتباك المبهم الدائم وتفكك البنية العقلية.</li>
+                            <li><strong>البلادة الانفعالية والانسحاب الكامل:</strong> انسحاب كامل وكلي من المجتمع والواقع للعيش في عالم داخلي خاص به غارق في الخيال والأوهام، بطء شديد في الاستجابة والكلام، ويظهر "نمطية الحديث الرتيبة" (ترديد عبارة أو كلمة واحدة بصوت خفيض طوال اليوم)، وأقصى درجات الانسحاب هي "التصلب أو السبات التخشبي الكاتاتوني".</li>
+                            <li><strong>الخبل والانحلال الذهني:</strong> انحلال ذهني حاد ومعوق، إما عجز كامل عن التذكر والذاكرة (ينسى معلومات المدرسة، عمله، اسمه، أسماء والديه وأبنائه وزوجته) أو عجز تام عن التعلم وحل أبسط المشاكل البسيطة اليومية.</li>
+                            <li><strong>سوء التوجه المرجعي:</strong> فقدان كامل للتوجه، فلا يعرف الزمان (اليوم، الشهر، السنة)، ولا المكان (أين هو الآن)، ولا الأشخاص المحيطين به حتى أقرب الناس له.</li>
+                            <li><strong>الهلوسات (Hallucinations):</strong> إدراك حسي صارم دون وجود أي منبه خارجي حقيقي في المجال (يرى، يسمع، أو يشم أشياء لا وجود لها موضوعياً إطلاقاً)، مثل الهلوسة السمعية (سماع أصوات تسبه أو تأمره)، وهلوسة اللمس (ديدان وحشرات تسعى على جلده وتحت لحمه)، وهلوسة الذوق (طعم سموم وحلو/مر دون أكل)، وهي تختلف تماماً عن "الخداع البصري" الذي هو إساءة تفسير لمنبه حقيقي موجود فعلاً في المجال (كرؤية حبل فيظنه ثعباناً).</li>
+                            <li><strong>الهذيانات (Delusions والأوهام):</strong> معتقدات شاذة، زائفة، وجامدة يتمسك بها المريض تمسكاً مطلقاً ويقينياً لا يقبل النقاش رغم سخفها وتناقضها الصارخ مع الواقع العلمي، أنواعها: سوداوية (يعتقد أنه الشيطان أو مذنب مسؤول عن مصائب الكون، أو فقد عضوية مستحيلة كأن يؤكد أنه مجرد من الأمعاء والمعدة أو أن ساقيه متعفنتان تماماً)، واضطهاد (يعتقد جازماً أن المخابرات أو شخصيات بارزة يتآمرون لتسميمه بوضع الغاز في التكييف أو قتله، ويضع خططاً معقدة للدفاع والقتل الاستباقي)، وعظمة (يعتقد أنه غني يملك المليارات، ملك منفي، نبّي مرسل، أو مخترع عظيم غير مجرى البشرية، وتظهر غالباً في أطوار متأخرة بعد الخبل).</li>
+                            <li><strong>التغيرات الانفعالية الزائدة والمتطرفة:</strong> هبوط شديد وحزن ويأس بلا سبب منطقي يدفع للانتحار، أو اليوفوريا (الانشراح المفرط) وهي سعادة جنونية صاخبة بلا سبب وتدفق سريع متطاير للأفكار وكلام صاخب، أو الغضب المرضي الحاد والتهيج والشجار العنيف والقتل لأتفه الأسباب.</li>
+                        </ol>
+                    </div>
+
+                    <h4 class="nested-title">مقارنة تفصيلية دقيقة ومحكمة بين العصاب والذهان</h4>
+                    <p class="text-paragraph">للتفرقة الكلينيكية القاطعة بين الاضطرابات العصابية والأمراض العقلية الذهانية:</p>
+                    <table class="luxury-table">
+                        <thead>
+                            <tr>
+                                <th>وجه المقارنة</th>
+                                <th>الاضطرابات العصابية (العصاب النفسي)</th>
+                                <th>الأمراض العقلية (الذهان العقلي)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>العمر المقدر للشخص</strong></td>
+                                <td>يصيب كل الأعمار بلا استثناء (الأطفال، الشباب، الشيوخ والكهولة).</td>
+                                <td>قلما يصيب الأطفال الصغار، وينتشر بقوة في الشباب والكهولة والشيخوخة.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>الأسباب المنشئة للمرض</strong></td>
+                                <td>نفسي وبيئي خالص (خبرات طفولة قاسية، تربية خاطئة، وصراعات حادة).</td>
+                                <td>اختلال عضوي/كيميائي وبيولوجي بالدماغ وتلعب الوراثة الجينية دوراً مهيئاً كبيراً.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>الحيل الدفاعية وطبيعتها</strong></td>
+                                <td>يستخدم حيل دفاعية لاشعورية جزئية كهروب وتخفيف مؤقت لشدة القلق.</td>
+                                <td>يسرف فيها ويطورها لأوهام وهذيانات معقدة ومزيفة ومحكمة تشوه الواقع تماماً.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>طبيعة السلوك والكلام</strong></td>
+                                <td>كلامه منطقي ومترابط، يعي تماماً مرضه ويطلب العلاج، ولا توجد لديه هلوسات.</td>
+                                <td>كلامه غير مترابط (سلطة كلمات وتفكك)، سلوكه شاذ وغريب، ومليء بالهلوسات والهذيانات، وينكر مرضه.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>التوافق الاجتماعي والمهني</strong></td>
+                                <td>يتطابق نسبياً مع المستويات والمعايير الاجتماعية ويحاول جاهداً ممارسة أدواره ومسؤولياته.</td>
+                                <td>منفصل تماماً عن المعايير الاجتماعية والمجتمع، يعيش في عالمه الخاص الزائف ويرفض القوانين.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>طرق العلاج المتبعة</strong></td>
+                                <td>علاجه الأساسي والجوهري نفسي خالص (تحليلي، سلوكي معرفي، إرشادي كلامي).</td>
+                                <td>علاجه الأساسي طبي كيميائي، دوائي، صدمات، ودخول مستشفى حتمي أولاً لضبط السلوك لحين استقراره.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>فرص الشفاء والتنبؤ مستقبلاً</strong></td>
+                                <td>يتحسن جداً ونسبة الشفاء التام مرتفعة للغاية بمجرد زوال وتفريغ الأسباب والصراعات.</td>
+                                <td>غير مضمونة، النكسات محتملة جداً والتدهور العقلي والانحلال شائع إذا تأخر التدخل الطبي والدوائي.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5 class="nested-title" style="color:var(--primary-color); border-right-color:var(--secondary-color);">1. الفصام (الشيزوفرينيا - Schizophrenia)</h5>
+                    <p class="text-paragraph"><strong>المفهوم:</strong> اكتشفه وسماه الدكتور الفذ "بلولر" (Bleuler) عام 1911. معناه الحرفي والأصيل (انفصام العقل أو تفتت وتفكك الشخصية البنائية)، وهو عدم الترابط والاتساق بين العمليات النفسية الثلاث الأساسية (التفكير والوجدان والإرادة). يختلف تماماً وجوهرياً عن اضطراب "ازدواج الشخصية الفصامي الموهوم بروايات السينما"، ويتميز بالانفصال التام عن العالم والواقع والعيش في حلم باطن مستمر لا ينتهي.</p>
+                    <p class="text-paragraph"><strong>الأعراض والظواهر الإكلينيكية الست الصارمة (حسب الدليل الدولي العاشر ICD-10):</strong>
+                        <br>1. صدى التفكير الذاتي، سحب الأفكار قسراً من الرأس من قوى خارجية، أو إذاعتها جهراً للعامة وسرقتها، والإدراك الهذائي الوهمي الخارق.
+                        <br>2. أوهام التحكم الكامل والسيطرة في الجسد والحركة والمشاعر من قوى فضائية أو خارجية، ادعاء الولادة الإلهية أو التكليف بمهام كونية ونبوءات خاصة.
+                        <br>3. هلوسات سمعية مستمرة وصاخبة جداً (أصوات تعلق على سلوك المريض بدقة أو تتناقش في شأنه ومصيره بصيغة الغائب وتأمره بالافعال).
+                        <br>4. هلوسات مرافقة لهذيانات غير محددة البنية والنسق وتفشي الضلالات.
+                        <br>5. التبلد الانفعالي الشديد والمخيف (Blunting)، تنافر الانفعالات الصارخ مع الموقف (يضحك بهستيرية في مأتم وعزاء، ويبكي في فرح)، وندرة الكلام وفقره التام وانعدام التعبير.
+                        <br>6. فواصل وتداخلات حادة ومفاجئة في مجرى الكلام والتفكير تجعله غير مفهوم كلياً وسلطة كلمات مفككة. *(ملاحظة: في الحالات المزمنة، يُعتمد إكلينيكياً ونفسياً على تقييم الأعراض "السلبية" لضمان التشخيص).*
+                    </p>
+                    <p class="text-paragraph" style="font-weight:700; margin-right:15px;">فئات وأنواع الفصام المعتمدة كلينيكياً بالتفصيل:</p>
+                    <ol class="numbered-list" style="margin-right:35px;">
+                        <li><strong>فصام الاضطهاد (Paranoid Schizophrenia):</strong> النوع الأكثر انتشاراً وسيطرة على الإطلاق، يتميز بسيطرة هذيان اضطهادي وتآمري ثابت ومحكم وهلوسات سمعية تآمرية صاخبة، يتميز بخبرات شاذة جداً (إذاعة الأفكار)، واضطراب حاد في إدراك الوقت والألوان والمجال، وأصوات تهدد أو تشتم طوال اليوم، وقد توجد هلوسات شمية وتذوقية مصاحبة (يشم غازات سامة بالطعام)، التفكير يختل بشدة في الحالات الحادة، وقد يكون على شكل نوبات أو مزمناً مدمراً.</li>
+                        <li><strong>الفصام غير المميز (Undifferentiated Schizophrenia):</strong> لا ينطبق عليه معايير أو شروط فئة محددة، أو يجمع أعراضاً مختلفة ومختلطة من فئات متعددة بآن واحد بلا سيطرة واضحة لواحدة منها على المجال الإكلينيكي للمريض.</li>
+                        <li><strong>الفصام غير المنتظم (Disorganized Schizophrenia):</strong> تبلد وتنافر انفعالي حاد وسافر، سلوك طفلي أخرق، تصرفات مجنونة طائشة، وكلمات وجمل مختلطة تماماً بشكل لا يتفق مع الفئات المنظمة الأخرى ومفكك القوى بالكامل.</li>
+                        <li><strong>الفصام المتبقي (Residual Schizophrenia):</strong> مرحلة مزمنة متأخرة من المرض، تمثل انتقالاً واضحاً من مرحلة نشطة (كان بها نوبات ذهانية صاخبة وهلوسات وهذيانات حادة) إلى مرحلة متأخرة تسودها الأعراض السلبية الخالصة كالكسل المطلق، الخمول والبلادة التامة، التبلد الانفعالي، وفقر الكلام التام والانعزال الكلي عن الحياة البقائية.</li>
+                        <li><strong>الفصام التخشبي (Catatonic Schizophrenia):</strong> سيطرة الاضطرابات الحركية البنائية القصوى والمتطرفة، يتأرجح المريض بين الذهول التام والسبات العميق أو الطاعة العمياء الجوفاء للأوامر، وبين النشاط الحركي المفرط الهائج والمدمر، يتخذ المريض أوضاعاً جسمية ثابتة وغريبة وصعبة للغاية لفترات طويلة جداً وأيام (نادر الحدوث حالياً في الدول الصناعية المتقدمة بفضل الأدوية المهدئة الكبرى)، ويتصف بـ <em>"المرونة الشمعية"</em> (بقاء أجزاء جسم المريض وساقيه في أي وضع يُشكل عليه من قِبل الطبيب الفاحص كأنه تمثال من الشمع) و<em>"الخلفة أو العناد التخشبي الصارم"</em> (مقاومة عضلية عنيفة لأي حركة يطلبها الطبيب وفعل العكس تماماً بقوة). <span style="font-style:italic; font-weight:700; color:var(--primary-color);">(تنويه علمي هام جداً للمؤلف: الفصام البسيط والفصام الهيبيفريني حُذفا تماماً وإطلاقاً من الدليل الأمريكي الرابع DSM-IV والدليل الدولي العاشر للاضطرابات ICD-10 لعدم ثباتهما علمياً).</span></li>
+                    </ol>
+                    <p class="text-paragraph" style="margin-right:15px;"><strong>سبل الوقاية والعلاج:</strong> الوقاية تتطلب توفير الأمن النفسي والعاطفي الكامل في الطفولة، التنشئة الجيدة وتكوين مفهوم إيجابي صلب للذات، منع تعرض الأفراد المهيئين جينياً لضغوط وصراعات حادة ومروعة، ومنع التزاوج بين المصابين أو المهيئين للمرض سلالياً وعائلياً. أما العلاج فيشمل: 
+                        <br>• <em>علاج نفسي فردي:</em> لتنمية الجزء السليم المتبقي من الأنا وإرشاد الأسرة لكيفية التعامل مع المريض دون قمع.
+                        <br>• <em>علاج اجتماعي وبيئي:</em> لتجنب العزلة والدمج التدريجي في خطوط العمل البسيطة والعلاج بالعمل الحركي.
+                        <br>• <em>علاج طبي دوائي صارم:</em> وهو حجر الزاوية بالمهدئات الكبرى ومضادات الذهان الفصامي الحديثة، واللجوء للرجفة والصدمات الكهربائية المنظمة في حالات التخشبي والهياج الساحق لحماية حياته.
+                        <br>• <em>علاج جراحي:</em> بشق الفص الجبهي للدماغ، وهو نادر جداً وضيق للغاية حالياً ولا يتم إلا بعد 3 سنوات كاملة من فشل وتجربة كافة العلاجات الطبية والدوائية المستمرة والتدهور التام للشخصية.
+                    </p>
+
+                    <h5 class="nested-title" style="color:var(--primary-color); border-right-color:var(--secondary-color);">2. ذهان الهوس والاكتئاب (الاضطراب الوجداني ثنائي القطب الدوري)</h5>
+                    <p class="text-paragraph"><strong>المفهوم والأبعاد:</strong> مرض انفعالي وجداني قديم جداً عرفه الفراعنة في بردياتهم والإغريق بـ (الجنون الدوري)، يتصف باضطراب انفعالي متطرف وعنيف تتوالى فيه دورات أو نوبات من الهوس الصاخب والبهجة الجنونية الزائدة، ونوبات من الاكتئاب السوداوي العنيف واليأس القاتل، تتخللها فترات انتقالية طويلة من السواء العقلي والنفسي والوظيفي الكامل للفرد.</p>
+                    <p class="text-paragraph"><strong>الأسباب المنشئة لذهان الهوس والاكتئاب:</strong>
+                        <br>• <em>وراثية جسمية طبعية:</em> للوراثة الجينية العائلية دور مهيئ كبير جداً وقاطع، وكشفت البحاث أن النمط الجسمي المكتنز البدين الدائري (البيكنك) أكثر عرضة وإصابة بهذا المرض من غيره.
+                        <br>• <em>عضوية وفسيولوجية:</em> اضطرابات حادة في الغدد الصماء (الجنسية والدرقية والكظرية)، أورام الفص الجبهي للدماغ، زهري الجهاز العصبي المتقدم، واضطراب كيمياء الدماغ ونسبة المعادن والأملاح (كالليثيوم والصوديوم) في الدم والسائل العشبي.
+                        <br>• <em>نفسية اجتماعية ضاغطة:</em> اضطراب حاد في علاقة الطفل بالوالدين بالطفولة، الضغوط الحياتية الصادمة الحادة (موت عزيز، خسارة ثروة)، فشل العلاقات الزوجية، نقص ونزع المكانة الاجتماعية، والمعايير الوالدية العقابية الجامدة المستبدة التي تحطم الأنا.
+                    </p>
+                    <p class="text-paragraph"><strong>العلاج والوقاية الصارمة:</strong> دخول المستشفى ضروري وحتمي فوراً وفي الحال لخطر الانتحار المؤكد في نوبة الاكتئاب الخانقة، أو خطر قتل الغير، الاعتداء المدمر والتبذير المالي الجنوني غير الواعي في نوبة الهوس الصاخب. العلاج الطبي يعتمد كلياً على العقاقير الكيميائية الحدييثة وضبط أملاح كيمياء الدماغ (كمركبات الليثيوم ومثبتات المزاج) والرجفة الكهربائية المنظمة لرفع المزاج لحماية المريض من الموت جوعاً أو إنهاكاً حركياً. العلاج النفسي والاجتماعي يأتي تالياً بعد استقرار الحالة الطبية لتقديم الدعم وحل المشكلات الواقعية، والعلاج بالعمل لانتزاعه من التمركز حول الذات السوداوية في الاكتئاب، وتصريف طاقته الحركية والذهنية الزائدة في الهوس بنشاط مفيد. الوقاية تتطلب وضع المريض تحت الملاحظة الدقيقة الطويلة المستدامة لأن النكسة والانتكاس قد تحدث فجأة بعد أشهر أو سنوات من السواء الكلي.</p>
+
+                    <h3 class="subsection-title">ثالثاً: الأمراض النفسية الجسمية (السيكوسوماتية Psychosomatic)</h3>
+                    <p class="text-paragraph"><strong>المفهوم والأصل العلمي:</strong> اختلال وظيفي وعضوي تشريحي شديد ومحقق في أعضاء وأنسجة الجسم المختلفة، ناتج ومسبَّب أساساً وعميقاً عن ضغط "سيكولوجي" ونفسي بحت كتمه الفرد ولم يعبر عنه لفظياً أو حركياً فتفرغ عبر الجسد. ظهر هذا المصطلح الطبي النفسي بقوة في القرن التاسع عشر بفضل جهود الطبيب "هاينروث" وأبحاث سيجموند فرويد، ويصيب أي عضو جسدي خاضع للجهاز العصبي الذاتي ويحتاج حتماً لعلاج طبي عضوي وعلاج نفسي متكاملين معاً بآن واحد لضمان الشفاء التام ومنع تلف العضو.</p>
+                    <p class="text-paragraph"><strong>الأسباب وسيكولوجية المرض العضوية:</strong> التعرض لضغط انفعالي شديد، حاد، ومستمر (خوف، قلق، غضب، كراهية، غيرة) يكتمه الفرد كلياً لاعتبارات اجتماعية أو أخلاقية ولا يعبر عنه، فيعمل داخلياً من خلال الجهاز العصبي السمبثاوي والباراسمبثاوي ليعطل العضو ويوتر الأوعية والأنسجة. الانفعال يُحدث تغيرات طبيعية فسيولوجية مؤقتة (ارتفاع حرارة، زيادة ضربات قلب)، لكن استمراره المزمن الكثيف بشدة يحولها لاضطراب فسيولوجي بنائي وقرح وتلف يصيب أضعف الأعضاء مقاومة تكوينية بالجسد. 
+                        <br><strong>العوامل المحددة للعضو المصاب سيكوسوماتياً:</strong> الضعف التكويني الوراثي للعضو الموروث من الآباء، أمراض أو حوادث سابقة في هذا العضو جعلته هشا، تاريخ العائلة المرضي المحدد، طبيعة ونوع الضغط الانفعالي المحددة، المعنى الرمزي والسيكولوجي للعضو عند المريض (كالقلب رمز الحب، أو المعدة رمز الهضم والبلع)، والمكسب الثانوي من المرض (جلب الاهتمام والعطف والتهرب من المسؤوليات)، والطابع العام للمرض السيكوسوماتي في التحليل النفسي هو شكل من أشكال النكوص الطفولي الفسيولوجي الراجع للجسد أو الكبت العضوي المحول.
+                    </p>
+                    
+                    <p class="text-paragraph" style="font-weight:700; margin-right:15px; margin-top:20px;">أنواع الاستجابات والاضطرابات السيكوسوماتية الثمانية المعتمدة علمياً:</p>
+                    <ol class="numbered-list" style="margin-right:35px;">
+                        <li><strong>استجابات معدية-معوية (الجهاز الهضمي):</strong> قرحة المعدة الحادة والاثني عشر النازفة، التهاب القولون العصبي التشنجي المزمن، التهاب المعده المخاطي، وفقدان الشهية العصبي الحاد والمقلق للحياة.</li>
+                        <li><strong>استجابات قلبية وعائية (الجهاز الدوري):</strong> عصاب القلب الانفعالي (ألم وهمي بالقلب وخوف من توقفه)، الإغماء النفسي المتكرر، الصداع النصفي الشديد والمزمن (الشيقة الانفعالية)، وارتفاع ضغط الدم الأساسي السيكوسوماتي.</li>
+                        <li><strong>استجابات تنفسية (الجهاز التنفسي):</strong> الربو الشعبي الحاد وتشنج الشعب عند الأزمات الانفعالية، نزلات الصدر والبرد الزائفة النفسية، والتهاب الجيوب الأنفية المزمن الناتج عن القلق والتوجس.</li>
+                        <li><strong>استجابات جلدية (الجلد والأنسجة):</strong> الأكزيما النفسية المستعصية على العلاج الطبي، حب الشباب الهائج المرتبط بالأزمات الانفعالية، والتهاب الحكة الجلدية العصبي وتساقط الشعر البقعي (الثعلبة النفسية).</li>
+                        <li><strong>استجابات عضلية-هيكلية (العظام والعضلات):</strong> التهاب المفاصل الروماتيزمي الرقبي والظهري، ووجع وآلام أسفل الظهر المزمنة والمقعدة (تنشأ بكثرة في التحليل النفسي من مشاعر الكراهية والغضب المكبوتة بشدة والمسببة لتوتر وتشنج عضلي دائم في الظهر دون وعي).</li>
+                        <li><strong>استجابات جنسية تناسلية (الجهاز التناسلي):</strong> العجز الجنسي الكامل وسرعة القذف الحادة والمخلة بالزواج (للذكور)، والبرود الجنسي التام وانعدام اللذة والتقلصات المهبلية المؤلمة المعوقة للجماع (للإناث)، ويربطها التحليل النفسي بعقدة أوديب وإلكترا المكبوتة غير المحلولة في الطفولة والخوف من العقاب والتأثيم الجنسي.</li>
+                        <li><strong>استجابات حسية خاصة وظيفية:</strong> مثل حالات العمى الهستيري أو الصمم الهستيري الوظيفي الكامل وفقد النطق عند الصدمات الانفعالية العنيفة.</li>
+                        <li><strong>استجابات غدية وأيضية:</strong> تغير كيمياء الدم الكلية واضطراب الغدد الصماء كمرض السكر النفسي (ارتفاع السكر الحاد عند الغضب الخوف) وتضخم الغدة الدرقية الانفعالي السام الجحوظي.</li>
+                    </ol>
+                    <p class="text-paragraph" style="margin-right:15px;"><strong>العلاج المتكامل:</strong> يعتمد كلياً وبشكل حتمي على الدمج المتوازن والدقيق بين <em>العلاج العضوي الطبي الدوائي</em> السريع لإصلاح التلف النسيجي والقرح وتسكين العضو، و<em>العلاج النفسي الشامل الموازي</em> (تدعيمي لبث الأمن، تحليلي لكشف الصراع المكبوت المتفرغ بالجسد، وسلوكي معرفي لتدريبه على الاسترخاء وخفض التوتر العضلي)، إضافة لمساعدة المريض اجتماعياً وبيئياً على حل مشكلاته الواقعية بدلاً من كبتها داخل أحشائه وأنسجته الجسدية.</p>
+                </div>
+            </div>
+
+            <!-- 5. تبويب الاختبار التفاعلي الشامل (Engine الكامل لـ 80 سؤالاً بقوة JavaScript) -->
+            <div id="quiz-tab" class="tab-content">
+                <div class="quiz-container">
+                    <h2 class="section-heading" style="margin-bottom:15px;">📝 الاختبار التفاعلي الذكي الشامل</h2>
+                    <p class="text-paragraph">أهلاً بك في نظام الاختبارات المطور لمنصة Y_EDUX. تم تحويل بنك الأسئلة بالكامل ليكون اختباراً حقيقياً تفاعلياً. يمكنك تصفية الأسئلة حسب الفصل أو خوض الامتحان الشامل المكون من 80 سؤالاً. اختر إجابتك، واضغط "تحقق" لرؤية النتيجة الفورية والتصحيح، ثم اضغط "التالي" لمواصلة التقدم.</p>
+                    
+                    <div class="quiz-filters">
+                        <button class="filter-btn active-filter" onclick="filterQuiz('all', this)">🌍 الاختبار الشامل (80 سؤال)</button>
+                        <button class="filter-btn" onclick="filterQuiz('ch1', this)">📕 الفصل الأول (20 سؤال)</button>
+                        <button class="filter-btn" onclick="filterQuiz('ch2', this)">📘 الفصل الثاني (20 سؤال)</button>
+                        <button class="filter-btn" onclick="filterQuiz('ch3', this)">📗 الفصل الثالث (20 سؤال)</button>
+                        <button class="filter-btn" onclick="filterQuiz('ch4', this)">orange الفصل الرابع (20 سؤال)</button>
+                    </div>
+
+                    <div class="quiz-header-dashboard">
+                        <h3 id="quiz-progress-text">السؤال 1 من 80</h3>
+                        <h3 id="quiz-score-live">النتيجة الحالية: 0 / 0</h3>
+                    </div>
+
+                    <div class="progress-bar-container">
+                        <div id="progress-fill" class="progress-bar-fill"></div>
+                    </div>
+
+                    <!-- ساحة عرض الأسئلة الديناميكية -->
+                    <div id="quiz-questions-area">
+                        <!-- سيتم بناء الأسئلة ديناميكياً بواسطة Javascript لمنع الجمود والبطء -->
+                    </div>
+
+                    <!-- لوحة عرض النتيجة النهائية المذهلة بعد انتهاء الامتحان -->
+                    <div id="quiz-results-area" class="results-dashboard">
+                        <div class="score-circle">
+                            <span id="res-percent" class="number">0%</span>
+                            <span class="label">النتيجة النهائية</span>
+                        </div>
+                        <h3 id="res-greeting" style="font-size:22px; font-weight:800; color:var(--secondary-color); margin-bottom:15px;">عمل ممتاز!</h3>
+                        <p id="res-details" class="text-paragraph" style="text-align:center;">لقد قمت بالإجابة على 0 سؤالاً بشكل صحيح من أصل 0 سؤالاً.</p>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card c-card">
+                                <span id="stat-correct" class="val">0</span>
+                                <span class="lbl">إجابة صحيحة</span>
+                            </div>
+                            <div class="stat-card w-card">
+                                <span id="stat-wrong" class="val">0</span>
+                                <span class="lbl">إجابة خاطئة</span>
+                            </div>
+                            <div class="stat-card p-card">
+                                <span id="stat-total" class="val">0</span>
+                                <span class="lbl">إجمالي الأسئلة</span>
+                            </div>
+                        </div>
+
+                        <button class="start-btn" onclick="restartQuiz()">🔄 إعادة خوض الاختبار من جديد</button>
+                    </div>
+
+                    <div class="quiz-controls" id="quiz-nav-controls">
+                        <button class="quiz-btn btn-prev" id="btn-prev" onclick="changeQuestion(-1)" disabled>⬅️ السابق</button>
+                        <button class="quiz-btn btn-verify" id="btn-verify" onclick="verifyCurrentAnswer()">✔️ تحقق من الإجابة</button>
+                        <button class="quiz-btn btn-next" id="btn-next" onclick="changeQuestion(1)">التالي ➡️</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- كود الـ JavaScript المحرك للمنصة بالكامل ولنظام الاختبار التفاعلي الذكي -->
+    <script>
+        // 1. نظام التبديل الفخم بين تبويبات القائمة الجانبية (SPA Architecture)
+        function switchTab(event, tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active-content');
+            });
+            document.querySelectorAll('.tabs-nav button').forEach(btn => {
+                btn.classList.remove('active-tab');
+            });
+
+            document.getElementById(tabId).classList.add('active-content');
+            if (event) {
+                event.currentTarget.classList.add('active-tab');
+            }
+            window.scrollTo(0, 0);
+
+            // عند الانتقال لتبويب الاختبار، نقوم بإعادة تهيئة نظام الأسئلة إذا لزم الأمر
+            if (tabId === 'quiz-tab' && filteredQuestions.length === 0) {
+                initQuiz('all');
+            }
+        }
+
+        // 2. بنك بيانات الأسئلة الشامل والكامل (80 سؤالاً دون نقصان حرف واحد) بكل تفاصيله الدقيقة وطرق تصحيحه
+        const rawQuizData = [
+            // الفصل الأول: الصحة النفسية (1-20)
+            { id: 1, ch: 'ch1', type: 'TF', q: 'الصحة النفسية مفهوم ثابت ومحدد يتفق عليه جميع العلماء مهما اختلفت الثقافات.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'مفهوم ثقافي نسبي غير ثابت يتأثر بالبيئة الثقافية والاجتماعية للفرد ووجهات نظر العلماء بناء على مناهجهم.' },
+            { id: 2, ch: 'ch1', type: 'TF', q: 'يُعد المحك الإحصائي دقيقاً جداً في التمييز بين السلوك السوي واللاسوي لأنه يراعي الدلالة الاجتماعية والخلقية.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'المحك الإحصائي مضلل وغير دقيق لأنه يعتبر العباقرة وقصار/طوال القامة شواذا لانحرافهم عن المتوسط ويحدد الانحراف مجردا من المعنى الاجتماعي والخلقي.' },
+            { id: 3, ch: 'ch1', type: 'TF', q: 'التحرر النسبي من الأعراض المرضية والانحرافات يُثبت بالضرورة تمتع الفرد بصحة نفسية سليمة وقوية.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'حذرت منظمة الصحة العالمية من أن مجرد التحرر من الأعراض المرضية والانحرافات لا يثبت بالضرورة قوة الصحة النفسية.' },
+            { id: 4, ch: 'ch1', type: 'TF', q: 'يرى "شوبن" أن الصحة النفسية ترتبط بالتكيف المتكامل وضبط النفس وتحمل المسؤولية.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، يرى شوبن أنها ترتبط بالتكيف المتكامل وضبط النفس والشعور بالمسؤولية الشخصية والاجتماعية وإرجاء الإشباع الفوري لنتائج أبعد.' },
+            { id: 5, ch: 'ch1', type: 'TF', q: 'المحك الذاتي في تقييم السلوك السوي يعتمد على الأطر المرجعية للفرد، وهو محك موضوعي تماماً ولا يتعرض للتحريف.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'المحك الذاتي غير موضوعي، وتتعرض أحكامه للتشويه والتحريف بحكم دوافع الفرد واتجاهاته خاصة في المواقف غير الحيادية.' },
+            { id: 6, ch: 'ch1', type: 'TF', q: 'يتأثر الحكم على مستوى الصحة النفسية للفرد بمراحل النمو العمرية التي يمر بها.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، فمص الأصابع أو التبول اللاإرادي طبيعي للرضيع، لكنه يعتبر مشكلة وسلوكاً شاذاً لمن هو في العاشرة.' },
+            { id: 7, ch: 'ch1', type: 'TF', q: 'من محكات السلوك السوي وفقاً لمحك "التوازن" عند كفافي، أن يجمع السلوك بين المثالية والواقعية.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، يقوم محك التوازن لكفافي على الجمع المرن والواقعي بين أطراف متعددة مثل المثالية والواقعية، والحرية والمسؤولية، والوازع الداخلي والخارجي.' },
+            { id: 8, ch: 'ch1', type: 'TF', q: 'تعتبر الحماية الزائدة (التدليل) من قبل الآباء سبباً في شعور الأبناء بالاستقلالية والثقة بالنفس.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'الحماية الزائدة (التدليل) تسبب الاتكالية، اللامبالاة، الانسحاب، الانطواء، وانعدام الثقة بالنفس.' },
+            { id: 9, ch: 'ch1', type: 'TF', q: 'يرى "كولمان" أن السلوك السوي هو الذي يتفق مع تحقيق إمكانيات الفرد لأقصى درجة وصالح الجماعة معاً.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، يرى كولمان أن السلوك السوي يحقق نمو الفرد لأقصى درجة واستقرار وتقدم الجماعة معاً، ويوجب تعديل الظروف المعيقة للتوافق.' },
+            { id: 10, ch: 'ch1', type: 'TF', q: 'تتأثر الصحة النفسية كحالة ديناميكية بقدرة الفرد على تحويل الفشل والإحباط إلى دافعية ونشاط ناجح.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، فالصحة النفسية حالة ديناميكية مرنة تتضمن السيطرة على الإحباط وتحويل الأخطاء إلى خطوات ناجحة والتصرف بمرونة وتفاؤل.' },
+            { id: 11, ch: 'ch1', type: 'MCQ', q: 'أي المحكات التالية يعتبر مضللاً لأنه يحدد ظواهر الانحراف عن المتوسط مجردة من المعنى والدلالة الاجتماعية؟', options: ['(أ) المحك الذاتي', '(ب) المحك الإحصائي', '(ج) المحك الاجتماعي', '(د) محك التوازن'], answer: 1, explanation: 'المحك الإحصائي يعتمد على المتوسط الرياضي وشيوع السلوك دون النظر للقيمة والخلفية الاجتماعية والدلالة الخلقية.' },
+            { id: 12, ch: 'ch1', type: 'MCQ', q: 'من المحكات الأساسية للصحة النفسية عند المؤلف، والتي تندرج تحتها مرونة الفرد في تعامله وإقامة علاقات فعالة:', options: ['(أ) الاتزان الانفعالي', '(ب) التوافق الشخصي والاجتماعي', '(ج) تحقيق الذات', '(د) التكامل الشخصي'], answer: 1, explanation: 'المحكات الأساسية للمؤلف هي ثلاثة: الاتزان الانفعالي، التوافق الشخصي والاجتماعي (المرونة والعلاقات الفعالة)، وتحقيق الذات.' },
+            { id: 13, ch: 'ch1', type: 'MCQ', q: '"حالة عقلية انفعالية مركبة دائمة نسبياً من الشعور بأن كل شيء على ما يرام السعادة والرضا والطمأنينة والأمن والوفاء بالالتزامات"، هذا تعريف الصحة النفسية عند:', options: ['(أ) بوهيم (Bohim)', '(ب) منظمة الصحة العالمية', '(ج) كيلاندر (Kilander)', '(د) عبد السلام عبد الغفار'], answer: 1, explanation: 'تعريف منظمة الصحة العالمية لعام 1964 ركّز على الحالة المركبة الدائمة نسبياً من الطمأنينة والكفاءة ومواجهة مطالب الحياة.' },
+            { id: 14, ch: 'ch1', type: 'MCQ', q: 'أي مما يلي يمثل نقطة النقد الموجهة لـ "المحك الاجتماعي"؟', options: ['(أ) يعتمد على تكرار السلوك وشيوعه رقمياً.', '(ب) المجتمع نفسه قد يتعرض لظروف وأمراض تخرجه عن حدود السوية.', '(ج) يعتمد على الإطار المرجعي الشخصي للفرد وحده.', '(د) يغفل دور الفرد داخل الجماعة كلياً.'], answer: 1, explanation: 'المجتمع نفسه قد يمرض أو يخرج عن السوية، فالتوافق مع مجتمع مريض أو منحرف ليس سلوكاً سوياً (كمحاولة الأنبياء تطهير المجتمعات من انحرافاتها).' },
+            { id: 15, ch: 'ch1', type: 'MCQ', q: 'يركز تعريف "كيلاندر" للصحة النفسية على مفهوم محوري هو:', options: ['(أ) التوافق مع المطالب البيولوجية الداخلية فقط.', '(ب) مدى قدرة الفرد على التأثير في بيئته والتكيف مع الحياة لتحقيق الإشباع والسعادة.', '(ج) الخلو التام من الأمراض العقلية والعصبية.', '(د) الاتزان الانفعالي وثبات الشخصية فقط.'], answer: 1, explanation: 'كيلاندر يربط قياس الصحة النفسية بمدى قدرة الفرد الفعالة على التأثير في بيئته والتكيف مع مطالب الحياة لإشباع حاجاته وسعادته.' },
+            { id: 16, ch: 'ch1', type: 'MCQ', q: 'الإحساس بأشياء ليس لها وجود موضوعي كالهلوسة يعتبر عرضاً واضحاً لـ:', options: ['(أ) صحة نفسية سليمة وإدراك متسع.', '(ب) صحة نفسية سيئة (مرضية).', '(ج) تكيف اجتماعي معقد مبرر ثقافياً.', '(د) محك توافق شخصي داخلي.'], answer: 1, explanation: 'الهلوسة (سمعية أو بصرية أو لمسية) والخوف الشديد المعوق للفاعلية هما من الأعراض الواضحة المتفق عليها لتدني الصحة النفسية وسوئها.' },
+            { id: 17, ch: 'ch1', type: 'MCQ', q: '"تنظيم متسق بين عوامل التكوين العقلي والتكوين الانفعالي للفرد يحدد استجابات دالة على اتزانه وتوافقه" هو تعريف للصحة النفسية عند:', options: ['(أ) أديب الخالدي', '(ب) كيلاندر', '(ج) منظمة الصحة العالمية', '(د) كولمان'], answer: 0, explanation: 'هذا نص تعريف الدكتور أديب الخالدي الصادر عام 2002 والذي ركز على التنظيم المتسق بين المكون العقلي والانفعالي للفرد.' },
+            { id: 18, ch: 'ch1', type: 'MCQ', q: 'السلوك الذي يعتبر عادياً ومقبولاً في مجتمع المدينة المعقد ولكنه يُعد سلوكاً غير عادي ومرفوض بشدة في المجتمع الريفي هو:', options: ['(أ) التنافس المهني', '(ب) العزلة وانعدام الاتصال الجماعي الفعال', '(ج) التطوع الخيري', '(د) الاعتماد على النفس بالكامل'], answer: 1, explanation: 'العزلة وانعدام الاتصال مرفوضة بشدة في المجتمع الريفي القائم على اللحمة، بينما قد تكون مقبولة إلى حد ما في مجتمع المدينة المعقد، مما يثبت نسبية المفهوم.' },
+            { id: 19, ch: 'ch1', type: 'MCQ', q: 'المحك الذي بُني تاريخياً على رأي فلاسفة اليونان مثل "بروتاجوارس" بأن "الإنسان مقياس كل شيء" هو:', options: ['(أ) المحك الإحصائي والعددي', '(ب) المحك الذاتي الشخصي', '(ج) محك التوازن المرن', '(د) محك تكامل الشخصية'], answer: 1, explanation: 'المحك الذاتي يعتمد على آراء الفلاسفة القدامى بأن الفرد ذاته وإطاره المرجعي الشخصي هو مقياس الحكم على السلوك سوياً أم لا.' },
+            { id: 20, ch: 'ch1', type: 'MCQ', q: 'من الخصائص والصفات المحددة للفرد ذي الصحة النفسية السليمة حسب عبد السلام عبد الغفار (1990):', options: ['(أ) إدراك نواحي قوته وجوانب ضعفه وتقبلها بواقعية.', '(ب) أن تكون المسافة بين طموحه وإمكاناته مناسبة وواقعية.', '(ج) الاتزان الانفعالي والمبادأة الإيجابية في العلاقات الاجتماعية.', '(د) جميع ما سبق ذكره صحيح.'], answer: 3, explanation: 'صفات الفرد السوي عند عبد السلام عبد الغفار تشمل تقبل الذات، ومناسبة مستوى الطموح للإمكانات، والمرونة، والاتزان الانفعالي، والمبادأة، والنجاح الاجتماعي.' },
+
+            // الفصل الثاني: الصحة النفسية والتوافق (21-40)
+            { id: 21, ch: 'ch2', type: 'TF', q: 'التكيف يشير إلى حالة التوازن النهائية التي يبلغها الكائن، بينما التوافق يشير إلى الخطوات والعمليات المؤدية لذلك.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'العكس صحيح؛ التكيف (Adaptation) يمثل الخطوات والإجراءات والتعديلات، والتوافق هو الحالة النهائية من الاتزان التي يبلغها الكائن.' },
+            { id: 22, ch: 'ch2', type: 'TF', q: 'الإحباط ينشأ فقط نتيجة العوائق الخارجية المادية أو الاجتماعية في البيئة المحيطة.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'الإحباط ينشأ من عوائق خارجية (مادية واجتماعية واقتصادية ومنافسة) وعوائق داخلية شخصية أيضاً (كالعيوب البدنية، ضعف الذكاء، الخجل، أو الدوافع المتعارضة).' },
+            { id: 23, ch: 'ch2', type: 'TF', q: 'التبرير هو حيلة دفاعية لاشعورية تتضمن خداعاً للذات لتجنب الشعور بالقلق والامتهان وإيجاد أسباب منطقية كاذبة لتعليل الفشل.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، التبرير حيلة لاشعورية يخدع بها الفرد ذاته بإيجاد أسباب تبدو منطقية مقبولة لكنها مختلقة لتغطية سلوك خاطئ أو فشل.' },
+            { id: 24, ch: 'ch2', type: 'TF', q: 'التقمص والتقليد هما نفس العملية الشعورية التي يقوم بها الفرد لمحاكاة الآخرين.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'يختلفان؛ التقليد عملية واعية شعورية، أما التقمص/التوحد فهو آلية لاشعورية تماماً واندماج تام في شخصية أخرى لنمو الأنا والأنا الأعلى.' },
+            { id: 25, ch: 'ch2', type: 'TF', q: 'الشخص السوي، وفقاً لشوبين (Shobin)، هو الذي يتعلم إرجاء الإشباع العاجل الفوري في سبيل تحقيق إشباع ونواتج أبعد وآجلة.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، يعرّف شوبين التوافق بالسلوك المتكامل المتميز بالضبط الذاتي، والمسؤولية الشخصية والاجتماعية، وتأجيل الإشباع الفوري للنضج الانفعالي.' },
+            { id: 26, ch: 'ch2', type: 'TF', q: 'الصراع المتعدد الإقدام والإحجام يتضمن الاختيار بين أشياء لكل منها جوانب حسنة ومحببة وجوانب سيئة ومكروهة بآن واحد.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، هذا هو تعريف صراع الإقدام الإحجام المتعدد والمركب حيث يحمل كل بديل عناصر جذب وعناصر تَنفُر بآن واحد.' },
+            { id: 27, ch: 'ch2', type: 'TF', q: 'ظاهرة "كبش الفداء" تنتج عن تحول موجة الاعتداء والعدوان من مصدرها الأصلي المخيف إلى مصدر آخر أضعف وأسهل.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، عندما يعجز الفرد عن مواجهة المصدر الأصلي للإحباط والخوف (كالرئيس)، يحول عدوانه نحو كبش فداء أضعف (كالطلاب أو الأبناء).' },
+            { id: 28, ch: 'ch2', type: 'TF', q: 'الكبت هو عملية دفاعية شعورية متعمدة وقصدية يمحو بها الفرد ذكرياته المؤلمة ورغباته الساخنة من عقله الباطن.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'الكبت آلية لاشعورية غير متعمدة يتم بها استبعاد الحفزات المؤلمة عن الوعي، أما الاستبعاد المتعمد المقصود فيُسمى قمعاً (Suppression).' },
+            { id: 29, ch: 'ch2', type: 'TF', q: 'التسامي (الإعلاء) يُعد من العمليات والآليات الواقية من المرض النفسي والتي تلقى قبولاً وتقديراً اجتماعياً وثقافياً ممتازاً.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، التسامي يحول طاقة الدوافع الممنوعة (جنسية/عدوانية) إلى أهداف اجتماعية وأخلاقية راقية كالفن والرياضة والبحث العلمي.' },
+            { id: 30, ch: 'ch2', type: 'TF', q: 'تغيير الهدف وتنمية مهارات جديدة تعتبر من الأساليب غير المباشرة (اللاشعورية) للتوافق التام.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'تغيير الهدف وتنمية مهارات جديدة ومضاعفة الجهد هي من أساليب التوافق المباشرة الواعية وليس الحيل اللاشعورية.' },
+            { id: 31, ch: 'ch2', type: 'MCQ', q: 'الحالة النفسية والانفعالية التي تنشأ عن تعارض دافعين لا يمكن إرضاؤهما في وقت واحد لتساويهما في القوة والشدة تسمى:', options: ['(أ) الإحباط المزمن', '(ب) الصراع النفسي', '(ج) القلق العام', '(د) النكوص الطفلي'], answer: 1, explanation: 'الصراع ينشأ نتيجة تعارض دافعين أو رغبتين متساويتين في القوة والجاذبية ولا يمكن إشباعهما معاً بآن واحد.' },
+            { id: 32, ch: 'ch2', type: 'MCQ', q: 'حيلة دفاعية لاشعورية يلجأ فيها الفرد إلى إلصاق صفاته ونقائصه المرفوضة وغير المقبولة بالآخرين ليزيل عن كاهله الفشل والقلق:', options: ['(أ) الإسقاط (Projection)', '(ب) الكبت (Repression)', '(ج) التبرير (Rationalization)', '(د) التعويض (Compensation)'], answer: 0, explanation: 'الإسقاط هو إلصاق العيوب والنقائص بالآخرين وتبرئة الذات لاشعورياً (يرتبط بالإنكار مثل: أنا أكرهه تتحول لاشعورياً إلى هو يكرهني).' },
+            { id: 33, ch: 'ch2', type: 'MCQ', q: 'العودة النكوصية إلى أشكال طفلية وسلوكية سابقة من النمو عند مواجهة أزمات ومواقف صعبة قاسية تُسمى علمياً بـ:', options: ['(أ) التكوين العكسي البنائي', '(ب) التقمص التوحدي', '(ج) النكوص (Regression)', '(د) الاستدماج والاستدخال'], answer: 2, explanation: 'النكوص هو الارتداد لاستجابات طفلية سابقة لمواجهة الإحباط، كالتبول اللاإرادي أو مص الأصابع بعد ولادة طفل جديد بالأسرة.' },
+            { id: 34, ch: 'ch2', type: 'MCQ', q: 'أي مما يلي يُعد من أساليب مواجهة وعلاج الإحباط المباشرة والواعية الصريحة؟', options: ['(أ) العمل الجدي ومضاعفة الجهد والتعلم', '(ب) اللجوء لأحلام اليقظة والخيال', '(ج) التبرير العقلاني الكاذب لفشله', '(د) إسقاط العيوب على الزملاء والمحيط'], answer: 0, explanation: 'العمل الجدي ومضاعفة الجهد، وتغيير الطريقة، وتحوير السلوك، وتغيير الهدف هي أساليب توافق مباشرة واعية وصحية.' },
+            { id: 35, ch: 'ch2', type: 'MCQ', q: 'حيلة "التكوين العكسي" اللاشعورية تعني إجرائياً وعلمياً بالعيادة النفسية:', options: ['(أ) نسيان الخبرات المؤلمة والصادمة كلياً.', '(ب) إظهار وتبني سلوك ومشاعر هي النقيض التام للمشاعر والدوافع المكبوتة بالداخل بالكامل.', '(ج) تقليد الآخرين ومحاكاتهم للوصول للنجاح الاجتماعي.', '(د) تبرير الفشل بأسباب منطقية كاذبة لخداع الذات.'], answer: 1, explanation: 'التكوين العكسي هو المبالغة في إظهار صفة إيجابية نقيضة لإخفاء دافع سلبي مكبوت (مثل المبالغة المفرطة في إظهار الحب لإخفاء كراهية شديدة مكبوتة).' },
+            { id: 36, ch: 'ch2', type: 'MCQ', q: 'من العوائق الذاتية والشخصية الداخلية التي قد تسبب الإحباط الحاد والمباشر للفرد:', options: ['(أ) القوانين والأنظمة والنواهي الاجتماعية.', '(ب) انخفاض مستوى الذكاء العقلي والعيوب والاضطرابات النفسية وعاهات البنية الجسدية.', '(ج) سوء الحالة الاقتصادية والفقر العام.', '(د) العادات والتقاليد وسلطة الوالدين الصارمة.'], answer: 1, explanation: 'العيوب الشخصية هي عوائق داخلية تنبع من ذات الفرد كالبدنية (عاهات) أو عقلية (ضعف ذكاء) أو نفسية (كالخجل المعوق والخوف المرضي).' },
+            { id: 37, ch: 'ch2', type: 'MCQ', q: 'الفرد الذي أصيب بإعاقة جسدية أو بصرية ويحاول بقوة تعويض ذلك بالتفوق والتميز المطلق في مجال آخر كالأدب أو الشعر يستخدم حيلة:', options: ['(أ) الإسقاط والإنكار المباشر', '(ب) التعويض (Compensation)', '(ج) التبرير العقلاني الملتوي', '(د) الاستدخال والاستدماج الثقافي'], answer: 1, explanation: 'التعويض حيلة لاشعورية لتغطية نقص في جانب بالتميز في جانب آخر، كطه حسين في الأدب وبيتهوفن في الموسيقى بعد الصمم.' },
+            { id: 38, ch: 'ch2', type: 'MCQ', q: 'تعديل الكائن الحي لبنيته الداخلية واستجاباته بحيث يتلاءم مع الظروف البيئية الجديدة يُسمى عند العلماء بـ:', options: ['(أ) المغايرة (Dissimilation)', '(ب) المماثلة (Assimilation)', '(ج) الهروب والانسحاب الكلي', '(د) الجمود والتصلب العشوائي'], answer: 0, explanation: 'التكيف يتضمن المغايرة (تعديل الكائن لنفسه ليتلائم مع البيئة) والمماثلة (إحداث تعديل في البيئة لتلائم حاجات الكائن الحي).' },
+            { id: 39, ch: 'ch2', type: 'MCQ', q: 'استبدال وتحويل دافع جنسي أو عدواني مكبوت ومحرم بنشاط ثقافي أو علمي أو رياضي راقٍ يحظى بقبول اجتماعي عارم يُسمى:', options: ['(أ) التبرير الكاذب للذات', '(ب) التسامي والإعلاء (Sublimation)', '(ج) الإسقاط التآمري على الغير', '(د) التقمص والتوحد بالرمز المجبوب'], answer: 1, explanation: 'التسامي أو الإعلاء هو قمة العمليات الدفاعية نجاحاً، حيث يقي من المرض النفسي ويصرف الدوافع المحرمة في نواحٍ إيجابية مقبولة مجتمعياً.' },
+            { id: 40, ch: 'ch2', type: 'MCQ', q: 'من النتائج المباشرة المترتبة فورياً على وقوع الفرد في شباك الإحباط والصراع العنيف المكتوم:', options: ['(أ) التوتر الحركي والعصبي وعدم الاستقرار.', '(ب) الجمود السلوكي وتكرار الأفعال آلياً دون جدوى.', '(ج) عدم المبالاة والبلادة العاطفية وفقد الأمل بالكامل.', '(د) جميع ما سبق ذكره من نتائج محققة وعلمية.'], answer: 3, explanation: 'النتائج المباشرة للإحباط والصراع تشمل التوتر، والاعتداء (العدوان وكبش الفداء)، وعدم المبالاة، وأحلام اليقظة، والجمود السلوكي العشوائي.' },
+
+            // الفصل الثالث: الشخصية (41-60)
+            { id: 41, ch: 'ch3', type: 'TF', q: 'يرى فرويد في نموذجه التركيبي أن "الهي" (ID) عقلانية ومنطقية وتعمل وفق مبدأ الواقعية وتأجيل اللذة للسلامة.', options: ['صواب', 'خطأ'], answer: 1, explanation: '"الهي" لاشعورية تماماً، فوضوية، لا منطق ولا قيم لها، وهدفها اللذة المباشرة الفورية عبر العمليات الأولية. الأنا (Ego) هي التي تعمل وفق مبدأ الواقع والعمليات الثانوية المنطقية.' },
+            { id: 42, ch: 'ch3', type: 'TF', q: 'تفترض النظرية السلوكية الراديكالية لسكنر أن الفروق بين الأشخاص ترجع في أصلها الجوهري إلى الوراثة الجينية الحتمية وليس لنمط ومواعيد المكافأة والتعزيز.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'سكنر يرى أن البيئة والتعزيز والمكافآت الخارجية هي المحددة تماماً لشخصية الفرد وسلوكه، وينكر الحتمية الوراثية والدوافع الداخلية الموروثة في تشكيل السمات.' },
+            { id: 43, ch: 'ch3', type: 'TF', q: '"الأنا الأعلى" (Superego) هي المكون التركيبي الذي يمثل الضمير والرقابة الأخلاقية والمثالية في شخصية الفرد عند فرويد ويتكون بالتشرب من الوالدين.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، تتكون الأنا الأعلى بين 3-5 سنوات من معايير الوالدين، وتمثل الضمير الذي يعاقب على المحرمات بالذنب، ويزود الأنا بالمثالية والمكافأة.' },
+            { id: 44, ch: 'ch3', type: 'TF', q: 'يعتقد كارل روجرز (Carl Rogers) أن السلوك الإنساني في جوهره الأصيل غير عقلاني ومندفع نحو تدمير الذات والشر الحتمي والعدوان.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'روجرز والاتجاه الإنساني يفترضون أن الإنسان يتحرك بقوة إيجابية نامية وميل فطري أصيل (Actualizing tendency) للخير والتعقل وتحقيق الذات وبناء الكفاءة.' },
+            { id: 45, ch: 'ch3', type: 'TF', q: 'قسّم العالم جوردن ألبورت السمات الفردية الشخصية المتفردة إلى ثلاثة مستويات: سمات رئيسية غالبة، وسمات محورية مركزية، وسمات ثانوية محدودة.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، قسّم ألبورت السمات الفردية الشخصية إلى: رئيسية غالبة (Cardinal)، ومحورية مركزية (Central) وتشمل 5-10 سمات كالميول، وثانوية (Secondary) محدودة الأثر.' },
+            { id: 46, ch: 'ch3', type: 'TF', q: 'استخدم العالم ريموند كاتل أسلوب "التحليل العاملي" الإحصائي المعقد لاستنتاج 16 عاملاً أساسياً وعنصراً عميقاً في الشخصية البشرية السوية.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، اعتمد كاتل على التحليل العاملي لاستخراج سمات المصدر العميقة وصاغ مقياس الـ 16 عاملاً للشخصية (16 PF) و12 سمة مرضية.' },
+            { id: 47, ch: 'ch3', type: 'TF', q: 'التعزيز السلبي عند سكنر في الإشراط الإجرائي يعني معاقبة الكائن الحي بإضافة شيء مكروه أو مؤلم أو صدمة لإضعاف السلوك.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'خطأ جسيم، التعزيز السلبي هو استبعاد وإزالة مثير مؤلم أو مكروه لـ "تقوية" السلوك وتثبيته وليس إضعافه (كلاهما يقوي السلوك)، أما إضافة مكروه فهو عقاب إيجابي.' },
+            { id: 48, ch: 'ch3', type: 'TF', q: 'التشكيل (Shaping) عند سكنر هو الانتقال خطوة بخطوة للوصول إلى السلوك المعقد المطلوب عبر تعزيز المقاربات التدريجية المتتالية.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، التشكيل هو تعزيز المقاربات التدريجية المتتالية لبناء سلوك معقد نهائي كتعليم المشي أو لغة أو تدريب حيوانات السيرك.' },
+            { id: 49, ch: 'ch3', type: 'TF', q: 'النظريات الإنسانية الوجودية (كنظريات روجرز وماسلو) تهتم باكتشاف الأسباب الدفينة واللاشعورية للسلوك المترسبة من الطفولة المبكرة عبر الكبت.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'نظريات الأعماق والتحليل النفسي (فرويد ويونج) هي التي تهتم باللاشعور والطفولة، أما الإنسانية فتركّز على الوجود الراهن، الكينونة، والحرية المستقبلية.' },
+            { id: 50, ch: 'ch3', type: 'TF', q: 'في نظرية التحليل النفسي، العمليات الأولية كالأحلام وتكوين الصور تعجز عن التمييز بين الصور الذهنية الداخلية والإدراك الحسي الواقعي الخارجي.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، العمليات الأولية بـ "الهي" تفرغ التوتر عبر الأحلام والصور الذهنية دون تفرقة بين واقع وخيال لتفريغ طاقة الغرائز تحقيقاً للذة.' },
+            { id: 51, ch: 'ch3', type: 'MCQ', q: 'أي مما يلي يُعتبر ويُصنف علمياً من "المعززات الأولية الموجبة" في نظرية ب. ف. سكنر للإجرائي؟', options: ['(أ) النقود والأوراق المالية المكتسبة', '(ب) المدح اللفظي والابتسام والتقدير المعنوي', '(ج) الطعام والشراب الفطري المباشر دون تدريب', '(د) التوبيخ والسب والعقاب الصريح'], answer: 2, explanation: 'المعززات الأولية الموجبة تبعث السرور فواً ودون تدريب مسبق كالحاجة للطعام والشراب والجنس.' },
+            { id: 52, ch: 'ch3', type: 'MCQ', q: 'الجزء من الشخصية التركيبية عند فرويد المسؤول عن التفرقة بين الذات واللاذات والتفاعل مع البيئة ويعمل وفق مبدأ الواقع والعمليات الثانوية هو:', options: ['(أ) الهي (ID) الغريزية المظلمة', '(ب) الأنا (Ego) الواقعية الدينامية', '(ج) الأنا الأعلى (Superego) الأخلاقية', '(د) اللاشعور الجمعي الباطن'], answer: 1, explanation: 'الأنا (Ego) تتطور لتكون وسيطاً بين الغرائز والواقع وتعمل وفق مبدأ الواقع والتفكير المنطقي (العمليات الثانوية) وتأجيل اللذة لحماية الذات.' },
+            { id: 53, ch: 'ch3', type: 'MCQ', q: 'رائد اتجاه "العلاج المتمركز حول الشخص" وصاحب نظرية الذات الشهيرة في القوة الثالثة الإنسانية بعلم النفس هو العالِم:', options: ['(أ) سيجموند فرويد', '(ب) جوردن ألبورت أسلوب الانتقائية', '(ج) ب. ف. سكنر السلوكي الصارم', '(د) كارل روجرز (Carl Rogers)'], answer: 4, explanation: 'كارل روجرز هو رائد الاتجاه الإنساني المتمركز حول الشخص القائم على النزعة الفطرية للتحقيق والتقدير الإيجابي غير المشروط.' },
+            { id: 54, ch: 'ch3', type: 'MCQ', q: 'مصطلح (Persona) اللاتيني التاريخي الأصيل الذي اشتُقت واقتبست منه كلمة شخصية (Personality)، كان يُقصد به في الأصل القديم بمصطلحات الممثلين:', options: ['(أ) الروح والخلود الداخلي الباطن', '(ب) القناع (mask) الذي يرتديه الممثل على المسرح', '(ج) العقل والمنطق والتفكير العالي', '(د) السلوك البشري الملاحظ موضوعياً وثابتاً'], answer: 1, explanation: 'يعني القناع، ويعكس تاريخياً وبمدرسة التحليل النفسي أننا نختار ما نظهره للآخرين وهناك صفات وأسرار تبقى طي الكتمان واللاشعور.' },
+            { id: 55, ch: 'ch3', type: 'MCQ', q: 'يرى فرويد في نظريته الدينامية أن الطاقة النفسية الحيوية الدافعة لغريزة الحياة والجنس والبقاء برمتها تسمى علمياً بـ:', options: ['(أ) الأنا المثالية المستهدفة', '(ب) الليبيدو (Libido)', '(ج) التسامي والإعلاء الفردي', '(د) العمليات الثانوية المنطقية'], answer: 1, explanation: 'الليبيدو (Libido) هو المصطلح الصارم الذي وضعه فرويد للتعبير عن القوة النفسية الدافعة والحيوية لغريزة الحياة والجنس البقائية.' },
+            { id: 56, ch: 'ch3', type: 'MCQ', q: 'العقاب الذي يتضمن إجرائياً "استبعاد وحرمان الكائن من شيء سار ومحبب ومرغوب فيه لديه" (كالحرمان من المصروف أو مشاهدة التلفاز) يُسمى عقاباً:', options: ['(أ) إيجابياً أولياً فسيولوجياً صامتاً', '(ب) سلبياً (Negative Punishment)', '(ج) إيجابياً ثانوياً مكتسباً بالتوبيخ', '(د) معززاً سلبياً إجرائياً لإطفاء السلوك'], answer: 1, explanation: 'العقاب السلبي هو سحب واستبعاد مثير محبوب مرغوب لإضعاف سلوك خاطئ، أما العقاب الإيجابي فهو إضافة مثير مكروه مؤلم كالضرب.' },
+            { id: 57, ch: 'ch3', type: 'MCQ', q: 'وفقاً لروجرز، عندما يتبنى الطفل معايير والديه القمعية ليحصل على عطفهم، ويتجاهل مشاعره وخبراته العضوية الحقيقية، فإن مفهومه عن ذاته يصبح:', options: ['(أ) متطابقاً تماماً مع خبرته الأصلية (Congruent)', '(ب) غير متطابق ومزيفاً مع خبرته الحقيقية (Incongruent) ومولداً للقلق', '(ج) محققاً لذاته بكفاءة ومرونة عقلية كاملة', '(د) متمركزاً حول الخبرة العضوية المستقلة البقائية'], answer: 1, explanation: 'شروط القيمة الصارمة تجعل الطفل ينكر خبراته الحقيقية ليرضي والديه فيحدث عدم تطابق (Incongruence) بين مفهوم الذات والخبرة، مسبباً قلقاً واضطراباً نرجسياً.' },
+            { id: 58, ch: 'ch3', type: 'MCQ', q: 'من الانتقادات والعيوب العلمية الموجهة لنظرية التحليل النفسي الدينامي لسيجموند فرويد:', options: ['(أ) المبالغة المفرطة في التفاؤل والتبسيط تجاه الطبيعة البشرية.', '(ب) التأكيد والتمركز الزائد والمبالغ فيه على الدافع الجنسي كسبب وحيد ومطلق لكافة الأمراض وعقد الشخصية البالغة.', '(ج) إهمال دور اللاشعور كلياً واعتبار الإنسان واعياً دائماً.', '(د) اعتمادها المفرط والتام على تجارب الحيوانات المخبرية كالفئران والحمام.'], answer: 1, explanation: 'نُقد فرويد بشدة لتأكيده الزائد على دافع الجنس الذي استمده من مرضاه، وظلاميته وتشاؤمه تجاه الإنسان، وعدم قياس طاقة الليبيدو مخبرياً.' },
+            { id: 59, ch: 'ch3', type: 'MCQ', q: 'السمات التي تتراوح بين 5 إلى 10 سمات واضحة وتميز الفرد بسهولة ويمكن استنتاجها بسهولة من المقابلات والملاحظة (حسب تصنيف ألبورت للسمات الفردية):', options: ['(أ) السمات الرئيسية الغالبة الكاردينالية الشاملة', '(ب) السمات المحورية المركزية (Central)', '(ج) السمات الثانوية محدودة التأثير العددي', '(د) السمات الدينامية المنشطة والموجهة للسلوك'], answer: 1, explanation: 'السمات المحورية المركزية تتراوح بين 5-10 سمات تميز طباع الفرد وتتضح بالمقابلات كالكرم، الأمانة، أو العصبية، وهي أقل شمولاً من الرئيسية الغالبة.' },
+            { id: 60, ch: 'ch3', type: 'MCQ', q: 'قائل العبارة الشهيرة "أعطوني مجموعة من الأطفال الأصحاء سليمي البنية... وأنا كفيل أن أخرج منهم الطبيب واللص" هو ممثل للاتجاه السلوكي الذي يؤكد على تأثير حتمي مطلق لـ:', options: ['(أ) المحددات الوراثية الجينية السلالية والنوع', '(ب) التعليم والمحددات البيئية والتجريب الإشراطي الموجه الخارجي', '(ج) ميكانيزمات اللاشعورية والصراعات المكبوتة الدفينة', '(د) الاعتبارات الإنسانية الوجودية السواء وكينونة الفرد المعاصرة'], answer: 1, explanation: 'واطسون هو مؤسس السلوكية الراديكالية التي تؤمن بالقدرة المطلقة للبيئة والتعليم الشرطي على تشكيل وصياغة أي فرد بصرف النظر عن استعداداته الموروثة.' },
+
+            // الفصل الرابع: الاضطرابات العصابية والذهانية والأمراض السيكوسوماتية (61-80)
+            { id: 61, ch: 'ch4', type: 'TF', q: 'العصاب النفسي هو اضطراب وظيفي دينامي نفسي المنشأ يفقد فيه المريض اتصاله بالواقع الاجتماعي تماماً وينكر مرضه بالكلية.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'العصابي يظل مستمراً ومحافظاً على اتصاله بالواقع الاجتماعي والمهني ويعي تماماً ويدرك مرضه ومعاناته ويطلب المساعدة طواعية، الذهاني (العقلي) هو من يفقد الاتصال بالواقع وينكر مرضه تماماً.' },
+            { id: 62, ch: 'ch4', type: 'TF', q: 'يتثبت ويتميز القلق المرضي العصابي الإكلينيكي بأنه خبرة انفعالية مؤلمة غامضة، عامة، ومستمرة، وغير معروفة المصدر أو السبب موضوعياً في المجال.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، القلق المرضي العصابي عام ومبهم وغير معروف المصدر (قلق الأنا)، عكس القلق العادي الموضوعي المعروف السبب كالخوف المبرر موضوعياً.' },
+            { id: 63, ch: 'ch4', type: 'TF', q: 'الهستيريا التحولية (Conversion Hysteria) تعني تحول الأفكار والصراعات والانفعالات المكبوتة لاشعورياً إلى عاهات وأعراض جسدية كالشلل أو الخدار دون تلف عضوي عصبياً.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، تتحول الصراعات في التحولية الهستيرية لاشعورياً لعَرَض جسدي حسي أو حركي أو غذائي لخدمة مكسب وغرض لاشعوري كالهروب من معركة أو زواج ضاغط.' },
+            { id: 64, ch: 'ch4', type: 'TF', q: 'المريض بالوسواس القهري يفقد بصيرته العقلية تماماً ولا يدرك سخافة أو عدم منطقية أفكاره المتسلطة وأفعاله الرتيبة المكررة لساعات.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'خطأ كلينيكي، مريض الوسواس القهري يمتلك بصيرة تامة ويعلم يقيناً سخافة وعدم منطقية أفكاره وأفعاله ويقاومها داخلياً بعنف ولكنه يُقهر عليها لخفض شحنة القلق.' },
+            { id: 65, ch: 'ch4', type: 'TF', q: 'الذهان الوظيفي (كالفصام والبارانويا والاضطراب الدوري) هو الاضطراب العقلي الخطير الذي ينتج مباشرة عن تلف مادي محقق وعضوي في أنسجة المخ والدماغ.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'الذهان الوظيفي نفسي المنشأ بالكامل ولا توجد له أي أسباب عضوية أو تشريحية واضحة ومحققة بالدماغ، الذهان العضوي (كخرف الشيخوخة والأورام) هو الناجم عن تلف مادي.' },
+            { id: 66, ch: 'ch4', type: 'TF', q: 'يتميز ويشخص مرض الفصام العقلي (الشيزوفرينيا Schizophrenia) بوجود هلاوس سمعية مستمرة وصاخبة وهذيانات ضلالية ثابتة وانفصال تام عن الواقع الخارجي بالعيش في حلم باطن.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، الفصام انفصام عقلي وتفتت للشخصية يتميز بصدى التفكير والهلوسات السمعية التآمرية والهذيانات الشاذة والانفصال التام عن الواقع.' },
+            { id: 67, ch: 'ch4', type: 'TF', q: '"المرونة الشمعية" المحكمة والمقاومة العضلية العنيفة العكسية (العناد الكاتاتوني) من أبرز وأهم الأعراض التشخيصية لفئة الفصام التخشبي.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، الفصام التخشبي الكاتاتوني يسيطر عليه الذهول أو الهياج التموجي الحركي، ويتصف بالمرونة الشمعية الثابتة للأطراف، والعناد والمقاومة العضلية العنيفة لأي حركة.' },
+            { id: 68, ch: 'ch4', type: 'TF', q: 'الأمراض النفسية الجسمية (السيكوسوماتية) هي أمراض وهمية وهستيرية عضوية المنشأ خالص ولا علاقة لها بالضغوط الانفعالية أو الكبت أو الصراعات النفسية الداخلية.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'خطأ طبي، السيكوسوماتية هي اختلال وتلف عضوي وتشريحي محقق وصريح في الأنسجة (كالقرحة والربو والضغط) ناتج أساساً ومباشرة عن كبت ضغوط وانفعالات نفسية حادة عجز الفرد عن تصريفها.' },
+            { id: 69, ch: 'ch4', type: 'TF', q: 'ذهان الهوس والاكتئاب الوجداني الدوري يتميز بتقلبات انفعالية متطرفة وعنيفة تتراوح دورياً بين النشاط والبهجة الجنونية الزائدة والحزن واليأس السوداوي القاتل تخللها فترات سواء كامل.', options: ['صواب', 'خطأ'], answer: 0, explanation: 'صحيح، يُسمى الاضطراب الدوري الوجداني (ثنائي القطب) وتتوالى فيه نوبات الهوس الصاخب ونوبات الاكتئاب وتتخلله فترات من السواء والعقلانية الكاملة.' },
+            { id: 70, ch: 'ch4', type: 'TF', q: 'يعتمد العلاج الأساسي والحتمي الفوري في حالة الأمراض العقلية الحادة (الذهان) على العلاج النفسي الفردي الكلامي فقط دون أي حاجة للتدخل الدوائي أو الكيميائي أو دخول مستشفى النفسية.', options: ['صواب', 'خطأ'], answer: 1, explanation: 'خطأ كلينيكي حاد، الذهان العقلي يتطلب حتماً وفوراً دخول المستشفى لضبط السلوك، وعلاجه الأساسي والجوهري طبي كيميائي دوائي لموازنة ناقلات الدماغ وعقاقير مضادة للذهان، والعلاج النفسي يأتي تالياً بعد استقرار الحالة.' },
+            { id: 71, ch: 'ch4', type: 'MCQ', q: 'الأعراض والظواهر الإكلينيكية مثل فقدان الذاكرة الهستيري الشامل، نوبات الشرود والهروب لمسافات بعيدة، والسلوك التلقائي الآلي اللاشعوري تُصنف وتندرج جميعها ضمن:', options: ['(أ) الهستيريا التحولية الحركية العنيفة', '(ب) الهستيريا التفككية الانفصالية (Dissociative Hysteria)', '(ج) نوبات الهلع وعصابات القلق المرضي الساحق', '(د) فئة الفصام التخشبي والسبات الكاتاتوني الثابت'], answer: 1, explanation: 'الهستيريا التفككية تنشأ من تفكك وتفتت الشعور والوعي هرباً من صراع، وتشمل فقدان الذاكرة الهستيري (Amnesia)، والشرود والهروب (Fugue)، والسلوك التلقائي الآلي (Automatic Behavior).' },
+            { id: 72, ch: 'ch4', type: 'MCQ', q: 'أي مما يلي يُعد ويُصنف ويشخَّص بدقة علمية من الخصائص والأعراض العامة الصارمة للذهان (المرض العقلي) مقارنة وتفرقة قاطعة مع العصاب النفسي؟', options: ['(أ) الاستبصار الكامل بالمرض ومحاولة العلاج طواعية', '(ب) استمرار وصيانة الاتصال بالواقع الخارجي الاجتماعي والمهني', '(ج) الهلوسات الحسية المتنوعة والهذيانات الضلالية الجامدة وتفتت الأنا كلياً', '(د) استخدام حيلة التبرير اللاشعورية البسيطة كآلية دفاع مريحة'], answer: 2, explanation: 'الهلوسات، الهذيانات، سوء التوجه، التفكك العقلي، البلادة والانفصال التام عن الواقع الواقع، ونكران المرض هي الخصائص الصارمة المحددة للذهان العقلي.' },
+            { id: 73, ch: 'ch4', type: 'MCQ', q: 'المريض الذهاني الذي يعتقد بشكل جازم ويقيني مطلق لا يقبل النقاش أو التمحيص بأن جهات مخابراتية سرية أو شخصيات بارزة يتآمرون عليه لتسميمه بالغاز القاتل أو قتله يعاني من هذيان:', options: ['(أ) العظمة والنبؤة الخارقة', '(ب) الاضطهاد والمؤامرات (Delusions of Persecution)', '(ج) السوداوية وإنكار الذات والجسد', '(د) المراقبة والإشارة والاتصال الروحي الباطن'], answer: 1, explanation: 'هذيان الاضطهاد والمؤامرة يجعل المريض يتمسك بمعتقدات زائفة بأن جهات بارزة أو سرية تتآمر لتسميمه أو قتله ويضع خططاً قتالية معقدة للدفاع والقتل الاستباقي.' },
+            { id: 74, ch: 'ch4', type: 'MCQ', q: 'السلوك والطقس الحركي المتمثل كلينيكياً في قيام المريض بغسل يديه لعشرات المرات يومياً ولساعات طوال لدرجة التمزق خوفاً ورعباً من التلوث والميكروبات يعبر صراحة عن:', options: ['(أ) فعل واندفاع قهري سلوكي سحري (Compulsion)', '(ب) عرض هستيري تحولي حسي خداري جلدي', '(ج) عرض تفككي انفصالي فصامي شامل وعميق', '(د) توهم مرضي خالص (عصاب قلق مبهم عام)'], answer: 0, explanation: 'هذا طقس وفعل قهري سلوكي (Compulsion) يأتيه الفرد مجبراً وخارج وعيه المنطقي وبدافع قسري لا يُقاوم لخفض حدة القلق الناشئ من فكرة وسواسية تملّكته.' },
+            { id: 75, ch: 'ch4', type: 'MCQ', q: 'من السمات والخصائص البارزة والمشخصة بدقة في تركيبة بنيّة "الشخصية الهستيرية" بالعيادة النفسية المعاصرة:', options: ['(أ) الانضباط الصارم، الولاء الحرفي للمؤسسات، والتزمت الأخلاقي الصارم.', '(ب) الأنانية الطفولية، المركزية حول الذات، الاستعراضية، والمبالغة والمسرحة للتعبير العاطفي والانفعالي وسهولة الاستهواء.', '(ج) الحرص الجنوني على النظافة والدقة المتناهية والبطء الشديد بالتنفيذ وعناد التجميع.', '(د) الانعزال التام عن مجريات الواقع وكره التغيير والجمود السلوكي التكراري.'], answer: 1, explanation: 'الشخصية الهستيرية تتسم بالأنانية، التمركز حول الذات، الطفولية، المسرحة والمبالغة التمثيلية للانفعالات، سهولة الاستهواء السريع، والتذبذب السريع الصاخب بين الحب والكراهية.' },
+            { id: 76, ch: 'ch4', type: 'MCQ', q: 'من الأمراض والاضطرابات النفسية الجسمية البنائية (السيكوسوماتية المحققة التلف النسيجي) ذات الاستجابة والتفريغ التنفسي بالجهاز التنفسي الحاد:', options: ['(أ) قرحة المعدة والاثني عشر والقولون العصبي تشنجي', '(ب) الربو الشعبي الحاد وتشنج القصبات الانفعالي (Asthma)', '(ج) الأكزيما وحب الشباب العصبي والهيجان الجلدي', '(د) التهاب المفاصل الروماتيزمي الرقبي والظهري والعمود'], answer: 1, explanation: 'الربو الشعبي الحاد، التهاب الجيوب الأنفية الانفعالي، ونزلات الصدر الزائفة النفسية هي الاستجابات والاضطرابات السيكوسوماتية الخاصة بالتفريغ عبر الجهاز التنفسي.' },
+            { id: 77, ch: 'ch4', type: 'MCQ', q: 'نوبات وأعراض مثل "الدوار والدوخة الشديدة"، و"خفقان وتسارع ضربات القلب المفاجئ"، و"غصة وانسداد الحلق الخانقة"، و"توهج الحرارة الحارقة الساخنة بالوجه" تصنف وتحدد بالكامل ضمن الأعراض الجسمية لمرض:', options: ['(أ) الفصام العقلي وتشتت البنية الفكرية', '(ب) الوسواس القهري الفكري والحركي التكراري', '(ج) عصاب القلق المرضي الحاد ونوباته الفسيولوجية (Anxiety)', '(د) ذهان الهوس الوجداني الصاخب والانشراح اليوفوري'], answer: 2, explanation: 'هذه هي أعراض نوبات المرحلة الأولى (الجسمية الفسيولوجية) لاضطراب القلق حسب تصنيف شيهان الكلينيكي لعلامات توتر وعمل الجهاز العصبي السمبثاوي.' },
+            { id: 78, ch: 'ch4', type: 'MCQ', q: 'الفصام العقلي الذهاني الذي تسيطر وتهيمن عليه إكلينيكياً وتشخيصياً الهذيانات الاضطهادية الثابتة نسبياً والهلوسات السمعية التآمرية التهديدية بشكل واضح وجلي هو:', options: ['(أ) الفصام التخشبي والذهول المرن الشمعي', '(ب) فصام الاضطهاد البارانوييدي الصارم (Paranoid Schizophrenia)', '(ج) الفصام المتبقي والأعراض السلبية الخمول الانعزالي', '(د) الفصام غير المنتظم التنافر الانفعالي وسلطة الكلام'], answer: 1, explanation: 'فصام الاضطهاد (البارانوييدي) هو الأكثر انتشاراً، وتسيطر عليه تماماً الهذيانات الاضطهادية الثابتة والمنسقة وهلوسات سماع أصوات تتناقش وتشتم المريض بصيغة الغائب.' },
+            { id: 79, ch: 'ch4', type: 'MCQ', q: 'الاختلاف الرئيسي والتفرقة القاطعة بين العصاب والذهان من حيث زاوية وعنصر "التوافق الاجتماعي والمهني وممارسة الأدوار" هو أن:', options: ['(أ) العصابي لا ينسجم تماماً مع المجتمع وينبذ القوانين الصارمة.', '(ب) الذهاني يتطابق دائماً وبدقة مع المعايير والقوانين الاجتماعية المقبولة بالجماعة.', '(ج) العصابي يحاول جاهداً ممارسة أدواره ومسؤولياته الاجتماعية ويتطابق نسبياً مع المعايير رغم معاناته وقلقه الداخلي.', '(د) لا يوجد أي فرق كلينيكي أو اجتماعي بينهما من حيث التوافق العام.'], answer: 2, explanation: 'العصابي يظل متصلاً بالواقع ومحافظاً على أدائه الاجتماعي والمهني ويكافح للتوافق مع المعايير، أما الذهاني فينفصل تماماً وينهار توافقه الاجتماعي والمهني كلياً.' },
+            { id: 80, ch: 'ch4', type: 'MCQ', q: 'إحساس مريض الذهان الداخلي القاطع واليقيني بأن ديداناً غريبة وحشرات مقززة تمشي وتسعى على جلده وتحت لحمه دون وجود أي منبه خارجي حقيقي في المجال يُعد ويشخص بـ:', options: ['(أ) خداعاً بصرياً وخطأ تفسيري مبرر حركياً في المجال', '(ب) هلوسة لمسية يقينية (Tactile Hallucination)', '(ج) هذياناً سوداوياً وإنكار مادي للجسد وأعضائه الباطنة', '(د) فعلاً وطقساً قهرياً لاشعورياً حركياً لغسل الجسد والمظاهر'], answer: 1, explanation: 'الهلوسة اللمسية (Tactile Hallucination) هي إدراك حسي للمس دون وجود منبه خارجي حقيقي، كالشعور الحاد واليقيني بسريان حشرات أو ديدان على أو تحت الجلد بالذهان العقلي.' }
+        ];
+
+        let filteredQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = {}; // تخزين إجابات المستخدم المفتاح هو معرف السؤال والقيمة هي الفهرس المحدد
+        let verifiedQuestions = {}; // الأسئلة التي تم التحقق من إجابتها لمنع تغيير الاختيار
+
+        // 3. محرك تشغيل الفلترة والتغذية التفاعلية للاختبار الذكي
+        function filterQuiz(category, element) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active-filter'));
+            element.classList.add('active-filter');
+            initQuiz(category);
+        }
+
+        function initQuiz(category) {
+            if (category === 'all') {
+                filteredQuestions = [...rawQuizData];
+            } else {
+                filteredQuestions = rawQuizData.filter(q => q.ch === category);
+            }
+            
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            verifiedQuestions = {};
+            
+            document.getElementById('quiz-questions-area').style.display = 'block';
+            document.getElementById('quiz-results-area').style.display = 'none';
+            document.getElementById('quiz-nav-controls').style.display = 'flex';
+            
+            updateLiveScore();
+            renderCurrentQuestion();
+        }
+
+        // 4. بناء وعرض السؤال الحالي تفاعلياً مع الخيارات الراديوية الفاخرة
+        function renderCurrentQuestion() {
+            if (filteredQuestions.length === 0) return;
+            
+            const qArea = document.getElementById('quiz-questions-area');
+            qArea.innerHTML = ''; // تصفير الساحة لضمان خفة المتصفح
+            
+            const qData = filteredQuestions[currentQuestionIndex];
+            const isVerified = verifiedQuestions[qData.id] !== undefined;
+            
+            // تحديث لوحة التحكم والنصوص الفوقية
+            document.getElementById('quiz-progress-text').innerText = `السؤال ${currentQuestionIndex + 1} من ${filteredQuestions.length} [فصل: ${qData.ch.replace('ch', '')}]`;
+            
+            // احتساب شريط التقدم الفاخر
+            const percentProgress = ((currentQuestionIndex + 1) / filteredQuestions.length) * 100;
+            document.getElementById('progress-fill').style.width = `${percentProgress}%`;
+            
+            // بناء الـ HTML الخاص بالسؤال التفاعلي بالكامل
+            const qWrapper = document.createElement('div');
+            qWrapper.className = 'question-wrapper active-q';
+            
+            const qText = document.createElement('div');
+            qText.className = 'question-text';
+            qText.innerText = `${currentQuestionIndex + 1}. ${qData.q}`;
+            qWrapper.appendChild(qText);
+            
+            const optionsUl = document.createElement('ul');
+            optionsUl.className = 'options-list';
+            
+            qData.options.forEach((opt, idx) => {
+                const optLi = document.createElement('li');
+                optLi.className = 'option-item';
+                
+                // الراديو الداخلي للتحكم والاختيار المحسوب
+                const radioInput = document.createElement('input');
+                radioInput.type = 'radio';
+                radioInput.name = `q-opt-${qData.id}`;
+                radioInput.id = `opt-idx-${qData.id}-${idx}`;
+                radioInput.value = idx;
+                if (userAnswers[qData.id] === idx) {
+                    radioInput.checked = true;
+                    optLi.classList.add('selected-option');
+                }
+                if (isVerified) {
+                    radioInput.disabled = true;
+                }
+                
+                // حدث النقر التفاعلي لتغيير وتلوين الخيارات الفاخرة المحددة
+                optLi.addEventListener('click', () => {
+                    if (isVerified) return; // منع التغيير بعد التحقق
+                    radioInput.checked = true;
+                    document.querySelectorAll('.option-item').forEach(li => li.classList.remove('selected-option'));
+                    optLi.classList.add('selected-option');
+                    userAnswers[qData.id] = idx;
+                });
+                
+                // تلوين الخيارات بعد التحقق الفوري (الأخضر للصحيح والأحمر للخطأ المرتكب)
+                if (isVerified) {
+                    if (idx === qData.answer) {
+                        optLi.classList.add('correct-ans');
+                    } else if (userAnswers[qData.id] === idx && idx !== qData.answer) {
+                        optLi.classList.add('wrong-ans');
+                    }
+                }
+                
+                const optLabel = document.createElement('label');
+                optLabel.htmlFor = `opt-idx-${qData.id}-${idx}`;
+                optLabel.innerText = opt;
+                optLabel.style.cursor = isVerified ? 'default' : 'pointer';
+                optLabel.style.width = '100%';
+                optLabel.style.paddingRight = '10px';
+                
+                optLi.appendChild(radioInput);
+                optLi.appendChild(optLabel);
+                optionsUl.appendChild(optLi);
+            });
+            
+            qWrapper.appendChild(optionsUl);
+            
+            // إضافة صندوق شرح وتعليل علمي فوري للجواب عند التحقق لمزيد من الفاعلية والتثبيت الفكري
+            if (isVerified) {
+                const expBox = document.createElement('div');
+                expBox.className = 'callout-box';
+                expBox.style.marginTop = '20px';
+                expBox.style.backgroundColor = userAnswers[qData.id] === qData.answer ? '#E8FAF0' : '#FFF5F5';
+                expBox.style.borderRightColor = userAnswers[qData.id] === qData.answer ? '#25D366' : 'var(--primary-color)';
+                
+                const expTitle = document.createElement('h5');
+                expTitle.innerText = userAnswers[qData.id] === qData.answer ? '✔️ إجابة صحيحة - الشرح العلمي والتعليل  :' : '❌ إجابة خاطئة - التصحيح والتعليل العلمي  :';
+                expTitle.style.color = userAnswers[qData.id] === qData.answer ? '#1E7E34' : 'var(--primary-color)';
+                
+                const expText = document.createElement('p');
+                expText.className = 'text-paragraph';
+                expText.style.marginBottom = '0';
+                expText.style.fontWeight = '600';
+                expText.innerText = qData.explanation;
+                
+                expBox.appendChild(expTitle);
+                expBox.appendChild(expText);
+                qWrapper.appendChild(expBox);
+            }
+            
+            qArea.appendChild(qWrapper);
+            
+            // ضبط حالة الأزرار السفلية للتنقل التفاعلي الذكي والكامل بقوة
+            document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
+            
+            const nextBtn = document.getElementById('btn-next');
+            if (currentQuestionIndex === filteredQuestions.length - 1) {
+                nextBtn.innerText = '🏁 إنهاء الاختبار وعرض اللوحة';
+                nextBtn.className = 'quiz-btn btn-submit-test';
+            } else {
+                nextBtn.innerText = 'التالي ➡️';
+                nextBtn.className = 'quiz-btn btn-next';
+            }
+        }
+
+        // 5. محرك التحقق الفوري المطور لكل سؤال بحد ذاته لزيادة التعلم البنائي والفعال
+        function verifyCurrentAnswer() {
+            if (filteredQuestions.length === 0) return;
+            const qData = filteredQuestions[currentQuestionIndex];
+            
+            if (userAnswers[qData.id] === undefined) {
+                alert('فضلًا يا أستاذنا، اختر إجابة أولاً قبل التحقق من الصحة!');
+                return;
+            }
+            
+            if (verifiedQuestions[qData.id] !== undefined) {
+                alert('تم التحقق من هذا السؤال مسبقاً والتعليل معروض بالأسفل!');
+                return;
+            }
+            
+            verifiedQuestions[qData.id] = true;
+            updateLiveScore();
+            renderCurrentQuestion();
+        }
+
+        function updateLiveScore() {
+            let correctCount = 0;
+            let verifiedCount = 0;
+            
+            filteredQuestions.forEach(q => {
+                if (verifiedQuestions[q.id]) {
+                    verifiedCount++;
+                    if (userAnswers[q.id] === q.answer) {
+                        correctCount++;
+                    }
+                }
+            });
+            
+            document.getElementById('quiz-score-live').innerText = `الأسئلة المحققة فورياً: ${correctCount} صحيحة من أصل ${verifiedCount} مراجعة`;
+        }
+
+        // 6. محرك التنقل التتابعي (السابق والتالي وإنهاء الاختبار بالكامل برسم اللوحة الإحصائية المحكمة)
+        function changeQuestion(direction) {
+            // إذا كان المستخدم يضغط على التالي ويريد إنهاء الاختبار في السؤال الأخير
+            if (direction === 1 && currentQuestionIndex === filteredQuestions.length - 1) {
+                finishQuizAndShowDashboard();
+                return;
+            }
+            
+            currentQuestionIndex += direction;
+            if (currentQuestionIndex < 0) currentQuestionIndex = 0;
+            if (currentQuestionIndex >= filteredQuestions.length) currentQuestionIndex = filteredQuestions.length - 1;
+            
+            renderCurrentQuestion();
+        }
+
+        // 7. حساب المخرجات والنسب ورسم لوحة البيانات الإحصائية النهائية للاختبار التفاعلي الذكي بالكامل دون ثغرات
+        function finishQuizAndShowDashboard() {
+            let totalQ = filteredQuestions.length;
+            let correctAnswers = 0;
+            let wrongAnswers = 0;
+            let unAnswered = 0;
+            
+            filteredQuestions.forEach(q => {
+                if (userAnswers[q.id] === undefined) {
+                    unAnswered++;
+                    wrongAnswers++; // عدم الإجابة يعتبر خطأ بالنتيجة الكلية
+                } else if (userAnswers[q.id] === q.answer) {
+                    correctAnswers++;
+                } else {
+                    wrongAnswers++;
+                }
+            });
+            
+            const scorePercent = Math.round((correctAnswers / totalQ) * 100);
+            
+            // إخفاء وعرض اللوحات تفاعلياً وبأقصى سرعة تشغيلية ممكنة
+            document.getElementById('quiz-questions-area').style.display = 'none';
+            document.getElementById('quiz-nav-controls').style.display = 'none';
+            
+            const resultsArea = document.getElementById('quiz-results-area');
+            resultsArea.style.display = 'block';
+            
+            // حقن الأرقام والنسب الإحصائية
+            document.getElementById('res-percent').innerText = `${scorePercent}%`;
+            document.getElementById('stat-correct').innerText = correctAnswers;
+            document.getElementById('stat-wrong').innerText = wrongAnswers;
+            document.getElementById('stat-total').innerText = totalQ;
+            
+            // تحديد رسالة التهنئة والتشجيع التربوية حسب النسبة المئوية المحققة
+            const greeting = document.getElementById('res-greeting');
+            const details = document.getElementById('res-details');
+            
+            details.innerText = `لقد أجبت بشكل صحيح على ${correctAnswers} سؤالاً من إجمالي ${totalQ} سؤالاً مطروحاً بالاختبار الحركي.`;
+            
+            if (scorePercent >= 90) {
+                greeting.innerText = '👑 عبقري ممتاز! درجة المستشار والتمكن الكامل!';
+                greeting.style.color = '#25D366';
+            } else if (scorePercent >= 75) {
+                greeting.innerText = '✨ رائع جداً! مستوى عالٍ ومتميز ومبشر بالنجاح التفوق!';
+                greeting.style.color = '#007BFF';
+            } else if (scorePercent >= 50) {
+                greeting.innerText = '👍 ناجح ومقبول! تحتاج لمراجعة طفيفة لضبط أدق الدقائق والدرجات!';
+                greeting.style.color = 'orange';
+            } else {
+                greeting.innerText = '❌ تحتاج لإعادة التصفح والمذاكرة! قم بزيارة التبويبات والمحاضرات الجانبية!';
+                greeting.style.color = 'var(--primary-color)';
+            }
+        }
+
+        // 8. إعادة تصفير نظام الأسئلة بالكامل والبدء من جديد
+        function restartQuiz() {
+            const activeFilterBtn = document.querySelector('.filter-btn.active-filter');
+            activeFilterBtn.click();
+        }
+
+        // تشغيل نظام الأسئلة الشامل تلقائياً عند تحميل الصفحة لأول مرة
+        window.onload = function() {
+            initQuiz('all');
+        };
+    </script>
+</body>
+</html>
